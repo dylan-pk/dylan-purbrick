@@ -1,13 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/layout.astro';
 import ProjectCard from '../components/ProjectCard.jsx';
+const base = '/dylan-purbrick';
 
 const projects = [
-  { id: "datsun", title: "Datsun 1200", category: "Restoration", specs: ["Electrical fault repair", "Thermal insulation", "Audio modernization"], image: "/datsun.jpg" },
-  { id: "gallery-robot", title: "Gallery Robot", category: "Robotics", specs: ["OpenCV ORB Matching", "ROS 2 Python Nodes", "90% Success Rate"], image: "/gallery.jpg" },
-  { id: "pedometer", title: "Pedometer Shield", category: "Embedded", specs: ["Altium PCB Shield", "Arduino Logic", "CAD Enclosure"], image: "/pedometer.jpg" },
-  { id: "defender", title: "Land Rover", category: "Modification", specs: ["Solar/Aux Power", "Winch Integration", "Custom Storage"], image: "/defender.jpg" },
-  { id: "pliers", title: "Printed Pliers", category: "Additive Mfg", specs: ["Print-in-Place Joint", "Tolerance Control", "CAD Geometry"], image: "/pliers.jpg" }
+  { id: "datsun", title: "Datsun 1200", category: "Restoration", specs: ["Loom Repair", "Rust Remediation", "Interior"], image: `${base}/datsun.jpg` },
+  { id: "gallery-robot", title: "Gallery Robot", category: "Robotics", specs: ["ROS 2", "OpenCV", "90% Success"], image: `${base}/gallery.jpg` },
+  { id: "defender", title: "Land Rover", category: "Modification", specs: ["Solar Wiring", "Winch", "Storage"], image: `${base}/defender.jpg` },
+  { id: "pedometer", title: "Pedometer Shield", category: "Embedded", specs: ["Custom PCB", "Altium", "Arduino"], image: `${base}/pedometer.jpg` },
+  { id: "pliers", title: "Printed Pliers", category: "Manufacturing", specs: ["Print-in-Place", "Tolerance", "CAD"], image: `${base}/pliers.jpg` }
 ];
 ---
 
@@ -15,22 +16,22 @@ const projects = [
   <main class="mx-auto max-w-7xl px-6 pt-48 pb-32">
     <section class="mb-48">
         <h1 class="text-8xl md:text-[11rem] leading-[0.8] tracking-tighter uppercase mb-12">
-            <span class="font-wayfinder text-industrial-black italic">Dylan</span> <br /> 
+            <span class="font-wayfinder text-industrial-black">Dylan</span> <br /> 
             <span class="font-neue text-brand-orange">Purbrick</span>
         </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start font-neue">
             <div class="space-y-6">
                 <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">// Personal Profile</p>
-                <p class="text-xl text-gray-600 leading-relaxed font-neue">
-                    I am currently undergoing my final-year of study of a Bachelor of Engineering (Honours) in Mechatronic Engineering at the University of Technology Sydney, and currently an Engineering Assistant at Keith Engineering. My professional journey is driven by a deep passion for furthering my mechanical understanding and gaining hands-on experience.
+                <p class="text-xl text-gray-600 leading-relaxed">
+                    I am currently undergoing my final-year of study of a Bachelor of Engineering (Honours) in Mechatronic Engineering at UTS, and currently an Engineering Assistant at Keith Engineering[cite: 101]. My professional journey is driven by a deep passion for furthering my mechanical understanding and gaining hands-on experience[cite: 102].
                 </p>
             </div>
             <div class="border-l border-gray-100 pl-10 space-y-4">
-                <p class="text-sm text-gray-500 font-neue leading-loose">
-                    Beyond technical aptitude in areas like Python, SolidWorks, and Fusion 360, I offer proven transferable skills developed through leadership roles, including co-founding the UTS MechSoc. My approach is grounded in a belief that professional growth is achieved through practical immersion.
+                <p class="text-sm text-gray-500 leading-loose">
+                    Beyond technical aptitude in Python and SolidWorks, I offer proven transferable skills developed through leadership roles, including co-founding the UTS MechSoc and supervising teams in fast-paced environments[cite: 106].
                 </p>
-                <a href="/resume" class="inline-block border-b-2 border-brand-orange text-brand-orange font-bold font-neue uppercase text-[10px] tracking-widest pt-4 hover:text-brand-purple hover:border-brand-purple transition-colors">
-                    Explore Resume & Skills →
+                <a href={`${base}/resume`} class="inline-block border-b-2 border-brand-orange text-brand-orange font-bold uppercase text-[10px] tracking-widest pt-4 hover:text-brand-purple hover:border-brand-purple transition-all">
+                    View Career Summary →
                 </a>
             </div>
         </div>
@@ -39,7 +40,7 @@ const projects = [
     <section id="projects">
       <div class="mb-12 border-b-2 border-industrial-black pb-4 flex justify-between items-end">
         <h2 class="text-5xl font-black uppercase tracking-tighter">
-            <span class="font-wayfinder italic">Technical</span> <span class="font-neue text-brand-orange">Portfolio</span>
+            <span class="font-wayfinder">Portfolio</span> <span class="font-neue text-brand-orange">Systems</span>
         </h2>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
