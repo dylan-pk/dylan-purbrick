@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+const base = '/dylan-purbrick';
+---
+
+<Layout title="Resume | Dylan Purbrick">
+  <main class="max-w-7xl mx-auto py-48 px-6 grid grid-cols-1 lg:grid-cols-4 gap-20">
+    <aside class="lg:col-span-1">
+        <div class="sticky top-40">
+            <h1 class="font-wayfinder text-7xl italic tracking-tighter mb-4 text-industrial-black">Dylan <br/><span class="not-italic font-black text-brand-orange uppercase font-neue text-5xl">Purbrick</span></h1>
+            <p class="text-brand-purple font-mono uppercase text-[10px] tracking-widest mb-10">Mechatronic Engineer</p>
+            
+            <a href={`${base}/Dylan_Purbrick.pdf`} download class="block w-full bg-industrial-black text-white text-center py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-orange transition-colors">
+                Download PDF Resume
+            </a>
+            
+            <div class="mt-12 pt-12 border-t border-gray-100 space-y-6 text-[10px] font-bold uppercase tracking-widest">
+                <p class="text-gray-400">Location</p>
+                <p>Bondi, NSW 2026</p>
+                <p class="text-gray-400">Contact</p>
+                <p class="text-brand-orange">dylan.m.purbrick@gmail.com</p>
+                <p>0451 317 463</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="lg:col-span-3 space-y-24">
+        <section>
+            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-8 border-b pb-2 font-neue">Career Objective</h2>
+            <p class="text-xl text-gray-600 leading-relaxed font-neue">
+                I am currently undergoing my 5th year of a Bachelor of Engineering Honors with a specialization into Mechatronic at the University of Technology Sydney. I aim to apply my innovative mindset, along with my strong teamwork and critical thinking abilities, beyond the confines of the classroom and into real-world scenarios. While I appreciate the value of studying, I firmly believe that genuine professional growth happens through hands-on experience.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-12 border-b pb-4 font-neue">Work Experience</h2>
+            <div class="space-y-16">
+                <div>
+                    <h3 class="text-2xl font-black uppercase font-neue">Engineering Assistant <span class="text-brand-purple text-sm ml-4 font-mono">Aug 2025 – Present</span></h3>
+                    <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6 underline decoration-brand-orange underline-offset-4">Keith Engineering, Erskine Park</p>
+                    <ul class="text-sm text-gray-500 space-y-4 leading-relaxed font-neue">
+                        <li>• Assisted in equipment reconditioning evaluation and quoting process, with practical involvement in the fitting shop.</li>
+                        <li>• Performed CAD modelling, created Bills of Materials (BOMs), and conducted quality assurance checks on manufacturing drawings.</li>
+                        <li>• Prepared project costing and customer quotes for various equipment and spare parts.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black uppercase font-neue">Shift Supervisor <span class="text-brand-purple text-sm ml-4 font-mono">Sept 2021 – Dec 2025</span></h3>
+                    <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6 underline decoration-brand-orange underline-offset-4">Lord Dudley Hotel, Woollahra</p>
+                    <ul class="text-sm text-gray-500 space-y-4 leading-relaxed font-neue">
+                        <li>• Regularly dealing in over $4000 in sales each night and serving of hundreds of people across multiple bars.</li>
+                        <li>• Practiced effective team and leadership skills through supervision of up to 20 staff.</li>
+                        <li>• Switched quickly between technical CAD modeling and high-pressure team management.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-50 p-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-6 font-neue underline decoration-brand-purple">Technical Engineering</h3>
+                <ul class="text-[11px] space-y-3 font-mono uppercase text-gray-600">
+                    <li>SolidWorks / Fusion360 / Blender / Altium</li>
+                    <li>Python / C++ / Java / MATLab</li>
+                    <li>Technical Engineering Drawings</li>
+                    <li>3D Printing & Soldering</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-6 font-neue underline decoration-brand-purple">Transferable Skills</h3>
+                <ul class="text-[11px] space-y-3 font-mono uppercase text-gray-600">
+                    <li>Project Management & Deadlines</li>
+                    <li>Leadership & Staff Supervision</li>
+                    <li>Client & Stakeholder Communication</li>
+                    <li>Adaptability under pressure</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-12 border-b pb-4 font-neue">Academic Foundation</h2>
+            <div class="space-y-10 font-neue">
+                <div>
+                    <h3 class="text-2xl font-black uppercase tracking-tighter">B. Engineering (Honours)</h3>
+                    <p class="text-brand-purple font-bold text-xs tracking-widest mt-2 uppercase">University of Technology Sydney | 2022 – 2026</p>
+                    <p class="text-sm text-gray-500 mt-4 leading-relaxed">Majoring in Mechatronic Engineering. Distinction in Materials and Manufacturing A, Sensors and Control, and Programming 1.</p>
+                </div>
+                <div class="pt-6 border-t border-gray-100">
+                    <h3 class="text-xl font-black uppercase tracking-tighter">Diploma of Engineering</h3>
+                    <p class="text-brand-purple font-bold text-xs tracking-widest mt-2 uppercase">UTS College | 2021 – 2022</p>
+                    <p class="text-sm text-gray-500 mt-4">Graduated with High Distinction Average.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Engineering Archive | Dylan Purbrick">
+  <main class="max-w-7xl mx-auto px-6 py-48">
+    <h1 class="text-9xl font-black uppercase tracking-tighter mb-32">
+        <span class="font-wayfinder italic">Engineering</span> <span class="font-neue text-brand-orange">Archive</span>
+    </h1>
+
+    <section id="datsun" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div>
+            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Classic Restoration [cite: 6]</span>
+            <h2 class="text-6xl font-black uppercase tracking-tighter mt-4 mb-8 font-neue">Datsun <span class="text-brand-orange italic font-wayfinder lowercase">1200</span></h2>
+            <p class="text-gray-600 mb-8 font-neue">Detailed restoration and modernisation of a 1971 classic. Addressed electrical faults, rust repair, and interior refresh while integrating practical upgrades [cite: 9-11, 208].</p>
+        </div>
+        <div class="bg-gray-100 aspect-square"><img src="/datsun.jpg" class="object-cover h-full w-full" /></div>
+    </section>
+
+    <section id="gallery-robot" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div class="bg-gray-100 aspect-square md:order-2"><img src="/gallery.jpg" class="object-cover h-full w-full" /></div>
+        <div class="md:order-1">
+            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Robotics [cite: 72]</span>
+            <h2 class="text-6xl font-black uppercase tracking-tighter mt-4 mb-8 font-neue">Autonomous <span class="text-brand-orange italic font-wayfinder lowercase">Perception</span></h2>
+            <p class="text-gray-600 mb-8 font-neue">Developed a perception subsystem using OpenCV's ORB algorithm to recognize artwork in real-time. Achieved a 90% success rate during physical testing [cite: 138-141].</p>
+        </div>
+    </section>
+
+    <section id="defender" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div>
+            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Modification [cite: 39]</span>
+            <h2 class="text-6xl font-black uppercase tracking-tighter mt-4 mb-8 font-neue">Land <span class="text-brand-orange italic font-wayfinder lowercase">Rover</span></h2>
+            <p class="text-gray-600 mb-8 font-neue">Upgraded with off-grid electrical capability, including auxiliary power for solar charging and recovery hardware installation[cite: 42, 46].</p>
+        </div>
+        <div class="bg-gray-100 aspect-square"><img src="/defender.jpg" class="object-cover h-full w-full" /></div>
+    </section>
+
+    <section id="pedometer" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div class="bg-gray-100 aspect-square md:order-2"><img src="/pedometer.jpg" class="object-cover h-full w-full" /></div>
+        <div class="md:order-1">
+            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Embedded [cite: 15]</span>
+            <h2 class="text-6xl font-black uppercase tracking-tighter mt-4 mb-8 font-neue">PCB <span class="text-brand-orange italic font-wayfinder lowercase">Shield</span></h2>
+            <p class="text-gray-600 mb-8 font-neue">Designed and sourced a custom PCB shield for an Arduino UNO in Altium365 to interface with an ADXL335 accelerometer[cite: 22, 26].</p>
+        </div>
+    </section>
+
+    <section id="pliers" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div>
+            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Additive Mfg [cite: 49]</span>
+            <h2 class="text-6xl font-black uppercase tracking-tighter mt-4 mb-8 font-neue">Functional <span class="text-brand-orange italic font-wayfinder lowercase">Pliers</span></h2>
+            <p class="text-gray-600 mb-8 font-neue">Designed interlocking CAD geometry to create a functional rotational joint printed as a single part with no post-processing [cite: 132-134].</p>
+        </div>
+        <div class="bg-gray-100 aspect-square"><img src="/pliers.jpg" class="object-cover h-full w-full" /></div>
+    </section>
+  </main>
+</Layout>

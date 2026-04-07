@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-orange: #FF4F00;
+  --color-brand-purple: #571B7E;
+  --color-industrial-black: #1A1A1A;
+  --font-neue: "Inter", sans-serif;
+  --font-wayfinder: "Fraunces", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-industrial-black font-neue;
+  }
+}

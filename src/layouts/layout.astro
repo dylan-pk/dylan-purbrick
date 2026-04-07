@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+// This helper ensures links work locally and on GitHub
+const base = '/dylan-purbrick';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-white text-industrial-black font-neue antialiased relative">
+		<nav class="fixed top-0 z-[100] w-full border-b border-gray-100 bg-white/90 backdrop-blur-lg">
+			<div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+				<a href={`${base}/`} class="text-xl font-black tracking-tighter text-brand-purple font-neue">DP.</a>
+				<div class="flex gap-10 text-[10px] font-bold uppercase tracking-widest items-center font-neue">
+					<a href={`${base}/`} class="hover:text-brand-orange transition-colors">Home</a>
+					<a href={`${base}/projects`} class="hover:text-brand-orange transition-colors">Projects</a>
+					<a href={`${base}/resume`} class="hover:text-brand-orange transition-colors">Resume</a>
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-5 py-2 hover:bg-brand-purple transition-colors">Contact</a>
+				</div>
+			</div>
+		</nav>
+
+		<slot />
+
+		<button id="back-to-top" class="fixed bottom-8 right-8 z-[110] flex h-12 w-12 items-center justify-center bg-brand-orange text-white shadow-xl transition-all duration-300 translate-y-20 opacity-0 hover:bg-brand-purple" aria-label="Back to top">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7" />
+			</svg>
+		</button>
+
+		<footer class="bg-industrial-black text-white py-20 px-6 border-t border-white/10">
+			<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+				<div>
+					<h2 class="font-neue font-black uppercase text-4xl mb-6">Dylan Purbrick</h2>
+					<p class="text-gray-400 max-w-sm font-neue text-sm uppercase tracking-widest leading-loose">
+						Mechatronic Engineer <br/> Specializing in Industrial Design & Robotics.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+					<div>
+						<p class="text-brand-orange font-bold text-[10px] uppercase tracking-[0.3em] mb-4">Contact</p>
+						<ul class="font-neue text-sm space-y-2">
+							<li><a href="mailto:dylan.m.purbrick@gmail.com" class="hover:text-brand-orange">dylan.m.purbrick@gmail.com</a> [cite: 110, 159]</li>
+							<li><a href="tel:+61451317463" class="hover:text-brand-orange">+61 451 317 463</a> [cite: 109, 159]</li>
+						</ul>
+					</div>
+					<div>
+						<p class="text-brand-orange font-bold text-[10px] uppercase tracking-[0.3em] mb-4">Social</p>
+						<ul class="font-neue text-sm space-y-2">
+							<li><a href="https://www.linkedin.com/in/dylan-purbrick" target="_blank" class="hover:text-brand-orange">LinkedIn</a> [cite: 159]</li>
+							<li><a href="https://github.com/dylan-pk" target="_blank" class="hover:text-brand-orange">GitHub</a> [cite: 73]</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			const backToTopBtn = document.getElementById('back-to-top');
+			window.addEventListener('scroll', () => {
+				if (window.scrollY > 500) {
+					backToTopBtn?.classList.remove('translate-y-20', 'opacity-0');
+				} else {
+					backToTopBtn?.classList.add('translate-y-20', 'opacity-0');
+				}
+			});
+			backToTopBtn?.addEventListener('click', () => {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		</script>
+	</body>
+</html>
