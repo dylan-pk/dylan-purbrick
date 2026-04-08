@@ -26,21 +26,27 @@ const base = '/dylan-purbrick';
 
 		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch pt-24 gap-[2px]">
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch pt-24 gap-[2px] relative z-30">
+				
 				<a href={`${base}/`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'home' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
+				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+					{activeTab === 'home' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						01. Overview
 					</span>
 				</a>
+
 				<a href={`${base}/projects`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'projects' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
+				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+					{activeTab === 'projects' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						02. Projects
 					</span>
 				</a>
+
 				<a href={`${base}/resume`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'resume' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
+				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+					{activeTab === 'resume' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						03. Resume
 					</span>
@@ -48,7 +54,8 @@ const base = '/dylan-purbrick';
 
 				<div id="uni-indicator" class="hidden">
 					<a href={`${base}/uni?mode=uni`} 
-					   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'uni' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-brand-purple text-white hover:bg-brand-orange z-10'}`}>
+					   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-brand-purple text-white hover:bg-brand-orange z-10'}`}>
+						{activeTab === 'uni' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 							Academic Hub
 						</span>
@@ -70,7 +77,6 @@ const base = '/dylan-purbrick';
 					<h2 class="font-neue font-black uppercase text-3xl text-white mb-2 tracking-tighter">Dylan Purbrick</h2>
 					<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Mechatronic Engineering // UTS 2026</p>
 				</div>
-				
 				<div class="flex flex-col sm:flex-row items-center gap-8">
 					<a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-14 py-6 rounded-sm text-[12px] font-black uppercase tracking-[0.25em] hover:bg-brand-purple hover:-translate-y-2 transition-all shadow-[0_20px_40px_rgba(234,88,12,0.3)]">
 						Get In Touch via Email
