@@ -7,21 +7,14 @@ interface Props {
 const { title, activeTab } = Astro.props;
 const base = '/dylan-purbrick';
 
-// Helper to define tab state classes
-const getTabClasses = (tabName: string) => {
-    const isActive = activeTab === tabName;
-    return {
-        container: isActive 
-            ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' // Active: Full expansion
-            : 'bg-slate-300/40 text-slate-500/40 py-8 hover:py-10 hover:bg-slate-300/60 hover:text-slate-700', // Inactive: Half-height + faded
-        text: isActive 
-            ? 'opacity-100' 
-            : 'opacity-0 group-hover:opacity-100 transition-opacity duration-300', // Show text only on hover/active
-        bar: isActive 
-            ? 'block' 
-            : 'hidden'
-    };
-};
+// State definition for the "Dossier" tabs
+const tabs = [
+    { id: 'home', label: 'Overview', path: '/' },
+    { id: 'cover-letter', label: 'Cover Letter', path: '/cover-letter', uniOnly: true },
+    { id: 'projects', label: 'Projects', path: '/projects' },
+    { id: 'resume', label: 'Resume', path: '/resume' },
+    { id: 'uni', label: 'Reflection', path: '/uni', uniOnly: true },
+];
 ---
 
 <!doctype html>
@@ -35,43 +28,63 @@ const getTabClasses = (tabName: string) => {
 
 		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30 transition-all duration-500">
-				
-				<a href={`${base}/`} class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${getTabClasses('home').container}`}>
-					<div class={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)] ${getTabClasses('home').bar}`}></div>
-					<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${getTabClasses('home').text}`} style="writing-mode: vertical-rl; text-orientation: mixed;">Overview</span>
-				</a>
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30">
+				{tabs.map((tab) => {
+                    const isActive = activeTab === tab.id;
+                    return (
+                        <div id={tab.uniOnly ? `${tab.id}-indicator` : undefined} class={`${tab.uniOnly ? 'hidden' : 'contents'}`}>
+                            <a 
+                                href={`${base}${tab.path}${tab.uniOnly ? '?mode=uni' : ''}`} 
+                                class={`
+                                    group relative flex items-center justify-center rounded-l-xl transition-all duration-500 ease-in-out border-l border-t border-slate-400/20
+                                    ${isActive 
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
+                                        : 'bg-slate-300/40 text-slate-500/30 py-8 hover:py-12 hover:bg-slate-300/60 hover:text-slate-700'
+                                    }
+                                `}
+                            >
+                                {isActive && (
+                                    <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>
+                                )}
 
-                <div id="cover-letter-indicator" class="hidden flex flex-col">
-					<a href={`${base}/cover-letter?mode=uni`} class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${getTabClasses('cover-letter').container}`}>
-						<div class={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)] ${getTabClasses('cover-letter').bar}`}></div>
-						<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${getTabClasses('cover-letter').text}`} style="writing-mode: vertical-rl; text-orientation: mixed;">Cover Letter</span>
-					</a>
-				</div>
-
-				<a href={`${base}/projects`} class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${getTabClasses('projects').container}`}>
-					<div class={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)] ${getTabClasses('projects').bar}`}></div>
-					<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${getTabClasses('projects').text}`} style="writing-mode: vertical-rl; text-orientation: mixed;">Projects</span>
-				</a>
-
-				<a href={`${base}/resume`} class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${getTabClasses('resume').container}`}>
-					<div class={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)] ${getTabClasses('resume').bar}`}></div>
-					<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${getTabClasses('resume').text}`} style="writing-mode: vertical-rl; text-orientation: mixed;">Resume</span>
-				</a>
-
-				<div id="uni-indicator" class="hidden flex flex-col">
-					<a href={`${base}/uni?mode=uni`} class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-b border-slate-400/20 ${getTabClasses('uni').container}`}>
-						<div class={`absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)] ${getTabClasses('uni').bar}`}></div>
-						<span class={`text-[9px] font-black uppercase tracking-widest inline-block rotate-180 ${getTabClasses('uni').text}`} style="writing-mode: vertical-rl; text-orientation: mixed;">Reflection</span>
-					</a>
-				</div>
+                                <span 
+                                    class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} 
+                                    style="writing-mode: vertical-rl; text-orientation: mixed;"
+                                >
+                                    {tab.label}
+                                </span>
+                            </a>
+                        </div>
+                    );
+                })}
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 overflow-hidden">
 				<div class="p-8 md:p-16 lg:p-24 relative z-10">
 					<slot />
 				</div>
+                <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]"></div>
 			</main>
 		</div>
-        </body>
+
+		<script>
+			function updateUniMode() {
+				const params = new URLSearchParams(window.location.search);
+				if (params.get('mode') === 'uni') {
+					document.getElementById('uni-indicator')?.classList.remove('hidden');
+					document.getElementById('cover-letter-indicator')?.classList.remove('hidden');
+					document.querySelectorAll('a').forEach(link => {
+						const href = link.getAttribute('href');
+						if (href && (href.startsWith('/') || href.startsWith(window.location.origin))) {
+							const url = new URL(href, window.location.origin);
+							url.searchParams.set('mode', 'uni');
+							link.href = url.pathname + url.search + url.hash;
+						}
+					});
+				}
+			}
+			updateUniMode();
+			document.addEventListener('astro:page-load', updateUniMode);
+		</script>
+	</body>
 </html>
