@@ -2,62 +2,67 @@
 import Layout from '../layouts/layout.astro';
 import ProjectCard from '../components/ProjectCard.jsx';
 const base = '/dylan-purbrick';
+
+const projects = [
+  { 
+    id: "agricultural-monitor", 
+    title: "Agricultural Monitor", 
+    category: "Simulated Robotics", 
+    specs: ["Autonomous Navigation", "Simulink", "Sensor Array"], 
+    image: `${base}/ag-robot.jpg`,
+    portfolio: `${base}/Ag_Monitor_Portfolio.pdf`
+  },
+  { 
+    id: "vertical-garden", 
+    title: "Vertical Garden Robot", 
+    category: "Embedded Systems", 
+    specs: ["Environmental Sensing", "Automated Irrigation", "WiFi Logging"], 
+    image: `${base}/garden-robot.jpg`,
+    github: "https://github.com/dylanpurbrick/vertical-garden-monitor",
+    portfolio: `${base}/Garden_Robot_Portfolio.pdf`
+  },
+  { 
+    id: "gallery-robot", 
+    title: "Gallery Robot", 
+    category: "Autonomous Systems", 
+    specs: ["ROS 2", "OpenCV", "90% Success"], 
+    image: `${base}/gallery.jpg`,
+    github: "https://github.com/dylanpurbrick/gallery-host",
+    portfolio: `${base}/Gallery_Robot_Portfolio.pdf`
+  },
+  { 
+    id: "pedometer", 
+    title: "Pedometer Shield", 
+    category: "Hardware", 
+    specs: ["Altium", "Custom PCB", "I2C Interface"], 
+    image: `${base}/pedometer.jpg` 
+  },
+  { 
+    id: "printed-pliers", 
+    title: "Printed Pliers", 
+    category: "Additive Manufacturing", 
+    specs: ["Print-in-Place", "Tolerance Control", "Fusion 360"], 
+    image: `${base}/pliers.jpg` 
+  },
+  { 
+    id: "defender", 
+    title: "Land Rover Defender", 
+    category: "System Modification", 
+    specs: ["Solar Integration", "Winch Wiring", "Custom Storage"], 
+    image: `${base}/defender.jpg` 
+  }
+];
 ---
 
-<Layout title="Dylan Purbrick | Engineering Projects" activeTab="projects">
-  <main class="max-w-7xl mx-auto px-6 py-48">
-    <h1 class="text-9xl font-black uppercase tracking-tighter mb-32">
-        <span class="font-wayfinder">Technical</span> <span class="font-neue text-brand-orange">Archive</span>
-    </h1>
+<Layout title="Dylan Purbrick | Projects" activeTab="projects">
+  <div class="max-w-6xl relative z-10">
+    <header class="mb-24 border-b border-slate-200 pb-12">
+        <h1 class="text-6xl font-black uppercase tracking-tighter mb-4">Technical Archive</h1>
+        <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Section_03 // Engineering Proofs & Personal Build Log</p>
+    </header>
 
-    <section id="datsun" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div>
-            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Restoration</span>
-            <h2 class="text-6xl font-black uppercase mt-4 mb-8 font-neue">Datsun <span class="text-brand-orange italic font-wayfinder lowercase">1200</span></h2>
-            <p class="text-gray-600 mb-8 font-neue leading-relaxed">Mechanical and electrical restoration of a 1971 sedan. Project involved rust repair, paint, interior refresh, and addressing main loom electrical faults.</p>
-            <ul class="font-mono text-[10px] space-y-2 text-brand-purple uppercase tracking-widest">
-                <li>+ Loom redesign & repair</li>
-                <li>+ Thermal/Sound insulation</li>
-                <li>+ Classic integrity retention</li>
-            </ul>
-        </div>
-        <div class="bg-gray-100 aspect-square rounded-sm overflow-hidden"><img src={`${base}/datsun.jpg`} class="object-cover h-full w-full" /></div>
-    </section>
-
-    <section id="gallery-robot" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div class="bg-gray-100 aspect-square rounded-sm overflow-hidden md:order-2"><img src={`${base}/gallery.jpg`} class="object-cover h-full w-full" /></div>
-        <div class="md:order-1">
-            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Autonomous Robotics</span>
-            <h2 class="text-6xl font-black uppercase mt-4 mb-8 font-neue">Gallery <span class="text-brand-orange italic font-wayfinder uppercase">Host</span></h2>
-            <p class="text-gray-600 mb-8 font-neue leading-relaxed">Developed a ROS 2 perception subsystem using OpenCV's ORB algorithm to recognize artwork from real-time camera data with 90% accuracy.</p>
-        </div>
-    </section>
-
-    <section id="defender" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div>
-            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Modification</span>
-            <h2 class="text-6xl font-black uppercase mt-4 mb-8 font-neue">Land <span class="text-brand-orange italic font-wayfinder uppercase">Rover Defender</span></h2>
-            <p class="text-gray-600 mb-8 font-neue leading-relaxed">Integration of off-grid electrical systems, including winch wiring, solar panels, and auxiliary power for touring and remote travel.</p>
-        </div>
-        <div class="bg-gray-100 aspect-square rounded-sm overflow-hidden"><img src={`${base}/defender.jpg`} class="object-cover h-full w-full" /></div>
-    </section>
-
-    <section id="pedometer" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div class="bg-gray-100 aspect-square rounded-sm overflow-hidden md:order-2"><img src={`${base}/pedometer.jpg`} class="object-cover h-full w-full" /></div>
-        <div class="md:order-1">
-            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Embedded Systems</span>
-            <h2 class="text-6xl font-black uppercase mt-4 mb-8 font-neue">Custom <span class="text-brand-orange italic font-wayfinder uppercase">Pedometer</span></h2>
-            <p class="text-gray-600 mb-8 font-neue leading-relaxed">Design and ECAD of a custom Arduino UNO shield in Altium365 to track steps using an ADXL335 accelerometer with >90% accuracy.</p>
-        </div>
-    </section>
-
-    <section id="pliers" class="py-32 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div>
-            <span class="text-brand-purple font-mono text-[10px] uppercase tracking-widest">// Manufacturing</span>
-            <h2 class="text-6xl font-black uppercase mt-4 mb-8 font-neue">Functional <span class="text-brand-orange italic font-wayfinder uppercase">Pliers</span></h2>
-            <p class="text-gray-600 mb-8 font-neue leading-relaxed">Designed interlocking CAD geometry for a functional print-in-place set of pliers requiring zero assembly or post-processing.</p>
-        </div>
-        <div class="bg-gray-100 aspect-square rounded-sm overflow-hidden"><img src={`${base}/pliers.jpg`} class="object-cover h-full w-full" /></div>
-    </section>
-  </main>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((p) => <ProjectCard client:load {...p} />)}
+    </div>
+  </div>
 </Layout>
