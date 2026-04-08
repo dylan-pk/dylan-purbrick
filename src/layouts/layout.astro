@@ -26,21 +26,21 @@ const base = '/dylan-purbrick';
 
 		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch pt-24 gap-1">
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch pt-24 gap-[2px]">
 				<a href={`${base}/`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all hover:bg-white/10 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.2)] z-20' : 'bg-slate-700/50 text-slate-400 border-l border-white/10'}`}>
+				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'home' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						01. Overview
 					</span>
 				</a>
 				<a href={`${base}/projects`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all hover:bg-white/10 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.2)] z-20' : 'bg-slate-700/50 text-slate-400 border-l border-white/10'}`}>
+				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'projects' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						02. Projects
 					</span>
 				</a>
 				<a href={`${base}/resume`} 
-				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all hover:bg-white/10 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.2)] z-20' : 'bg-slate-700/50 text-slate-400 border-l border-white/10'}`}>
+				   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'resume' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-[#f1f5f9] text-slate-400 hover:bg-white/50 z-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						03. Resume
 					</span>
@@ -48,7 +48,7 @@ const base = '/dylan-purbrick';
 
 				<div id="uni-indicator" class="hidden">
 					<a href={`${base}/uni?mode=uni`} 
-					   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple shadow-[-15px_0_30_rgba(0,0,0,0.2)] z-20' : 'bg-brand-purple text-white hover:bg-brand-orange border-l border-white/10'}`}>
+					   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/50 ${activeTab === 'uni' ? 'bg-white text-brand-purple shadow-[-15px_0_30px_rgba(0,0,0,0.1)] z-30 border-r-transparent translate-x-[1px]' : 'bg-brand-purple text-white hover:bg-brand-orange z-10'}`}>
 						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 							Academic Hub
 						</span>
@@ -56,7 +56,7 @@ const base = '/dylan-purbrick';
 				</div>
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_0_80px_rgba(0,0,0,0.4)] min-h-screen rounded-r-3xl md:rounded-tr-3xl relative">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_0_80px_rgba(0,0,0,0.4)] min-h-screen rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200">
 				<div class="p-8 md:p-16 lg:p-24 relative z-10">
 					<slot />
 				</div>
@@ -64,17 +64,18 @@ const base = '/dylan-purbrick';
 			</main>
 		</div>
 
-		<footer class="relative z-10 bg-slate-900 py-20 px-6 border-t border-white/5">
+		<footer class="relative z-10 bg-slate-900 py-24 px-6 border-t border-white/5">
 			<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
 				<div class="text-center md:text-left">
 					<h2 class="font-neue font-black uppercase text-3xl text-white mb-2 tracking-tighter">Dylan Purbrick</h2>
 					<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Mechatronic Engineering // UTS 2026</p>
 				</div>
+				
 				<div class="flex flex-col sm:flex-row items-center gap-8">
-					<a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-12 py-5 rounded-sm text-[11px] font-black uppercase tracking-[0.2em] hover:bg-brand-purple hover:-translate-y-1 transition-all shadow-2xl shadow-brand-orange/30">
-						Contact Me via Email
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-14 py-6 rounded-sm text-[12px] font-black uppercase tracking-[0.25em] hover:bg-brand-purple hover:-translate-y-2 transition-all shadow-[0_20px_40px_rgba(234,88,12,0.3)]">
+						Get In Touch via Email
 					</a>
-					<a href="https://linkedin.com/in/dylan-purbrick" target="_blank" class="text-slate-500 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-colors">
+					<a href="https://linkedin.com/in/dylan-purbrick" target="_blank" class="text-slate-400 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-colors">
 						LinkedIn Profile
 					</a>
 				</div>
