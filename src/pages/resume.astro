@@ -5,10 +5,10 @@ const base = '/dylan-purbrick';
 
 <Layout title="Dylan Purbrick | Resume" activeTab="resume">
   <div class="max-w-4xl">
-    <header class="mb-20 border-b border-slate-100 pb-12 flex justify-between items-start">
+    <header class="mb-20 border-b border-slate-200 pb-12 flex justify-between items-start">
         <div>
             <h1 class="text-6xl font-black uppercase tracking-tighter mb-2">Resume</h1>
-            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Mechatronic Specialist</p>
+            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Section_03 // Career Overview</p>
         </div>
         <a href={`${base}/Dylan_Purbrick.pdf`} download class="text-[10px] font-black uppercase tracking-widest border-2 border-industrial-black px-6 py-3 hover:bg-industrial-black hover:text-white transition-all">
             Download PDF
@@ -17,39 +17,67 @@ const base = '/dylan-purbrick';
 
     <div class="space-y-24 font-neue">
         <section>
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">01 // Work History</h2>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-8">01 // Objective</h2>
+            <p class="text-xl text-slate-700 leading-relaxed max-w-3xl">
+                Currently in my 5th year of a Bachelor of Engineering (Honours), I aim to apply my innovative mindset and critical thinking to industrial challenges. I firmly believe genuine professional growth is cultivated through practical, hands-on experience.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">02 // Experience</h2>
             <div class="space-y-16">
                 <div>
                     <h3 class="text-2xl font-black uppercase">Engineering Assistant</h3>
                     <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Keith Engineering | 2025 – Present</p>
                     <ul class="space-y-4 text-slate-600 text-sm leading-relaxed max-w-2xl">
-                        <li>• Contributed to equipment reconditioning evaluation and CAD modeling for industrial systems.</li>
-                        <li>• Responsible for final quality assurance checks on manufacturing drawings and Bill of Materials (BOM) creation.</li>
+                        <li>• Assisted in the reconditioning evaluation and quoting process for industrial equipment.</li>
+                        <li>• Performed CAD modeling, Bill of Materials (BOM) creation, and final quality assurance checks on manufacturing drawings.</li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-2xl font-black uppercase">Shift Supervisor</h3>
                     <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Lord Dudley Hotel | 2021 – Present</p>
                     <ul class="space-y-4 text-slate-600 text-sm leading-relaxed max-w-2xl">
-                        <li>• Managing nightly sales exceeding $4,000 and supervising teams of up to 20 staff members.</li>
-                        <li>• Maintaining performance under significant pressure while balancing a rigorous engineering degree.</li>
+                        <li>• Managing nightly operations and sales while supervising teams of up to 20 staff members.</li>
+                        <li>• Maintaining high-level performance and leadership in a fast-paced, high-pressure environment.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="pt-24 border-t border-slate-100">
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">02 // Education</h2>
+        <section class="bg-white/50 p-12 rounded-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Technical Skills</h2>
+                <ul class="space-y-3 font-mono text-[11px] uppercase tracking-wider text-slate-500">
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> SolidWorks / Fusion360 / Altium</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> Python / C++ / MATLAB / Java</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> 3D Printing & Soldering</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> Technical Drawing & QA</li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Transferable</h2>
+                <ul class="space-y-3 font-mono text-[11px] uppercase tracking-wider text-slate-500">
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> Project Management</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> Stakeholder Communication</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> Leadership & Adaptability</li>
+                    <li class="flex gap-3"><span class="text-brand-orange">+</span> High-Pressure Resolution</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">04 // Education</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <h3 class="text-xl font-black uppercase">B. Engineering (Honours)</h3>
                     <p class="text-sm text-brand-purple font-bold mt-2">University of Technology Sydney</p>
-                    <p class="text-xs text-slate-400 mt-4 italic">Distinction in Materials, Sensors, and Programming.</p>
+                    <p class="text-xs text-slate-400 mt-4 leading-loose">Majoring in Mechatronics. Distinction in Materials, Sensors/Control, and Programming.</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-black uppercase">Diploma of Engineering</h3>
                     <p class="text-sm text-brand-purple font-bold mt-2">UTS College</p>
-                    <p class="text-xs text-slate-400 mt-4 italic">Graduated with High Distinction Average.</p>
+                    <p class="text-xs text-slate-400 mt-4 leading-loose">Direct entry into Bachelor's degree with a High Distinction average.</p>
                 </div>
             </div>
         </section>
