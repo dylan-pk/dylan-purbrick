@@ -46,4 +46,58 @@ const base = '/dylan-purbrick';
 					</span>
 				</a>
 
-				<div id
+				<div id="uni-indicator" class="hidden">
+					<a href={`${base}/uni?mode=uni`} 
+					   class={`flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple shadow-[-15px_0_30_rgba(0,0,0,0.2)] z-20' : 'bg-brand-purple text-white hover:bg-brand-orange border-l border-white/10'}`}>
+						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
+							Academic Hub
+						</span>
+					</a>
+				</div>
+			</aside>
+
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_0_80px_rgba(0,0,0,0.4)] min-h-screen rounded-r-3xl md:rounded-tr-3xl relative">
+				<div class="p-8 md:p-16 lg:p-24 relative z-10">
+					<slot />
+				</div>
+				<div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]"></div>
+			</main>
+		</div>
+
+		<footer class="relative z-10 bg-slate-900 py-20 px-6 border-t border-white/5">
+			<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+				<div class="text-center md:text-left">
+					<h2 class="font-neue font-black uppercase text-3xl text-white mb-2 tracking-tighter">Dylan Purbrick</h2>
+					<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Mechatronic Engineering // UTS 2026</p>
+				</div>
+				<div class="flex flex-col sm:flex-row items-center gap-8">
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-12 py-5 rounded-sm text-[11px] font-black uppercase tracking-[0.2em] hover:bg-brand-purple hover:-translate-y-1 transition-all shadow-2xl shadow-brand-orange/30">
+						Contact Me via Email
+					</a>
+					<a href="https://linkedin.com/in/dylan-purbrick" target="_blank" class="text-slate-500 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-colors">
+						LinkedIn Profile
+					</a>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			function updateUniMode() {
+				const params = new URLSearchParams(window.location.search);
+				if (params.get('mode') === 'uni') {
+					document.getElementById('uni-indicator')?.classList.remove('hidden');
+					document.querySelectorAll('a').forEach(link => {
+						const href = link.getAttribute('href');
+						if (href && (href.startsWith('/') || href.startsWith(window.location.origin))) {
+							const url = new URL(href, window.location.origin);
+							url.searchParams.set('mode', 'uni');
+							link.href = url.pathname + url.search + url.hash;
+						}
+					});
+				}
+			}
+			updateUniMode();
+			document.addEventListener('astro:page-load', updateUniMode);
+		</script>
+	</body>
+</html>
