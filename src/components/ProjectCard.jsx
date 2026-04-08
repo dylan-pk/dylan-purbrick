@@ -40,16 +40,7 @@ export default function ProjectCard({ title, category, specs, image, github, dem
         {/* Action Button Grid */}
         <div className="grid grid-cols-2 gap-3 mt-auto">
           {/* Primary Action: Watch Video or View Live Demo */}
-          {video ? (
-            <a 
-              href={video} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="col-span-2 text-center bg-brand-orange text-white py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple transition-colors mb-2"
-            >
-              Watch Project Video
-            </a>
-          ) : demo && (
+          {demo && (
             <a 
               href={demo} 
               target="_blank" 
