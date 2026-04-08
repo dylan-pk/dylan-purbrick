@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function ProjectCarousel({ projects, base }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false); // Safe default for SSR
   const totalProjects = projects.length;
 
-  // Calculates how many items to show based on window size 
-  // (In a real implementation, you'd use a resize listener, but Tailwind handles the CSS)
+  // This hook only runs in the browser
+  useEffect(() => {
+    // Set initial state
+    setIsMobile(window.innerWidth < 768);
+
+    // Update state on resize to keep the carousel responsive
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalProjects);
   };
@@ -13,6 +24,10 @@ export default function ProjectCarousel({ projects, base }) {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + totalProjects) % totalProjects);
   };
+
+  // Safe calculation logic: 1 item for mobile, 2 for desktop
+  const itemsToShow = isMobile ? 1 : 2;
+  const translateValue = currentIndex * (100 / itemsToShow);
 
   return (
     <div className="relative group w-full overflow-hidden px-4 md:px-12">
@@ -34,7 +49,7 @@ export default function ProjectCarousel({ projects, base }) {
       {/* Sliding Track */}
       <div 
         className="flex transition-transform duration-500 ease-out gap-6"
-        style={{ transform: `translateX(-${currentIndex * (100 / (window?.innerWidth < 768 ? 1 : 2))}%)` }}
+        style={{ transform: `translateX(-${translateValue}%)` }}
       >
         {projects.map((project) => (
           <a 
