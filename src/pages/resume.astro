@@ -3,91 +3,56 @@ import Layout from '../layouts/layout.astro';
 const base = '/dylan-purbrick';
 ---
 
-<Layout title="Resume | Dylan Purbrick">
-  <main class="max-w-7xl mx-auto py-48 px-6 grid grid-cols-1 lg:grid-cols-4 gap-20">
-    <aside class="lg:col-span-1">
-        <div class="sticky top-40">
-            <h1 class="font-wayfinder text-7xl italic tracking-tighter mb-4">Dylan <br/><span class="not-italic font-black text-brand-orange uppercase font-neue text-5xl">Purbrick</span></h1>
-            <p class="text-brand-purple font-mono uppercase text-[10px] tracking-widest mb-10">Mechatronic Engineer // UTS</p>
-            
-            <a href={`${base}/Dylan_Purbrick.pdf`} download class="block w-full bg-industrial-black text-white text-center py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-orange transition-all">
-                Download PDF Resume
-            </a>
-            
-            <div class="mt-12 pt-12 border-t border-gray-100 space-y-4 text-[10px] font-bold uppercase tracking-widest">
-                <p class="text-gray-400">Location</p>
-                <p class="text-brand-purple">Bondi, NSW 2026</p>
-                <p class="text-gray-400">Contact</p>
-                <p class="text-brand-orange">dylan.m.purbrick@gmail.com</p>
-            </div>
+<Layout title="Dylan Purbrick | Resume" activeTab="resume">
+  <div class="max-w-4xl">
+    <header class="mb-20 border-b border-slate-100 pb-12 flex justify-between items-start">
+        <div>
+            <h1 class="text-6xl font-black uppercase tracking-tighter mb-2">Resume</h1>
+            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Mechatronic Specialist</p>
         </div>
-    </aside>
+        <a href={`${base}/Dylan_Purbrick.pdf`} download class="text-[10px] font-black uppercase tracking-widest border-2 border-industrial-black px-6 py-3 hover:bg-industrial-black hover:text-white transition-all">
+            Download PDF
+        </a>
+    </header>
 
-    <div class="lg:col-span-3 space-y-24 font-neue">
+    <div class="space-y-24 font-neue">
         <section>
-            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-8 border-b pb-2">Career Objective</h2>
-            <p class="text-xl text-gray-600 leading-relaxed font-neue">
-                Currently in my 5th year of a Bachelor of Engineering (Honours). I aim to apply my innovative mindset and critical thinking beyond the classroom. I firmly believe genuine professional growth happens through hands-on experience.
-            </p>
-        </section>
-
-        <section>
-            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-12 border-b pb-4">Work Experience</h2>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">01 // Work History</h2>
             <div class="space-y-16">
                 <div>
-                    <h3 class="text-2xl font-black uppercase">Engineering Assistant <span class="text-brand-purple text-sm ml-4 font-mono">2025 – Present</span></h3>
-                    <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Keith Engineering - Erskine Park</p>
-                    <ul class="text-sm text-gray-500 space-y-4 leading-relaxed">
-                        <li>• Assisted in equipment reconditioning evaluation and quoting process.</li>
-                        <li>• Performed CAD modelling, BOM creation, and quality assurance checks.</li>
-                        <li>• Prepared project costing and customer quotes for various spare parts.</li>
+                    <h3 class="text-2xl font-black uppercase">Engineering Assistant</h3>
+                    <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Keith Engineering | 2025 – Present</p>
+                    <ul class="space-y-4 text-slate-600 text-sm leading-relaxed max-w-2xl">
+                        <li>• Contributed to equipment reconditioning evaluation and CAD modeling for industrial systems.</li>
+                        <li>• Responsible for final quality assurance checks on manufacturing drawings and Bill of Materials (BOM) creation.</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-black uppercase">Shift Supervisor <span class="text-brand-purple text-sm ml-4 font-mono">2021 – 2025</span></h3>
-                    <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Lord Dudley Hotel - Woollahra</p>
-                    <ul class="text-sm text-gray-500 space-y-4 leading-relaxed">
-                        <li>• Managed over $4,000 in nightly sales and supervised up to 20 staff members.</li>
-                        <li>• Developed adaptability and high-pressure team leadership skills.</li>
+                    <h3 class="text-2xl font-black uppercase">Shift Supervisor</h3>
+                    <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Lord Dudley Hotel | 2021 – Present</p>
+                    <ul class="space-y-4 text-slate-600 text-sm leading-relaxed max-w-2xl">
+                        <li>• Managing nightly sales exceeding $4,000 and supervising teams of up to 20 staff members.</li>
+                        <li>• Maintaining performance under significant pressure while balancing a rigorous engineering degree.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="bg-gray-50 p-12 grid grid-cols-1 md:grid-cols-2 gap-12 border border-gray-100">
-            <div>
-                <h3 class="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-6">Technical Skills</h3>
-                <ul class="text-[11px] space-y-3 font-mono uppercase text-gray-600">
-                    <li>SolidWorks / Fusion360 / Altium</li>
-                    <li>Python / C++ / MATLab / Java</li>
-                    <li>Technical Engineering Drawings</li>
-                    <li>3D Printing & Soldering</li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-brand-orange font-bold uppercase tracking-widest text-[10px] mb-6">Transferable</h3>
-                <ul class="text-[11px] space-y-3 font-mono uppercase text-gray-600">
-                    <li>Project Management & Deadlines</li>
-                    <li>Stakeholder Communication</li>
-                    <li>Leadership & Adaptability</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="text-brand-orange font-bold uppercase tracking-[0.3em] text-[10px] mb-12 border-b pb-4">Education</h2>
-            <div class="space-y-10">
+        <section class="pt-24 border-t border-slate-100">
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">02 // Education</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
-                    <h3 class="text-2xl font-black uppercase">B. Engineering (Honours)</h3>
-                    <p class="text-brand-purple font-bold text-xs tracking-widest mt-2 uppercase">University of Technology Sydney</p>
-                    <p class="text-sm text-gray-500 mt-4 leading-relaxed">Majoring in Mechatronics. Distinction in Materials/Manufacturing, Sensors/Control, and Programming 1.</p>
+                    <h3 class="text-xl font-black uppercase">B. Engineering (Honours)</h3>
+                    <p class="text-sm text-brand-purple font-bold mt-2">University of Technology Sydney</p>
+                    <p class="text-xs text-slate-400 mt-4 italic">Distinction in Materials, Sensors, and Programming.</p>
                 </div>
-                <div class="pt-10 border-t border-gray-100">
+                <div>
                     <h3 class="text-xl font-black uppercase">Diploma of Engineering</h3>
-                    <p class="text-brand-purple font-bold text-xs tracking-widest mt-2 uppercase">UTS College | High Distinction Average</p>
+                    <p class="text-sm text-brand-purple font-bold mt-2">UTS College</p>
+                    <p class="text-xs text-slate-400 mt-4 italic">Graduated with High Distinction Average.</p>
                 </div>
             </div>
         </section>
     </div>
-  </main>
+  </div>
 </Layout>
