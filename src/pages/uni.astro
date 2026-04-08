@@ -1,40 +1,102 @@
 ---
 import Layout from '../layouts/layout.astro';
+const base = '/dylan-purbrick';
 ---
 
-<Layout title="UTS Professional Review | Dylan Purbrick" activeTab="uni">
+<Layout title="Dylan Purbrick | Professional Reflection" activeTab="uni">
   <div class="max-w-4xl">
-    <header class="mb-16">
-        <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em] mb-4">// Internal_Audit</p>
-        <h1 class="text-6xl font-black uppercase tracking-tighter text-industrial-black">
-            Professional <span class="text-brand-orange italic font-wayfinder lowercase">Review</span>
-        </h1>
+    <header class="mb-20 border-b border-slate-200 pb-12">
+        <h1 class="text-6xl font-black uppercase tracking-tighter mb-4">Professional Reflection</h1>
+        <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Section_04 // Internship Analysis & Career Application</p>
     </header>
 
-    <div class="space-y-20 font-neue">
-        <section class="bg-white/50 p-8 rounded-2xl border border-slate-200">
-            <h2 class="text-brand-purple font-black uppercase text-xs tracking-widest mb-6">Peer Feedback Summary</h2>
-            <p class="text-slate-600 leading-relaxed mb-6">
-                Reflecting on my collaboration with Olivia, Muhaimin, and Eric, our team focused on the mechanical structure of a mechatronic system. Key takeaways included the importance of bridging the gap between technical CAD modeling and cost-effective material procurement.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-slate-100">
+    <div class="space-y-24">
+        <section>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-8">01 // Internship Reality vs. Expectations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 font-neue text-slate-700">
+                <div class="space-y-4">
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-400">Pre-Internship Expectations</h3>
+                    <p class="text-lg leading-relaxed italic">
+                        "I expected the work to include elements of hands-on experience... and that this would be a great opportunity to expand my knowledge to further my career."
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-400">The Reality</h3>
+                    <p class="text-lg leading-relaxed">
+                        The experience aligned well with my expectations, though there was more paperwork than initially anticipated. The people were friendlier and the environment was more welcoming than imagined.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white/50 p-12 rounded-2xl border border-slate-200">
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12 text-center">02 // Core Professional Lessons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div>
-                    <p class="text-[10px] font-bold uppercase text-brand-orange mb-2">Technical Insight</p>
-                    <p class="text-xs text-slate-500">My role at Keith Engineering allowed me to bring industry-standard QA practices to our student project, specifically in BOM verification.</p>
+                    <h3 class="text-xl font-black uppercase mb-4">Adaptability & Change</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        I learned that being open to change and being adaptable are essential. When things do not go perfectly to plan, an engineer must effectively manage the task no matter how off-track the project goes.
+                    </p>
                 </div>
                 <div>
-                    <p class="text-[10px] font-bold uppercase text-brand-orange mb-2">Team Leadership</p>
-                    <p class="text-xs text-slate-500">Applied supervisor-level team management skills developed at the Lord Dudley Hotel to maintain project milestones.</p>
+                    <h3 class="text-xl font-black uppercase mb-4">Effective Communication</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Clear communication—or "being talkative"—is vital to prevent misunderstandings that derail projects. It builds better team relationships and makes it easier to reach out when issues arise.
+                    </p>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="text-industrial-black font-black uppercase text-xs tracking-widest mb-8">Reflective Practice</h2>
-            <div class="prose prose-slate text-slate-600">
-                <p>
-                    As a final-year Mechatronic Engineering student at UTS, this portfolio serves as evidence of my ability to transition from theoretical modeling to practical, industrial-grade implementation.
-                </p>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">03 // Value Proposition</h2>
+            <p class="text-2xl font-black uppercase text-slate-800 mb-12 leading-tight">
+                "A versatile, process-oriented technical resource capable of translating complex engineering knowledge into clear, accessible documentation."
+            </p>
+            
+            <div class="space-y-8 font-mono text-[11px] uppercase tracking-wider text-slate-500">
+                <div class="flex gap-6 border-l-2 border-brand-purple pl-6">
+                    <span class="text-brand-orange font-bold">[01]</span>
+                    <p>Process Improvement: Reformatting customer visitation records into traceability tables in Excel for better tracking.</p>
+                </div>
+                <div class="flex gap-6 border-l-2 border-brand-purple pl-6">
+                    <span class="text-brand-orange font-bold">[02]</span>
+                    <p>Systems Implementation: Leading internal discussions on the adoption of Autodesk Vault Pro into the company workflow.</p>
+                </div>
+                <div class="flex gap-6 border-l-2 border-brand-purple pl-6">
+                    <span class="text-brand-orange font-bold">[03]</span>
+                    <p>Technical Writing: Authored user manuals for the Schenck Balancing rotor and centrifuge stripping process.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-t-4 border-industrial-black pt-20">
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-8">04 // Cover Letter Archive</h2>
+            <div class="bg-white p-12 md:p-20 shadow-xl font-neue text-slate-800 leading-relaxed space-y-8 max-w-3xl mx-auto">
+                <div class="flex justify-between items-start border-b pb-8">
+                    <div>
+                        <p class="font-black uppercase text-lg">Dylan Purbrick</p>
+                        <p class="text-xs text-slate-400">Graduate Engineer Applicant</p>
+                    </div>
+                    <p class="text-xs font-mono">10/03/2026</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="font-bold">RE: GRADUATE ENGINEER PROGRAM APPLICATION // Industrus Engineering</p>
+                    <p>Dear Hiring Manager,</p>
+                    <p>
+                        I am writing to apply for the Graduate Engineer Program at Industrus Engineering. I am currently finishing my final year of a Bachelor of Engineering (Honours) in Mechatronic Engineering at UTS while working as an Engineering Assistant at Keith Engineering.
+                    </p>
+                    <p>
+                        At Keith Engineering, I am responsible for final quality checks of manufacturing drawings, ensuring technical accuracy to prevent material waste. I systematically cross-reference CAD models against Bills of Materials (BOM) to catch discrepancies early. This process has taught me that accountability is about ensuring the final product is safe and efficient.
+                    </p>
+                    <p>
+                        My role also requires acting as a bridge between technical drafting teams and clients, translating complex engineering data into accessible project costs and quotes. Furthermore, I have demonstrated innovation through university projects, such as designing print-in-place additive manufacturing tools with tight tolerance control.
+                    </p>
+                    <p>
+                        As a co-founder of the UTS MechSoc, I focused on delegating tasks and keeping teams motivated. I am eager to bring this collaborative mindset and my hands-on background to Industrus Engineering's future projects.
+                    </p>
+                    <p>Best Regards,<br/><span class="font-black uppercase">Dylan Purbrick</span></p>
+                </div>
             </div>
         </section>
     </div>
