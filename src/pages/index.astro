@@ -3,6 +3,7 @@ import Layout from '../layouts/layout.astro';
 import ProjectCarousel from '../components/ProjectCarousel.jsx';
 const base = '/dylan-purbrick';
 
+// Restored: Full technical rotation including all 6 projects [cite: 37, 39, 40, 42, 68-70, 74-77, 140-149]
 const allProjects = [
   { 
     id: "crop-guard", 
@@ -31,6 +32,20 @@ const allProjects = [
     category: "Restoration", 
     specs: ["Loom Repair", "Rust Remediation", "Interior"], 
     image: `${base}/datsun.jpg` 
+  },
+  { 
+    id: "defender", 
+    title: "Land Rover Defender", 
+    category: "System Modification", 
+    specs: ["Solar Integration", "Winch Wiring", "Storage"], 
+    image: `${base}/defender.jpg` 
+  },
+  { 
+    id: "printed-pliers", 
+    title: "Printed Pliers", 
+    category: "Additive Manufacturing", 
+    specs: ["Print-in-Place", "Fusion 360", "Tolerance Control"], 
+    image: `${base}/pliers.jpg` 
   }
 ];
 ---
@@ -52,13 +67,32 @@ const allProjects = [
         </a>
     </header>
 
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-40">
+        <div class="space-y-10 font-neue text-slate-700">
+            <p class="text-3xl font-medium leading-tight text-industrial-black">
+                Currently undergoing my final-year of a Bachelor of Engineering (Honours) in Mechatronics at UTS, while serving as an Engineering Assistant at Keith Engineering[cite: 37, 53].
+            </p>
+            <p class="text-xl leading-relaxed">
+                My professional journey is driven by a deep passion for mechanical systems and a belief that genuine growth occurs through practical immersion[cite: 38, 41, 54].
+            </p>
+        </div>
+        
+        <div class="bg-white/60 p-12 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-purple/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.5em] mb-8 font-bold">// Dossier_Summary</p>
+            <p class="text-lg text-slate-600 leading-relaxed font-neue">
+                Beyond technical aptitude in areas like Python, SolidWorks, and Fusion 360, I offer proven leadership and adaptability developed through co-founding the UTS MechSoc and managing high-pressure hospitality environments [cite: 42, 80-81, 86].
+            </p>
+        </div>
+    </div>
+
     <section class="py-20 bg-slate-50/50 rounded-[3rem] border border-slate-100">
-        <div class="px-8 md:px-16 mb-16 flex justify-between items-end">
+        <div class="px-8 md:px-16 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
             <div>
                 <h2 class="text-5xl font-black uppercase tracking-tighter text-industrial-black">Featured <span class="text-brand-orange">Works</span></h2>
-                <p class="text-xs font-mono text-slate-400 mt-2">Active Technical Rotations</p>
+                <p class="text-xs font-mono text-slate-400 mt-2 uppercase tracking-widest">Active Technical Rotations</p>
             </div>
-            <a href={`${base}/projects`} class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors border-b-2 border-brand-purple/20 pb-1">View All Archive</a>
+            <a href={`${base}/projects`} class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors border-b-2 border-brand-purple/20 pb-1">View Full Archive</a>
         </div>
 
         <ProjectCarousel client:load projects={allProjects} base={base} />
