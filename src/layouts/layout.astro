@@ -22,52 +22,40 @@ const base = '/dylan-purbrick';
 		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#334155] text-industrial-black font-neue antialiased min-h-screen relative overflow-x-hidden">
-		<div class="fixed inset-0 pointer-events-none opacity-[0.07] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
+		<div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
 
 		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch gap-10 relative z-30 border-r border-slate-200">
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30">
 				
 				<a href={`${base}/`} 
-				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all -mr-[1px] ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40' : 'bg-[#f1f5f9] text-slate-400 hover:text-industrial-black'}`}>
+				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
 					{activeTab === 'home' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">01. Overview</span>
-					
-					<div class="absolute -top-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at top left, transparent 39px, #334155 40px);"></div>
-					<div class="absolute -bottom-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at bottom left, transparent 39px, #334155 40px);"></div>
 				</a>
 
 				<a href={`${base}/projects`} 
-				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all -mr-[1px] ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40' : 'bg-[#f1f5f9] text-slate-400 hover:text-industrial-black'}`}>
+				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
 					{activeTab === 'projects' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">02. Projects</span>
-					
-					<div class="absolute -top-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at top left, transparent 39px, #334155 40px);"></div>
-					<div class="absolute -bottom-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at bottom left, transparent 39px, #334155 40px);"></div>
 				</a>
 
 				<a href={`${base}/resume`} 
-				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all -mr-[1px] ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40' : 'bg-[#f1f5f9] text-slate-400 hover:text-industrial-black'}`}>
+				   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
 					{activeTab === 'resume' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">03. Resume</span>
-					
-					<div class="absolute -top-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at top left, transparent 39px, #334155 40px);"></div>
-					<div class="absolute -bottom-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at bottom left, transparent 39px, #334155 40px);"></div>
 				</a>
 
 				<div id="uni-indicator" class="hidden">
 					<a href={`${base}/uni?mode=uni`} 
-					   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all -mr-[1px] ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40' : 'bg-brand-purple text-white'}`}>
+					   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all border-l border-t border-b border-slate-400/20 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-brand-purple text-white'}`}>
 						{activeTab === 'uni' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Academic Hub</span>
-						
-						<div class="absolute -top-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at top left, transparent 39px, #334155 40px);"></div>
-						<div class="absolute -bottom-10 right-0 w-10 h-10 pointer-events-none" style="background: radial-gradient(circle at bottom left, transparent 39px, #334155 40px);"></div>
 					</a>
 				</div>
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl rounded-bl-[4rem] md:rounded-tr-3xl relative z-20">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200">
 				<div class="p-8 md:p-16 lg:p-24 relative z-10">
 					<slot />
 				</div>
