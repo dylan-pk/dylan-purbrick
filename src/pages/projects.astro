@@ -3,98 +3,144 @@ import Layout from '../layouts/layout.astro';
 import ProjectCard from '../components/ProjectCard.jsx';
 const base = '/dylan-purbrick';
 
+// Comprehensive project data archive including all technical proofs
 const projects = [
   {
     id: "gallery-host",
     title: "Autonomous Gallery Host Robot",
     category: "Autonomous Systems // ROS 2",
-    image: `${base}/gallery.jpg`,
+    images: [`${base}/gallery-1.jpg`, `${base}/gallery-2.jpg`, `${base}/gallery-3.jpg`],
     github: "https://github.com/dylanpurbrick/gallery-host",
+    portfolio: `${base}/Gallery_Host_Portfolio.pdf`,
     details: {
-      what: "Develop a ROS 2 perception subsystem to identify artworks using template matching on real-time camera data and integrate with navigation and human interaction systems.",
+      what: "Develop a ROS 2 perception subsystem to identify artworks using template matching on real-time camera data and integrate with other systems (navigation and human interaction) for use in an autonomous robotic system.",
       how: [
-        "Implemented a ROS 2 Python node using rclpy for live camera feed subscription.",
-        "Utilized OpenCV’s ORB algorithm for feature extraction and template matching.",
-        "Created a ROS service (perform_template_matching) for real-time analysis and confidence scoring.",
-        "Packaged using setup.py, CMakeLists.txt, and package.xml for ROS 2 compatibility."
+        "Designed and implemented a ROS 2 Python node using rclpy to subscribe to a live camera feed.",
+        "Used OpenCV’s ORB algorithm to extract features and match templates loaded from a local resource folder.",
+        "Created a ROS service (perform_template_matching) to trigger real-time image analysis and return artwork data with confidence scores.",
+        "Packaged system using setup.py, CMakeLists.txt, and package.xml for ROS 2 compatibility.",
+        "Verified functionality in both simulated and real-world environments."
       ],
-      results: "Subsystem successfully identified artworks with 90% confidence 90% of times tested. Fully integrated with navigation for physical demonstration."
+      results: "Subsystem success included identifying template images with physical artworks with 90% confidence 90% of times tested. Successfully integrated with other subsystems for full physical demonstration."
+    }
+  },
+  {
+    id: "wallbug",
+    title: "Wallbug // Vertical Garden Monitor",
+    category: "Environmental Monitoring // Embedded Systems",
+    images: [`${base}/wallbug-1.jpg`, `${base}/wallbug-2.jpg`, `${base}/wallbug-3.jpg`],
+    github: "https://github.com/dylan-pk/Wallbug",
+    demo: "https://dylan-pk.github.io/Wallbug/",
+    portfolio: `${base}/Wallbug_Portfolio.pdf`,
+    details: {
+      what: "A vertical garden monitoring robot integrating environmental sensing with automated irrigation and real-time data logging.",
+      how: [
+        "Integrated sensor array for soil moisture, ambient temperature, and humidity levels.",
+        "Developed WiFi-based logging system for remote environmental monitoring.",
+        "Engineered automated irrigation trigger based on moisture threshold analysis.",
+        "Designed vertical-specific chassis for stable mounting and mobility."
+      ],
+      results: "Successfully automated maintenance of a vertical garden system with high reliability and zero plant loss over test period."
     }
   },
   {
     id: "datsun-1200",
     title: "Datsun 1200 Restoration",
     category: "Automotive Engineering // Restoration",
-    image: `${base}/datsun.jpg`,
+    images: [`${base}/datsun-1.jpg`, `${base}/datsun-2.jpg`, `${base}/datsun-3.jpg`],
+    portfolio: `${base}/Datsun_Restoration_Log.pdf`,
     details: {
-      what: "Restore and modernise a 1971 Datsun 1200, addressing key electrical faults while retaining original character through practical upgrades.",
+      what: "Restore and modernise a 1971 Datsun 1200, addressing key electrical faults and improving interior usability and comfort while retaining original character.",
       how: [
-        "Repaired faulty rear lights and fuel sensor wiring in the main loom; replaced starter motor.",
+        "Replaced starter motor and repaired faulty rear lights and fuel sensor wiring in the main loom.",
         "Installed modern thermal insulation and sound deadening beneath new interior carpet.",
-        "Upgraded head unit and speakers for an improved audio system.",
-        "Performed general fault diagnosis and parts replacement across interior systems."
+        "Upgraded head unit and speakers for improved audio system.",
+        "Performed general fault diagnosis and parts replacement across interior and electrical systems."
       ],
-      results: "Electrical system fully restored to consistent operation. Improved reliability and comfort without compromising classic integrity."
+      results: "Improved reliability and comfort without compromising classic integrity. Electrical system fully restored to consistent operation. Project demonstrated practical problem-solving and wiring repair."
     }
   },
   {
     id: "pedometer",
     title: "Prototype Pedometer",
     category: "Embedded Systems // PCB Design",
-    image: `${base}/pedometer.jpg`,
+    images: [`${base}/pedometer-1.jpg`, `${base}/pedometer-2.jpg`],
+    portfolio: `${base}/Pedometer_Portfolio.pdf`,
     details: {
-      what: "Design and source a custom PCB shield for an Arduino UNO R3 to interface with an ADXL335 accelerometer.",
+      what: "Design and source a custom PCB shield for an Arduino UNO R3 to interface with ADXL335; create a step tracker embedded program and mechanical enclosure.",
       how: [
-        "Used Altium365 to create schematics and ECAD for the custom PCB shield.",
-        "Programmed step and walking pace identification functions in Arduino C++.",
-        "Soldered the physical PCB shield and designed a mechanical enclosure."
+        "Used Altium365 to create schematics and ECAD for custom PCB.",
+        "Programmed step identification and walking pace functions using Arduino Language.",
+        "Soldered the physical PCB shield and assembled the unit.",
+        "Conducted experimental testing to verify algorithm accuracy."
       ],
-      results: "Design fulfilled its purpose with >90% accuracy. Final PCB achieved full marks with no hardware hacks required."
+      results: "The design fulfilled its purpose with >90% accuracy. Final PCB achieved full marks with no hacks required."
     }
   },
   {
     id: "defender-mod",
     title: "Land Rover Defender Modification",
     category: "Electrical Integration // Off-Grid",
-    image: `${base}/defender.jpg`,
+    images: [`${base}/defender-1.jpg`, `${base}/defender-2.jpg`, `${base}/defender-3.jpg`],
+    portfolio: `${base}/Defender_Modification_Guide.pdf`,
     details: {
-      what: "Upgrade a 2016 Land Rover Defender with off-grid electrical capability and external recovery hardware for remote travel.",
+      what: "Upgrade a 2016 Land Rover Defender with off-grid electrical capability and external recovery hardware to improve vehicle functionality for touring.",
       how: [
-        "Designed/installed auxiliary power system with solar charging, fridge, and exterior lighting terminals.",
-        "Rewired head unit for modern connectivity and audio performance.",
+        "Designed and installed an auxiliary power system with terminals for solar charging, fridge, and lighting.",
+        "Rewired and upgraded head unit for modern connectivity and audio performance.",
         "Installed electric winch and aftermarket bull bar, including electrical routing and structural mounting."
       ],
-      results: "Supports reliable off-grid operation with modular power usage. Improved safety and recovery capability for remote living."
+      results: "Vehicle now supports reliable off-grid operation with modular power usage. Improved safety and recovery capability for remote driving and living."
     }
   },
   {
     id: "printed-pliers",
     title: "3D Print-in-Place Pliers",
     category: "Additive Manufacturing // CAD",
-    image: `${base}/pliers.jpg`,
+    images: [`${base}/pliers-1.jpg`, `${base}/pliers-2.jpg`],
+    portfolio: `${base}/Pliers_Design_Report.pdf`,
     details: {
-      what: "Design and produce fully functional, print-in-place pliers optimizing for grip strength and ergonomics without post-processing.",
+      what: "Design and produce a fully functional, print-in-place set of pliers using additive manufacturing, optimizing for grip strength and ergonomics without post-processing.",
       how: [
-        "Designed interlocking geometry in CAD to form a functional rotational joint.",
-        "Applied tight tolerance control to ensure smooth motion between integrated halves.",
-        "Printed in PLA with no supports or assembly required."
+        "Designed interlocking pliers in CAD using overlapping geometry to form a functional rotational joint.",
+        "Applied tolerance control to ensure smooth motion between the two integrated halves.",
+        "Printed the part in PLA with no supports, post-processing, or assembly required.",
+        "Tested for grip strength, durability, and ergonomic performance."
       ],
-      results: "Produced functional pliers with smooth motion and strong grip. Demonstrated high proficiency in design for additive manufacturing (DfAM)."
+      results: "Produced a fully functional set of pliers with smooth motion and strong grip. Design received high academic marks for effectiveness and printability."
+    }
+  },
+  {
+    id: "crop-guard",
+    title: "Crop-Guard // Agricultural Monitor",
+    category: "Agricultural Robotics // Simulation",
+    images: [`${base}/cropguard-1.jpg`, `${base}/cropguard-2.jpg`],
+    github: "https://github.com/dylan-pk/Crop-Guard",
+    portfolio: `${base}/Crop_Guard_Portfolio.pdf`,
+    details: {
+      what: "An autonomous agricultural monitoring robot simulation designed for large-scale crop health tracking and navigation.",
+      how: [
+        "Built comprehensive simulation environment in Simulink for autonomous pathing.",
+        "Implemented sensor array processing for real-time crop health assessment.",
+        "Developed obstacle avoidance algorithms for complex terrain navigation.",
+        "Optimized navigation logic for maximum coverage efficiency."
+      ],
+      results: "Achieved 95% coverage rate in simulated environments with high-fidelity health reporting."
     }
   }
 ];
 ---
 
 <Layout title="Technical Archive" activeTab="projects">
-  <div class="max-w-6xl mx-auto">
-    <header class="mb-24 border-b border-slate-200 pb-12">
+  <div class="max-w-6xl mx-auto relative z-10">
+    <header class="mb-32 border-b border-slate-200 pb-12">
         <h1 class="text-6xl font-black uppercase tracking-tighter mb-4 text-industrial-black">Technical Archive</h1>
-        <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Engineering Proofs & Project Documentation</p>
+        <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Section_03 // Engineering Proofs & Documentation</p>
     </header>
 
-    <div class="space-y-32">
+    <div class="space-y-48 pb-48">
         {projects.map((project) => (
-            <div id={project.id} class="scroll-mt-32">
+            <div id={project.id} class="scroll-mt-40">
                 <ProjectCard client:load {...project} />
             </div>
         ))}
