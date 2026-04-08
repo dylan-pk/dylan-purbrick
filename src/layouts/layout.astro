@@ -1,62 +1,49 @@
 ---
 import '../styles/global.css';
-
 interface Props {
 	title: string;
 	activeTab: 'home' | 'cover-letter' | 'projects' | 'resume' | 'uni';
 }
-
 const { title, activeTab } = Astro.props;
 const base = '/dylan-purbrick';
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
 		<title>{title}</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-[#334155] text-industrial-black font-neue antialiased min-h-screen relative overflow-x-hidden">
-		<div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
-
 		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30">
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30 transition-all">
+				
 				<a href={`${base}/`} 
-				   class={`group relative flex items-center justify-center py-12 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
-					{activeTab === 'home' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+				   class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60 py-8 hover:py-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Overview</span>
 				</a>
 
                 <div id="cover-letter-indicator" class="hidden">
 					<a href={`${base}/cover-letter?mode=uni`} 
-					   class={`group relative flex items-center justify-center py-12 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'cover-letter' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
-						{activeTab === 'cover-letter' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+					   class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${activeTab === 'cover-letter' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60 py-8 hover:py-10'}`}>
 						<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Cover Letter</span>
 					</a>
 				</div>
 
 				<a href={`${base}/projects`} 
-				   class={`group relative flex items-center justify-center py-12 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
-					{activeTab === 'projects' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+				   class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60 py-8 hover:py-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Projects</span>
 				</a>
 
 				<a href={`${base}/resume`} 
-				   class={`group relative flex items-center justify-center py-12 px-2 rounded-l-xl transition-all border-l border-t border-slate-400/20 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
-					{activeTab === 'resume' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+				   class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-slate-400/20 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60 py-8 hover:py-10'}`}>
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Resume</span>
 				</a>
 
 				<div id="uni-indicator" class="hidden">
 					<a href={`${base}/uni?mode=uni`} 
-					   class={`group relative flex items-center justify-center py-14 px-2 rounded-l-xl transition-all border-l border-t border-b border-slate-400/20 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60'}`}>
-						{activeTab === 'uni' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+					   class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-300 border-l border-t border-b border-slate-400/20 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-16' : 'bg-slate-300/40 text-slate-500 hover:bg-slate-300/60 py-8 hover:py-10'}`}>
 						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">Professional Reflection</span>
 					</a>
 				</div>
@@ -66,24 +53,11 @@ const base = '/dylan-purbrick';
 				<div class="p-8 md:p-16 lg:p-24 relative z-10">
 					<slot />
 				</div>
-				<div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper.png')]"></div>
 			</main>
 		</div>
 
-		<footer class="relative z-10 bg-slate-900 py-24 px-6 border-t border-white/5">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-                <div>
-					<h2 class="font-neue font-black uppercase text-3xl text-white mb-2 tracking-tighter">Dylan Purbrick</h2>
-					<p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Mechatronic Engineering // UTS 2026</p>
-				</div>
-                <div class="flex flex-col sm:flex-row items-center gap-8">
-                    <a href="mailto:dylan.m.purbrick@gmail.com" class="bg-brand-orange text-white px-14 py-6 rounded-sm text-[12px] font-black uppercase tracking-[0.25em] hover:bg-brand-purple transition-all shadow-2xl">Email Inquire</a>
-                    <a href="https://linkedin.com/in/dylan-purbrick" target="_blank" class="text-slate-400 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-colors">LinkedIn</a>
-                </div>
-            </div>
-		</footer>
-
 		<script>
+            // Uni-Mode Logic
 			function updateUniMode() {
 				const params = new URLSearchParams(window.location.search);
 				if (params.get('mode') === 'uni') {
