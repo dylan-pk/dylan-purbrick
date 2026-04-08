@@ -24,46 +24,50 @@ const base = '/dylan-purbrick';
 	<body class="bg-[#334155] text-industrial-black font-neue antialiased min-h-screen relative overflow-x-hidden">
 		<div class="fixed inset-0 pointer-events-none opacity-[0.07] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
 
-		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
+		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-12">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch pt-24 gap-[2px] relative z-30">
+			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch gap-0 relative z-30">
 				
 				<a href={`${base}/`} 
-				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+				   class={`relative flex items-center justify-center py-12 px-2 rounded-tl-2xl transition-all border-l border-t border-slate-300/30 ${activeTab === 'home' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px]' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
 					{activeTab === 'home' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						01. Overview
 					</span>
+					<div class={`absolute -bottom-6 right-0 w-6 h-6 pointer-events-none ${activeTab === 'home' ? 'text-[#f1f5f9]' : 'text-slate-200/80'}`} style="background: radial-gradient(circle at bottom left, transparent 24px, currentColor 25px);"></div>
 				</a>
 
 				<a href={`${base}/projects`} 
-				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+				   class={`relative flex items-center justify-center py-12 px-2 rounded-tl-2xl transition-all border-l border-t border-slate-300/30 ${activeTab === 'projects' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px]' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
 					{activeTab === 'projects' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						02. Projects
 					</span>
+					<div class={`absolute -bottom-6 right-0 w-6 h-6 pointer-events-none ${activeTab === 'projects' ? 'text-[#f1f5f9]' : 'text-slate-200/80'}`} style="background: radial-gradient(circle at bottom left, transparent 24px, currentColor 25px);"></div>
 				</a>
 
 				<a href={`${base}/resume`} 
-				   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
+				   class={`relative flex items-center justify-center py-12 px-2 rounded-tl-2xl transition-all border-l border-t border-slate-300/30 ${activeTab === 'resume' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px]' : 'bg-slate-200/80 text-slate-400 hover:bg-slate-200 z-10'}`}>
 					{activeTab === 'resume' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 					<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 						03. Resume
 					</span>
+					<div class={`absolute -bottom-6 right-0 w-6 h-6 pointer-events-none ${activeTab === 'resume' ? 'text-[#f1f5f9]' : 'text-slate-200/80'}`} style="background: radial-gradient(circle at bottom left, transparent 24px, currentColor 25px);"></div>
 				</a>
 
 				<div id="uni-indicator" class="hidden">
 					<a href={`${base}/uni?mode=uni`} 
-					   class={`relative flex items-center justify-center py-10 px-2 rounded-l-2xl transition-all border-l border-y border-slate-300/30 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px] border-r-transparent' : 'bg-brand-purple text-white hover:bg-brand-orange z-10'}`}>
+					   class={`relative flex items-center justify-center py-12 px-2 rounded-tl-2xl transition-all border-l border-t border-slate-300/30 ${activeTab === 'uni' ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[2px]' : 'bg-brand-purple text-white hover:bg-brand-orange z-10'}`}>
 						{activeTab === 'uni' && <div class="absolute left-0 top-1/4 bottom-1/4 w-1.5 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
 						<span class="text-[9px] font-black uppercase tracking-widest inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
 							Academic Hub
 						</span>
+						<div class={`absolute -bottom-6 right-0 w-6 h-6 pointer-events-none ${activeTab === 'uni' ? 'text-[#f1f5f9]' : 'text-brand-purple'}`} style="background: radial-gradient(circle at bottom left, transparent 24px, currentColor 25px);"></div>
 					</a>
 				</div>
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_0_80px_rgba(0,0,0,0.4)] min-h-screen rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_0_80px_rgba(0,0,0,0.4)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200">
 				<div class="p-8 md:p-16 lg:p-24 relative z-10">
 					<slot />
 				</div>
