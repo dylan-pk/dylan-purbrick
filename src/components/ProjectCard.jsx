@@ -1,59 +1,36 @@
-import { motion } from "framer-motion";
+import React from 'react';
 
-export default function ProjectCard({ title, category, specs, image, id }) {
-  const base = '/dylan-purbrick';
-
+export default function ProjectCard({ title, category, specs, image, github, portfolio }) {
   return (
-    <motion.a 
-      href={`${base}/projects#${id}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="group relative block h-96 w-full cursor-pointer overflow-hidden rounded-xl border border-slate-200 bg-slate-50/80 shadow-sm transition-all hover:shadow-xl"
-    >
-      {/* Front Label: Industrial Slate Gradient */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-end p-8 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent">
-        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-brand-orange mb-2">
-          {category}
-        </p>
-        <h3 className="text-2xl font-black uppercase tracking-tight text-white group-hover:text-brand-orange transition-colors duration-300">
-          {title}
-        </h3>
+    <div className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all group">
+      <div className="h-64 overflow-hidden relative">
+        <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-industrial-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex items-end">
+          <p className="text-white text-xs font-mono uppercase tracking-widest">{category}</p>
+        </div>
       </div>
       
-      {/* Visual Data: Grayscale to Color */}
-      <div className="absolute inset-0 bg-slate-200">
-        <img 
-          src={image} 
-          alt={title} 
-          className="h-full w-full object-cover grayscale opacity-80 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" 
-        />
-      </div>
-
-      {/* Technical Annex: Slide-up Details */}
-      <div className="absolute inset-0 z-20 translate-y-full bg-slate-900 p-10 transition-transform duration-500 ease-in-out group-hover:translate-y-0">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-px w-8 bg-brand-purple"></div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-brand-purple italic">
-            Technical Specification
-          </p>
-        </div>
-
-        <ul className="space-y-4 font-mono text-[11px] uppercase tracking-wider text-slate-300">
-          {specs.map((s) => (
-            <li key={s} className="flex items-start gap-3">
-              <span className="text-brand-orange font-bold">+</span>
-              <span className="leading-relaxed">{s}</span>
-            </li>
+      <div className="p-8">
+        <h3 className="text-xl font-black uppercase mb-4 text-industrial-black">{title}</h3>
+        <ul className="flex flex-wrap gap-2 mb-8">
+          {specs.map((s, i) => (
+            <li key={i} className="text-[9px] font-mono uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-full text-slate-500 border border-slate-200">{s}</li>
           ))}
         </ul>
 
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <span className="inline-flex items-center gap-4 text-brand-orange font-black uppercase text-[10px] tracking-widest group-hover:gap-6 transition-all">
-            Review Full Dossier <span>→</span>
-          </span>
+        <div className="flex gap-3 mt-auto">
+          {github && (
+            <a href={github} target="_blank" className="flex-1 text-center bg-brand-purple text-white py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-colors">
+              GitHub
+            </a>
+          )}
+          {portfolio && (
+            <a href={portfolio} download className="flex-1 text-center border-2 border-industrial-black py-3 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-industrial-black hover:text-white transition-all">
+              Portfolio
+            </a>
+          )}
         </div>
       </div>
-    </motion.a>
+    </div>
   );
 }
