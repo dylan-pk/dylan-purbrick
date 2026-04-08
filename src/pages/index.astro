@@ -3,50 +3,67 @@ import Layout from '../layouts/layout.astro';
 import ProjectCard from '../components/ProjectCard.jsx';
 const base = '/dylan-purbrick';
 
-const projects = [
-  { id: "datsun", title: "Datsun 1200", category: "Restoration", specs: ["Loom Repair", "Rust Remediation", "Interior"], image: `${base}/datsun.jpg` },
-  { id: "gallery-robot", title: "Gallery Robot", category: "Robotics", specs: ["ROS 2", "OpenCV", "90% Success"], image: `${base}/gallery.jpg` },
-  { id: "defender", title: "Land Rover", category: "Modification", specs: ["Solar Wiring", "Winch", "Storage"], image: `${base}/defender.jpg` },
-  { id: "pedometer", title: "Pedometer Shield", category: "Embedded", specs: ["Custom PCB", "Altium", "Arduino"], image: `${base}/pedometer.jpg` },
-  { id: "pliers", title: "Printed Pliers", category: "Manufacturing", specs: ["Print-in-Place", "Tolerance", "CAD"], image: `${base}/pliers.jpg` }
+const featuredProjects = [
+  { 
+    id: "gallery-robot", 
+    title: "Gallery Robot", 
+    category: "Autonomous Systems", 
+    specs: ["ROS 2", "OpenCV", "90% Success"], 
+    image: `${base}/gallery.jpg`,
+    github: "https://github.com/dylanpurbrick/gallery-host" 
+  },
+  { 
+    id: "datsun", 
+    title: "Datsun 1200", 
+    category: "Restoration", 
+    specs: ["Loom Repair", "Rust Remediation", "Interior"], 
+    image: `${base}/datsun.jpg` 
+  }
 ];
 ---
 
 <Layout title="Dylan Purbrick | Overview" activeTab="home">
   <div class="max-w-5xl relative z-10">
-    <header class="mb-24">
-        <h1 class="text-7xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] mb-10 text-industrial-black">
-            <span class="font-wayfinder italic">Dylan</span> <br/>
-            <span class="text-brand-orange">Purbrick</span>
-        </h1>
-        <div class="h-1 w-24 bg-brand-purple"></div>
+    <header class="mb-24 flex flex-col md:flex-row justify-between items-start gap-8">
+        <div>
+            <h1 class="text-7xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] mb-10 text-industrial-black">
+                <span class="font-wayfinder italic">Dylan</span> <br/>
+                <span class="text-brand-orange">Purbrick</span>
+            </h1>
+            <div class="h-1 w-24 bg-brand-purple"></div>
+        </div>
+        
+        <a href={`${base}/Dylan_Purbrick_Resume.pdf`} download class="group flex items-center gap-4 border-2 border-industrial-black px-8 py-4 hover:bg-industrial-black transition-all">
+            <span class="text-[11px] font-black uppercase tracking-widest group-hover:text-white">Download Resume</span>
+            <svg class="w-4 h-4 group-hover:text-brand-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
+        </a>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-40">
         <div class="space-y-10 font-neue">
             <p class="text-3xl font-medium text-slate-800 leading-tight">
-                I am currently undergoing my final-year of study of a Bachelor of Engineering (Honours) in Mechatronic Engineering at UTS, and an Engineering Assistant at Keith Engineering.
+                Currently undergoing my final-year of a Bachelor of Engineering (Honours) in Mechatronics at UTS [cite: 37, 97, 104], while serving as an Engineering Assistant at Keith Engineering[cite: 37, 117].
             </p>
             <p class="text-xl text-slate-500 leading-relaxed">
-                My professional journey is driven by a deep passion for furthering my mechanical understanding and gaining hands-on experience, demonstrated through technical restoration projects and complex system modifications.
+                My professional journey is driven by a deep passion for mechanical systems and a belief that genuine growth occurs through hands-on experience[cite: 54, 99, 100].
             </p>
         </div>
         
         <div class="bg-white/60 p-12 rounded-3xl border border-slate-200 shadow-sm">
             <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.5em] mb-8 font-bold">// Dossier_Summary</p>
             <p class="text-lg text-slate-600 leading-relaxed font-neue">
-                Beyond technical aptitude in Python and SolidWorks, I offer proven transferable skills developed through leadership roles, including co-founding the UTS MechSoc and supervising teams in fast-paced environments.
+                Beyond technical aptitude in areas like Python, SolidWorks, and Fusion 360 [cite: 42, 151], I offer proven leadership and adaptability developed through co-founding the UTS MechSoc and managing high-pressure hospitality environments[cite: 42, 80, 86].
             </p>
         </div>
     </div>
 
     <section id="projects" class="pt-20">
         <div class="flex justify-between items-end mb-16 border-b border-slate-200 pb-8">
-            <h2 class="text-5xl font-black uppercase tracking-tighter text-industrial-black">Technical <span class="text-brand-orange">Archive</span></h2>
-            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400">File_02 // Selected Works</p>
+            <h2 class="text-5xl font-black uppercase tracking-tighter text-industrial-black">Featured <span class="text-brand-orange">Works</span></h2>
+            <p class="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400">Section_01 // Selected Highlights</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {projects.map((p) => <ProjectCard client:load {...p} />)}
+            {featuredProjects.map((p) => <ProjectCard client:load {...p} />)}
         </div>
     </section>
   </div>
