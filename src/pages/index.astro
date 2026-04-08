@@ -1,19 +1,32 @@
 ---
 import Layout from '../layouts/layout.astro';
-import ProjectCard from '../components/ProjectCard.jsx';
+import ProjectCarousel from '../components/ProjectCarousel.jsx';
 const base = '/dylan-purbrick';
 
-const featuredProjects = [
+const allProjects = [
+  { 
+    id: "crop-guard", 
+    title: "Crop-Guard", 
+    category: "Agricultural Robotics", 
+    specs: ["Autonomous Navigation", "Simulink", "Monitoring"], 
+    image: `${base}/ag-robot.jpg`
+  },
+  { 
+    id: "wallbug", 
+    title: "Wallbug", 
+    category: "Environmental Monitoring", 
+    specs: ["Vertical Mobility", "Sensor Integration", "WiFi"], 
+    image: `${base}/wallbug.jpg`
+  },
   { 
     id: "gallery-robot", 
     title: "Gallery Robot", 
     category: "Autonomous Systems", 
     specs: ["ROS 2", "OpenCV", "90% Success"], 
-    image: `${base}/gallery.jpg`,
-    github: "https://github.com/dylanpurbrick/gallery-host" 
+    image: `${base}/gallery.jpg`
   },
   { 
-    id: "datsun", 
+    id: "datsun-1200", 
     title: "Datsun 1200", 
     category: "Restoration", 
     specs: ["Loom Repair", "Rust Remediation", "Interior"], 
@@ -22,8 +35,8 @@ const featuredProjects = [
 ];
 ---
 
-<Layout title="Dylan Purbrick | Overview" activeTab="home">
-  <div class="max-w-5xl relative z-10">
+<Layout title="Overview" activeTab="home">
+  <div class="max-w-6xl relative z-10">
     <header class="mb-24 flex flex-col md:flex-row justify-between items-start gap-8">
         <div>
             <h1 class="text-7xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] mb-10 text-industrial-black">
@@ -39,31 +52,16 @@ const featuredProjects = [
         </a>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-40">
-        <div class="space-y-10 font-neue">
-            <p class="text-3xl font-medium text-slate-800 leading-tight">
-                Currently undergoing my final-year of a Bachelor of Engineering (Honours) in Mechatronics at UTS, while serving as an Engineering Assistant at Keith Engineering.
-            </p>
-            <p class="text-xl text-slate-500 leading-relaxed">
-                My professional journey is driven by a deep passion for mechanical systems and a belief that genuine growth occurs through hands-on experience.
-            </p>
+    <section class="py-20 bg-slate-50/50 rounded-[3rem] border border-slate-100">
+        <div class="px-8 md:px-16 mb-16 flex justify-between items-end">
+            <div>
+                <h2 class="text-5xl font-black uppercase tracking-tighter text-industrial-black">Featured <span class="text-brand-orange">Works</span></h2>
+                <p class="text-xs font-mono text-slate-400 mt-2">Active Technical Rotations</p>
+            </div>
+            <a href={`${base}/projects`} class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors border-b-2 border-brand-purple/20 pb-1">View All Archive</a>
         </div>
-        
-        <div class="bg-white/60 p-12 rounded-3xl border border-slate-200 shadow-sm">
-            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.5em] mb-8 font-bold">// Dossier_Summary</p>
-            <p class="text-lg text-slate-600 leading-relaxed font-neue">
-                Beyond technical aptitude in areas like Python, SolidWorks, and Fusion 360, I offer proven leadership and adaptability developed through co-founding the UTS MechSoc and managing high-pressure hospitality environments.
-            </p>
-        </div>
-    </div>
 
-    <section id="projects" class="pt-20">
-        <div class="flex justify-between items-end mb-16 border-b border-slate-200 pb-8">
-            <h2 class="text-5xl font-black uppercase tracking-tighter text-industrial-black">Featured <span class="text-brand-orange">Works</span></h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {featuredProjects.map((p) => <ProjectCard client:load {...p} />)}
-        </div>
+        <ProjectCarousel client:load projects={allProjects} base={base} />
     </section>
   </div>
 </Layout>
