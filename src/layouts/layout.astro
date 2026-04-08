@@ -22,15 +22,19 @@ const base = '/dylan-purbrick';
 	</head>
 	<body class="bg-white text-industrial-black font-neue antialiased relative">
 		
-		<div id="uni-banner" class="hidden sticky top-0 z-[200] bg-brand-purple text-white py-3 px-6 flex justify-between items-center border-b border-white/10 shadow-lg">
-			<div class="flex items-center gap-3">
-				<div class="h-2 w-2 rounded-full bg-brand-orange animate-pulse"></div>
-				<p class="font-neue text-[10px] font-bold uppercase tracking-widest">
-					Academic Submission Mode // Professional Engineering Experience Review
-				</p>
-			</div>
-			<a href={`${base}/uni?mode=uni`} class="bg-white text-brand-purple px-4 py-1.5 text-[10px] font-black uppercase tracking-tighter hover:bg-brand-orange hover:text-white transition-all">
-				Back to Assignment Home
+		<div id="uni-sidebar" class="hidden fixed right-0 top-1/2 -translate-y-1/2 z-[200] flex items-center">
+			<a 
+				href={`${base}/uni?mode=uni`} 
+				class="bg-brand-purple text-white px-4 py-6 flex flex-col items-center gap-4 shadow-2xl border-l border-white/20 hover:bg-brand-orange transition-all duration-300 group"
+				style="writing-mode: vertical-rl; text-orientation: mixed;"
+			>
+				<span class="font-neue text-[10px] font-black uppercase tracking-[0.3em] whitespace-nowrap">
+					Academic Submission Mode
+				</span>
+				<div class="h-8 w-[1px] bg-white/30 group-hover:bg-white/60"></div>
+				<span class="font-neue text-[9px] font-bold uppercase tracking-widest opacity-80">
+					Return to Hub
+				</span>
 			</a>
 		</div>
 
@@ -94,10 +98,10 @@ const base = '/dylan-purbrick';
 			const isUniMode = urlParams.get('mode') === 'uni';
 
 			if (isUniMode) {
-				// Show the safety banner
-				document.getElementById('uni-banner')?.classList.remove('hidden');
+				// Show the vertical badge
+				document.getElementById('uni-sidebar')?.classList.remove('hidden');
 
-				// Append ?mode=uni to all internal links to prevent the marker from getting "lost"
+				// Append ?mode=uni to all internal links
 				document.querySelectorAll('a').forEach(link => {
 					const href = link.getAttribute('href');
 					if (href && (href.startsWith('/') || href.includes(window.location.hostname))) {
