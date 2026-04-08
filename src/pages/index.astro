@@ -12,42 +12,52 @@ const projects = [
 ];
 ---
 
-<Layout title="Dylan Purbrick | Mechatronic Portfolio">
-  <main class="mx-auto max-w-7xl px-6 pt-48 pb-32">
-    <section class="mb-48">
-        <h1 class="text-8xl md:text-[11rem] leading-[0.8] tracking-tighter uppercase mb-12">
-            <span class="font-wayfinder text-industrial-black">Dylan</span> <br /> 
+<Layout title="Dylan Purbrick | Overview" activeTab="home">
+  <div class="max-w-6xl mx-auto">
+    <section class="mb-32">
+        <h1 class="text-7xl md:text-[9rem] leading-[0.85] tracking-tighter uppercase mb-16 text-industrial-black">
+            <span class="font-wayfinder italic">Dylan</span> <br /> 
             <span class="font-neue text-brand-orange">Purbrick</span>
         </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start font-neue">
-            <div class="space-y-6">
-                <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">// Personal Profile</p>
-                <p class="text-xl text-gray-600 leading-relaxed">
-                    I am currently undergoing my final-year of study of a Bachelor of Engineering (Honours) in Mechatronic Engineering at UTS, and currently an Engineering Assistant at Keith Engineering[cite: 101]. My professional journey is driven by a deep passion for furthering my mechanical understanding and gaining hands-on experience[cite: 102].
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start font-neue">
+            <div class="space-y-8">
+                <div class="flex items-center gap-4">
+                    <div class="h-[1px] w-12 bg-brand-purple"></div>
+                    <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Personal Profile</p>
+                </div>
+                <p class="text-2xl text-slate-700 leading-snug font-medium">
+                    I am currently undergoing my final-year of study of a Bachelor of Engineering (Honours) in Mechatronic Engineering at UTS, and currently an Engineering Assistant at Keith Engineering.
+                </p>
+                <p class="text-lg text-slate-500 leading-relaxed">
+                    My professional journey is driven by a deep passion for furthering my mechanical understanding and gaining hands-on experience.
                 </p>
             </div>
-            <div class="border-l border-gray-100 pl-10 space-y-4">
-                <p class="text-sm text-gray-500 leading-loose">
-                    Beyond technical aptitude in Python and SolidWorks, I offer proven transferable skills developed through leadership roles, including co-founding the UTS MechSoc and supervising teams in fast-paced environments[cite: 106].
+            
+            <div class="bg-white/50 p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <p class="text-sm text-slate-600 leading-loose">
+                    Beyond technical aptitude in Python and SolidWorks, I offer proven transferable skills developed through leadership roles, including co-founding the UTS MechSoc and supervising teams in fast-paced environments.
                 </p>
-                <a href={`${base}/resume`} class="inline-block border-b-2 border-brand-orange text-brand-orange font-bold uppercase text-[10px] tracking-widest pt-4 hover:text-brand-purple hover:border-brand-purple transition-all">
-                    View Career Summary →
+                <a href={`${base}/resume`} class="inline-flex items-center gap-4 text-brand-orange font-black uppercase text-[10px] tracking-widest hover:text-brand-purple transition-all group">
+                    <span>View Career Summary</span>
+                    <span class="group-hover:translate-x-2 transition-transform">→</span>
                 </a>
             </div>
         </div>
     </section>
 
     <section id="projects">
-      <div class="mb-12 border-b-2 border-industrial-black pb-4 flex justify-between items-end">
-        <h2 class="text-5xl font-black uppercase tracking-tighter">
-            <span class="font-wayfinder">Portfolio</span> <span class="font-neue text-brand-orange">Systems</span>
+      <div class="mb-12 border-b border-slate-200 pb-6 flex justify-between items-end">
+        <h2 class="text-4xl font-black uppercase tracking-tighter text-industrial-black">
+            <span class="font-wayfinder italic">Portfolio</span> <span class="text-brand-orange">Systems</span>
         </h2>
+        <p class="font-mono text-[9px] uppercase tracking-widest text-slate-400">Section 02 // Technical_Archive</p>
       </div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard client:load {...project} />
         ))}
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
