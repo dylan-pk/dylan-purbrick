@@ -20,10 +20,12 @@ const tabs = [
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>{title}</title>
+		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<title>{title} | Dylan Purbrick</title>
 	</head>
 	<body class="bg-[#334155] text-industrial-black font-neue antialiased min-h-screen relative overflow-x-hidden">
-		<div class="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
+		
+		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
 			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30">
 				{tabs.map((tab) => {
@@ -32,7 +34,13 @@ const tabs = [
                         <div id={`${tab.id}-tab-wrapper`} class={tab.uniOnly ? 'hidden' : 'block'}>
                             <a 
                                 href={`${base}${tab.path}${tab.uniOnly ? '?mode=uni' : ''}`} 
-                                class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-500 ease-in-out border-l border-t border-slate-400/20 ${isActive ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' : 'bg-slate-300/40 text-slate-500/40 py-8 hover:py-12 hover:bg-slate-300/60 hover:text-slate-700/80'}`}
+                                class={`
+                                    group relative flex items-center justify-center rounded-l-xl transition-all duration-500 ease-in-out border-l border-t border-slate-400/20
+                                    ${isActive 
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
+                                        : 'bg-slate-300/40 text-slate-500/40 py-10 hover:py-12 hover:bg-slate-300/60 hover:text-slate-700/80'
+                                    }
+                                `}
                             >
                                 {isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
                                 <span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
@@ -44,24 +52,19 @@ const tabs = [
                 })}
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col">
-				<div class="p-8 md:p-16 lg:p-24 relative z-10 flex-1">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col overflow-hidden">
+				<div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
 				</div>
 
 				<footer class="mt-auto border-t border-slate-200 p-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
-					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">
-						© 2026 Dylan Purbrick // Mechatronic Engineering
-					</p>
-					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">
-						dylan.m.purbrick@gmail.com
-					</a>
+					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">© 2026 Dylan Purbrick</p>
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">dylan.m.purbrick@gmail.com</a>
 				</footer>
 			</main>
 		</div>
 
 		<script>
-            // Uni-Mode Visibility Script
 			function updateUniMode() {
 				const params = new URLSearchParams(window.location.search);
 				if (params.get('mode') === 'uni') {
