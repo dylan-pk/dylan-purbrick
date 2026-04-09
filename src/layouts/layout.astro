@@ -32,19 +32,10 @@ const tabs = [
                         <div id={`${tab.id}-tab-wrapper`} class={tab.uniOnly ? 'hidden' : 'block'}>
                             <a 
                                 href={`${base}${tab.path}${tab.uniOnly ? '?mode=uni' : ''}`} 
-                                class={`
-                                    group relative flex items-center justify-center rounded-l-xl transition-all duration-500 ease-in-out border-l border-t border-slate-400/20
-                                    ${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
-                                        : 'bg-slate-300/40 text-slate-500/40 py-8 hover:py-12 hover:bg-slate-300/60 hover:text-slate-700/80'
-                                    }
-                                `}
+                                class={`group relative flex items-center justify-center rounded-l-xl transition-all duration-500 ease-in-out border-l border-t border-slate-400/20 ${isActive ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' : 'bg-slate-300/40 text-slate-500/40 py-8 hover:py-12 hover:bg-slate-300/60 hover:text-slate-700/80'}`}
                             >
                                 {isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
-                                <span 
-                                    class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'}`} 
-                                    style="writing-mode: vertical-rl; text-orientation: mixed;"
-                                >
+                                <span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
                                     {tab.label}
                                 </span>
                             </a>
@@ -53,22 +44,30 @@ const tabs = [
                 })}
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 overflow-hidden">
-				<div class="p-8 md:p-16 lg:p-24 relative z-10">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col">
+				<div class="p-8 md:p-16 lg:p-24 relative z-10 flex-1">
 					<slot />
 				</div>
+
+				<footer class="mt-auto border-t border-slate-200 p-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
+					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">
+						© 2026 Dylan Purbrick // Mechatronic Engineering
+					</p>
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">
+						dylan.m.purbrick@gmail.com
+					</a>
+				</footer>
 			</main>
 		</div>
 
 		<script>
+            // Uni-Mode Visibility Script
 			function updateUniMode() {
 				const params = new URLSearchParams(window.location.search);
 				if (params.get('mode') === 'uni') {
-                    // Target the specific wrappers we defined in the loop
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
 					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
-					
-                    document.querySelectorAll('a').forEach(link => {
+					document.querySelectorAll('a').forEach(link => {
 						const href = link.getAttribute('href');
 						if (href && (href.startsWith('/') || href.startsWith(window.location.origin))) {
 							const url = new URL(href, window.location.origin);

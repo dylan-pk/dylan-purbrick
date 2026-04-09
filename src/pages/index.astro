@@ -5,7 +5,6 @@ const base = '/dylan-purbrick';
 
 const resumePath = `${base}/Dylan_Purbrick_Resume.pdf`;
 
-// Full 7-Project Array for the Featured Carousel
 const allProjects = [
   { id: "wallbug", title: "Wallbug", category: "Embedded Systems", image: `${base}/images/wallbug-thumb.jpg`, specs: ["C++", "Sensors"] },
   { id: "gallery-host", title: "Gallery Host", category: "ROS 2", image: `${base}/images/gallery-thumb.jpg`, specs: ["Python", "OpenCV"] },
@@ -20,43 +19,42 @@ const allProjects = [
 <Layout title="Overview" activeTab="home">
   <div class="max-w-6xl relative z-10">
     
-    <header class="mb-32 flex flex-col md:flex-row items-center gap-12 border-b border-slate-200 pb-16">
-        <div class="relative group">
-            <img 
-                src={`${base}/images/dylan-profile.jpg`} 
-                alt="Dylan Purbrick" 
-                class="w-48 h-48 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 border-4 border-white shadow-2xl"
-            />
-            <div class="absolute inset-0 rounded-full border-2 border-brand-orange scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-        </div>
+    <header class="mb-32 flex flex-col md:flex-row items-center justify-between gap-12 border-b border-slate-200 pb-16">
+        <div class="flex flex-col md:flex-row items-center gap-12 order-2 md:order-1">
+            <div class="text-center md:text-left">
+                <h1 class="text-8xl font-black uppercase tracking-tighter leading-[0.8] mb-6 text-industrial-black">
+                    Dylan <br/><span class="text-brand-orange">Purbrick</span>
+                </h1>
+                <p class="text-[10px] font-mono text-brand-purple uppercase tracking-[0.4em] font-bold">
+                    Engineering Assistant // Mechatronic Student
+                </p>
+            </div>
 
-        <div class="text-center md:text-left flex-1">
-            <h1 class="text-8xl font-black uppercase tracking-tighter leading-[0.8] mb-6 text-industrial-black">
-                Dylan <br/><span class="text-brand-orange">Purbrick</span>
-            </h1>
-            <p class="text-[10px] font-mono text-brand-purple uppercase tracking-[0.4em] font-bold">
-                Engineering Assistant // Mechatronic Student
-            </p>
+            <div class="relative group order-1 md:order-2">
+                <img 
+                    src={`${base}/images/dylan-profile.jpg`} 
+                    alt="Dylan Purbrick" 
+                    class="w-48 h-48 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 border-4 border-white shadow-2xl"
+                />
+                <div class="absolute inset-0 rounded-full border-2 border-brand-orange scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+            </div>
         </div>
     </header>
 
-    <section class="mb-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <section class="mb-32 grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div class="lg:col-span-8 space-y-8">
             <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em]">01 // Career Objective</h2>
             <p class="text-3xl font-medium leading-tight text-industrial-black">
                 Driven by a passion for hands-on experience and practical immersion, I aim to apply my innovative mindset to complex real-world engineering challenges.
             </p>
             <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
-                I believe that genuine professional growth is best achieved in a dynamic industry setting. My developed skills in technical communication, problem-solving, and teamwork allow me to add immediate value.
+                My skills in problem-solving and teamwork allow me to add immediate value to professional engineering environments [cite: 9, 67-68].
             </p>
-
             <div class="pt-8">
                 <a href={resumePath} download class="inline-flex items-center gap-6 bg-industrial-black px-10 py-5 hover:bg-brand-orange transition-all rounded-sm shadow-2xl group">
-                    <span class="text-[12px] font-black uppercase tracking-widest text-white">Download Full Credentials</span>
+                    <span class="text-[12px] font-black uppercase tracking-widest text-white">Download Credentials</span>
                     <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20">
-                        <svg class="w-4 h-4 text-brand-orange group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
-                        </svg>
+                        <svg class="w-4 h-4 text-brand-orange group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
                     </div>
                 </a>
             </div>
@@ -68,7 +66,6 @@ const allProjects = [
                 <li class="flex justify-between"><span>Current:</span> <span class="text-industrial-black font-bold">Keith Engineering</span></li>
                 <li class="flex justify-between"><span>Education:</span> <span class="text-industrial-black">UTS Sydney</span></li>
                 <li class="flex justify-between"><span>Major:</span> <span class="text-industrial-black">Mechatronics</span></li>
-                <li class="flex justify-between"><span>Status:</span> <span class="text-industrial-black">Final Year</span></li>
             </ul>
         </div>
     </section>
@@ -76,10 +73,13 @@ const allProjects = [
     <section class="mb-48">
         <div class="flex items-center justify-between mb-12">
             <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em]">02 // Featured Works</h2>
-            <a href={`${base}/projects`} class="text-[10px] font-black uppercase text-brand-purple hover:text-brand-orange transition-colors tracking-widest">Full Technical Archive —></a>
+            <a href={`${base}/projects`} class="text-[10px] font-black uppercase text-brand-purple hover:text-brand-orange transition-colors tracking-widest">Technical Archive —></a>
         </div>
         
-        <ProjectCarousel client:load projects={allProjects} base={base} />
+        <div class="bg-white/50 p-6 md:p-12 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 font-mono text-[8px] uppercase tracking-tighter pointer-events-none">Ref_Archive_v.2.0</div>
+            <ProjectCarousel client:load projects={allProjects} base={base} />
+        </div>
     </section>
 
   </div>
