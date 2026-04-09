@@ -34,8 +34,17 @@ export default function ProjectCard({ title, category, images, github, demo, vid
               </a>
             )}
             {portfolio && (
-              <a href={portfolio} download className="flex items-center gap-2 px-3 py-1.5 border-2 border-industrial-black text-industrial-black rounded text-[9px] font-black uppercase tracking-widest hover:bg-industrial-black hover:text-white transition-all">
-                Portfolio PDF
+              <a 
+                href={portfolio} 
+                download 
+                className="flex items-center gap-2 px-4 py-2 border-2 border-industrial-black text-industrial-black rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-industrial-black hover:text-white transition-all"
+              >
+                {/* Download Icon */}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5l5 5v11a2 2 0 01-2 2z"/>
+                </svg>
+                
+                Download Portfolio
               </a>
             )}
           </div>
