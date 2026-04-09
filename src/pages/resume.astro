@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/layout.astro';
 const base = '/dylan-purbrick';
+const resumePath = `${base}/Dylan_Purbrick_Resume.pdf`;
 ---
 
 <Layout title="Resume" activeTab="resume">
@@ -8,9 +9,9 @@ const base = '/dylan-purbrick';
     <header class="mb-20 flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-200 pb-12">
         <div>
             <h1 class="text-6xl font-black uppercase tracking-tighter mb-4 text-industrial-black">Resume</h1>
-            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Professional Credentials</p>
+            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Section_04 // Professional Credentials</p>
         </div>
-        <a href={`${base}/Dylan_Purbrick_Resume.pdf`} download class="group flex items-center gap-4 bg-industrial-black px-8 py-4 hover:bg-brand-orange transition-all rounded-sm shadow-xl">
+        <a href={resumePath} download class="group flex items-center gap-4 bg-industrial-black px-8 py-4 hover:bg-brand-orange transition-all rounded-sm shadow-xl">
             <span class="text-[11px] font-black uppercase tracking-widest text-white">Download PDF</span>
             <svg class="w-4 h-4 text-brand-orange group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
@@ -20,38 +21,19 @@ const base = '/dylan-purbrick';
 
     <div class="space-y-24">
         <section>
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-8">01 // Objective</h2>
-            <p class="text-2xl font-medium text-slate-800 leading-snug max-w-2xl font-neue">
-                I aim to apply my innovative mindset, along with my strong teamwork and critical thinking abilities, beyond the confines of the classroom and into real-world scenarios. I firmly believe that genuine professional growth happens through hands-on experience.
-            </p>
-        </section>
-        
-        <section>
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">02 // Education</h2>
-            <div class="space-y-12">
-                <div class="flex flex-col md:flex-row md:justify-between items-start">
-                    <div>
-                        <h3 class="text-xl font-black uppercase">B. Engineering (Honours)</h3>
-                        <p class="text-sm font-bold text-brand-purple uppercase tracking-widest">University of Technology Sydney</p>
-                        <p class="text-[10px] font-mono mt-2 text-slate-400">Majoring in Mechatronics</p>
-                        <p class="text-[10px] font-mono text-slate-400 italic">Distinction in: Materials and Manufacturing, Sensors and Control</p>
-                    </div>
-                    <p class="text-xs font-mono text-slate-400 uppercase mt-4 md:mt-0">2022 — 2026</p>
-                </div>
-
-                <div class="flex flex-col md:flex-row md:justify-between items-start pt-8 border-t border-slate-100">
-                    <div>
-                        <h3 class="text-xl font-black uppercase">Diploma of Engineering</h3>
-                        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">UTS College</p>
-                        <p class="text-[10px] font-mono mt-2 text-slate-400">Graduated High Distinction Average</p>
-                    </div>
-                    <p class="text-xs font-mono text-slate-400 uppercase mt-4 md:mt-0">2021 — 2022</p>
-                </div>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-8">01 // Career Objective</h2>
+            <div class="space-y-6 max-w-3xl font-neue text-slate-800">
+                <p class="text-2xl font-medium leading-snug">
+                    Driven by a passion for hands-on experience and practical immersion, I aim to apply my innovative mindset and critical thinking abilities to complex real-world engineering challenges.
+                </p>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    While I appreciate the value of academic study, I believe that genuine professional growth is best achieved in a dynamic industry setting. My developed skills in technical communication, problem-solving, and cross-functional teamwork allow me to add immediate value while continuing to develop technical expertise.
+                </p>
             </div>
         </section>
 
         <section>
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">03 // Experience</h2>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">02 // Experience & Leadership</h2>
             <div class="space-y-16">
                 <div class="relative pl-12 border-l-2 border-slate-200">
                     <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-purple border-4 border-[#f1f5f9]"></div>
@@ -62,10 +44,26 @@ const base = '/dylan-purbrick';
                         </div>
                         <p class="text-xs font-mono text-slate-400 mt-2 md:mt-0 uppercase">August 2025 — Present</p>
                     </header>
-                    <ul class="space-y-3 font-neue text-slate-600">
-                        <li class="flex gap-4"><span>•</span> Assisted in equipment reconditioning evaluation and quoting with involvement in the fitting shop.</li>
-                        <li class="flex gap-4"><span>•</span> Performed CAD modeling, created Bills of Materials (BOMs), and conducted QA checks on manufacturing drawings.</li>
-                        <li class="flex gap-4"><span>•</span> Prepared project costing and customer quotes for equipment and spare parts.</li>
+                    <ul class="space-y-3 font-neue text-slate-600 text-sm">
+                        <li class="flex gap-4"><span>•</span> Assisted in equipment reconditioning evaluation and quoting process with practical involvement in the fitting shop.</li>
+                        <li class="flex gap-4"><span>•</span> Performed CAD modelling, created Bills of Materials (BOMs), and conducted quality assurance checks on manufacturing drawings.</li>
+                        <li class="flex gap-4"><span>•</span> Prepared project costing and customer quotes for various equipment and spare parts.</li>
+                    </ul>
+                </div>
+
+                <div class="relative pl-12 border-l-2 border-slate-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 border-4 border-[#f1f5f9]"></div>
+                    <header class="flex flex-col md:flex-row md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-black uppercase text-industrial-black">Cofounder and Team Executive</h3>
+                            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">UTS MechSoc</p>
+                        </div>
+                        <p class="text-xs font-mono text-slate-400 mt-2 md:mt-0 uppercase">Jan 2024 — Feb 2025</p>
+                    </header>
+                    <ul class="space-y-3 font-neue text-slate-600 text-sm">
+                        <li class="flex gap-4"><span>•</span> Planned and ran professional development events such as design and fabrication workshops.</li>
+                        <li class="flex gap-4"><span>•</span> Coordinated larger events including a ski trip to Mt. Hotham and a tour of the Snowy Hydro facility for 30 people.</li>
+                        <li class="flex gap-4"><span>•</span> Oversaw executive team members to organize technical events and community engagement.</li>
                     </ul>
                 </div>
 
@@ -76,41 +74,84 @@ const base = '/dylan-purbrick';
                             <h3 class="text-xl font-black uppercase text-industrial-black">Shift Supervisor</h3>
                             <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Lord Dudley Hotel | Woollahra</p>
                         </div>
-                        <p class="text-xs font-mono text-slate-400 mt-2 md:mt-0 uppercase">Sept 2021 — 2025</p>
+                        <p class="text-xs font-mono text-slate-400 mt-2 md:mt-0 uppercase">Sept 2021 — Dec 2025</p>
                     </header>
-                    <ul class="space-y-3 font-neue text-slate-600">
-                        <li class="flex gap-4"><span>•</span> Supervise up to 20 staff members across multiple bar environments.</li>
-                        <li class="flex gap-4"><span>•</span> Regularly manage over $4,000 in sales per night while ensuring customer satisfaction.</li>
+                    <ul class="space-y-3 font-neue text-slate-600 text-sm">
+                        <li class="flex gap-4"><span>•</span> Supervised up to 20 staff across multiple bars, practicing effective team and leadership skills.</li>
+                        <li class="flex gap-4"><span>•</span> Managed over $4,000 in sales per night while ensuring customer satisfaction in a high-pressure environment.</li>
                     </ul>
+                </div>
+
+                <div class="relative pl-12 border-l-2 border-slate-200">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 border-4 border-[#f1f5f9]"></div>
+                    <header class="flex flex-col md:flex-row md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-black uppercase text-industrial-black">General Bar Staff</h3>
+                            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Raw Bar | Bondi Beach</p>
+                        </div>
+                        <p class="text-xs font-mono text-slate-400 mt-2 md:mt-0 uppercase">Jul 2023 — Sept 2023</p>
+                    </header>
+                    <p class="text-sm font-neue text-slate-600 pl-1">Learnt to work accurately and quickly in a fast-paced environment, developing self-reliance and dependability within a small team.</p>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">04 // Skills</h2>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">03 // Skills</h2>
             <div class="bg-white/50 p-12 rounded-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-12 shadow-sm">
                 <div>
-                    <h3 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Technical Proficiencies</h3>
+                    <h3 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Technical & Practical</h3>
                     <ul class="space-y-3 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> CAD: SolidWorks, Fusion360, Altium, MATLab</li>
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Programming: Python, C++, Java</li>
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Engineering Drawings & QA</li>
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> 3D Printing & Soldering/<li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> CAD: SolidWorks, Fusion360, Blender, Altium, MATLab</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Programming: C++, Java, Python</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Technical Engineering Drawings</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> 3D Printing, Soldering & Hand Tools</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Transferable Competencies</h3>
+                    <h3 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 underline decoration-brand-orange underline-offset-8">Transferable Skills</h3>
                     <ul class="space-y-3 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Leadership & Team Supervision</li>
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Project Management</li>
-                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Adaptability & Problem Solving</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Leadership & Executive Supervision</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Project Management (Deadlines & Budgets)</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Team Collaboration & Unity</li>
+                        <li class="flex gap-3"><span class="text-brand-orange">+</span> Adaptability in Dynamic Settings</li>
                         <li class="flex gap-3"><span class="text-brand-orange">+</span> Customer Service Excellence</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        
+        <section>
+            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em] mb-12">04 // Education</h2>
+            <div class="space-y-12">
+                <div class="flex flex-col md:flex-row md:justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-black uppercase">B. Engineering (Honours)</h3>
+                        <p class="text-sm font-bold text-brand-purple uppercase tracking-widest">University of Technology Sydney</p>
+                        <p class="text-[10px] font-mono mt-2 text-slate-400">Majoring in Mechatronic Engineering</p>
+                        <p class="text-[10px] font-mono text-slate-400 italic">Distinction in: Materials and Manufacturing A, Sensors and Control, Programming 1</p>
+                    </div>
+                    <p class="text-xs font-mono text-slate-400 uppercase mt-4 md:mt-0">Jan 2022 — Jun 2026</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:justify-between items-start pt-8 border-t border-slate-100">
+                    <div>
+                        <h3 class="text-xl font-black uppercase">Diploma of Engineering</h3>
+                        <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">UTS INSEARCH</p>
+                        <p class="text-[10px] font-mono mt-2 text-slate-400">Graduated High Distinction Average</p>
+                    </div>
+                    <p class="text-xs font-mono text-slate-400 uppercase mt-4 md:mt-0">Jan 2021 — Jul 2022</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:justify-between items-start pt-8 border-t border-slate-100">
+                    <div>
+                        <h3 class="text-xl font-black uppercase">NSW Higher School Certificate</h3>
+                        <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Waverley College</p>
+                        <p class="text-[10px] font-mono mt-2 text-slate-400 italic">Captain of Music, Guitar Ensemble, Jazz band, and College Choir</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
   </div>
 </Layout>
