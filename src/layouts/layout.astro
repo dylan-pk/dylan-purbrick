@@ -33,7 +33,7 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30">
+			<aside class="w-full md:w-16 lg:w-20 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
@@ -46,7 +46,7 @@ const tabs = [
 								class={`nav-tab group relative w-full flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
                                         ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
-                                        : 'bg-slate-800/80 text-slate-100 py-10 hover:py-12 hover:bg-slate-700'}
+                                        : 'bg-slate-800/80 text-slate-100 py-8 hover:py-16 hover:bg-slate-700'}
 								`}
 							>
 								{isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
