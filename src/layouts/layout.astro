@@ -33,20 +33,20 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-28 lg:w-32 flex-shrink-0 flex flex-row md:flex-col items-stretch relative z-30 min-h-[600px]">
+			<aside class="w-full md:w-28 lg:w-32 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
 						<div 
 							id={`${tab.id}-tab-wrapper`} 
-							class={`w-full flex-1 flex flex-col ${tab.uniOnly ? 'hidden' : 'flex'}`}
+							class={`w-full ${tab.uniOnly ? 'hidden' : 'block'}`}
 						>
 							<a 
 								href={`${base}${tab.path}`} 
-								class={`nav-tab group relative w-full flex-1 flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
+								class={`nav-tab group relative w-full flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' 
-                                        : 'bg-slate-800/80 text-slate-100 hover:bg-slate-700'}
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
+                                        : 'bg-slate-800/80 text-slate-100 py-10 hover:py-12 hover:bg-slate-700'}
 								`}
 							>
 								{isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
@@ -59,7 +59,7 @@ const tabs = [
 				})}
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col">
+			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col overflow-hidden">
                 <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
 				</div>
@@ -84,9 +84,7 @@ const tabs = [
 
 				if (isUniMode) {
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
-					document.getElementById('uni-tab-wrapper')?.classList.add('flex');
 					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
-					document.getElementById('cover-letter-tab-wrapper')?.classList.add('flex');
 				}
 
 				const fadeAndGo = (url) => {
