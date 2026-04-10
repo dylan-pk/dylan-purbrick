@@ -48,14 +48,14 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # THE JANITOR: Explicitly targeted at your repository
+  # THE JANITOR: Corrected JSON mapping
   prune-history:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Prune old runs
         run: |
-          # We tell 'gh' exactly which repo to look at and which runs to delete
-          gh run list --repo ${{ github.repository }} --limit 100 --json databaseId -q '.[4:].databaseId' | xargs -I{} gh run delete --repo ${{ github.repository }} {}
+          # The '| .[].databaseId' tells the processor to map over the array slice
+          gh run list --repo ${{ github.repository }} --limit 100 --json databaseId -q '.[4:] | .[].databaseId' | xargs -r -I{} gh run delete --repo ${{ github.repository }} {}
         env:
           GH_TOKEN: ${{ github.token }}
