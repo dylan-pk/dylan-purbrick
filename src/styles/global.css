@@ -12,4 +12,26 @@
   body {
     @apply bg-white text-industrial-black font-neue;
   }
+
+  @layer base {
+  .bg-grid {
+    /* Grid Spec: 80px major lines. 
+       Lines are #ffffff at 5% opacity for that 'pronounced' look.
+    */
+    background-size: 80px 80px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-attachment: fixed;
+  }
+
+  /* Optional: Add a subtle 'vignette' so the grid fades at the edges */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.4) 100%);
+    pointer-events: none;
+    }
+  }
 }

@@ -1,0 +1,41 @@
+---
+// src/components/NextPageTrigger.astro
+const { nextPath, label } = Astro.props;
+---
+
+<div 
+  id="next-page-trigger" 
+  data-next={nextPath}
+  class="w-full py-24 flex flex-col items-center justify-center border-t border-white/10 bg-industrial-black/50"
+>
+  <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.2em] mb-4">
+    End of Section
+  </p>
+  <h3 class="text-2xl font-black uppercase text-white mb-2">
+    Continue to {label}
+  </h3>
+  <div class="w-12 h-1 bg-brand-orange animate-pulse"></div>
+</div>
+
+<script>
+  const trigger = document.getElementById('next-page-trigger');
+  
+  if (trigger) {
+    const nextPath = trigger.getAttribute('data-next');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && nextPath) {
+          // Optional: Add a small delay so the user realizes they reached the end
+          setTimeout(() => {
+            window.location.href = nextPath;
+          }, 600); 
+        }
+      });
+    }, {
+      threshold: 0.5 // Trigger when 50% of the footer is visible
+    });
+
+    observer.observe(trigger);
+  }
+</script>
