@@ -21,7 +21,7 @@ export default function ProjectCarousel({ projects, base }) {
   }, []);
 
   const move = (direction) => {
-    if (isTransitioning) return; // Prevent rapid-fire clicking [cite: 83]
+    if (isTransitioning) return; // Prevent rapid-fire clicking
     setIsTransitioning(true);
     setUseAnimation(true);
     setCurrentIndex(prev => prev + direction);
