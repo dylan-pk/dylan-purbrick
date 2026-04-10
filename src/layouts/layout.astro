@@ -33,17 +33,20 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-20 lg:w-24 flex flex-row md:flex-col items-stretch relative z-30">
+			<aside class="w-full md:w-24 lg:w-32 flex flex-row md:flex-col items-stretch relative z-30 min-h-[600px]">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
-						<div id={`${tab.id}-tab-wrapper`} class={tab.uniOnly ? 'hidden' : 'block'}>
+						<div 
+							id={`${tab.id}-tab-wrapper`} 
+							class={`flex-1 flex flex-col ${tab.uniOnly ? 'hidden' : 'flex'}`}
+						>
 							<a 
 								href={`${base}${tab.path}`} 
-								class={`nav-tab group relative flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
+								class={`nav-tab group relative flex-1 flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
-                                        : 'bg-slate-800/80 text-slate-100 py-10 hover:py-12 hover:bg-slate-700'}
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px]' 
+                                        : 'bg-slate-800/80 text-slate-100 hover:bg-slate-700'}
 								`}
 							>
 								{isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
@@ -57,8 +60,6 @@ const tabs = [
 			</aside>
 
 			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col">
-				<div id="scroll-prev-sensor" class="h-12 w-full pointer-events-none"></div>
-
                 <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
 				</div>
@@ -77,17 +78,15 @@ const tabs = [
 				const params = new URLSearchParams(window.location.search);
 				const isUniMode = params.get('mode') === 'uni';
 
-				// 1. DIRECTION & STATE TRACKING
 				let isSystemArmed = false;
                 let isTransitioning = false;
-				let lastScrollY = window.scrollY;
-				let scrollDirection = 'down';
-
 				setTimeout(() => { isSystemArmed = true; }, 1200);
 
 				if (isUniMode) {
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
+					document.getElementById('uni-tab-wrapper')?.classList.add('flex');
 					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
+					document.getElementById('cover-letter-tab-wrapper')?.classList.add('flex');
 				}
 
 				const fadeAndGo = (url) => {
@@ -97,13 +96,34 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-				// 2. DIRECTION SENSOR
-				window.addEventListener('scroll', () => {
-					scrollDirection = window.scrollY > lastScrollY ? 'down' : 'up';
-					lastScrollY = window.scrollY;
-				}, { passive: true });
+				// 1. PULL-TO-PREVIOUS LOGIC (Up Scroll Fix)
+				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
+				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
+				const nextSection = activeSequence[currentIndex + 1];
+                const prevSection = activeSequence[currentIndex - 1];
 
-				// 3. TAB INTERCEPTION
+                // Detect wheel/touch intent when at the top
+                window.addEventListener('wheel', (e) => {
+                    if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -20) {
+                        const url = new URL(window.location.origin + base + prevSection.path);
+                        if (isUniMode) url.searchParams.set('mode', 'uni');
+                        fadeAndGo(url.toString());
+                    }
+                }, { passive: true });
+
+				// 2. DOWN SCROLL OBSERVER
+				if (nextSection) {
+					const nextObserver = new IntersectionObserver((entries) => {
+						if (entries[0].isIntersecting && isSystemArmed) {
+							const url = new URL(window.location.origin + base + nextSection.path);
+							if (isUniMode) url.searchParams.set('mode', 'uni');
+							fadeAndGo(url.toString());
+						}
+					}, { threshold: 0.1 });
+					nextObserver.observe(document.getElementById('scroll-next-sensor'));
+				}
+
+				// 3. TAB CONTROLS
 				document.querySelectorAll('.nav-tab').forEach(tab => {
 					tab.addEventListener('click', (e) => {
 						e.preventDefault();
@@ -112,39 +132,6 @@ const tabs = [
 						fadeAndGo(url.toString());
 					});
 				});
-
-				// 4. BIDIRECTIONAL LOGIC
-				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
-				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
-				const nextSection = activeSequence[currentIndex + 1];
-                const prevSection = activeSequence[currentIndex - 1];
-
-				const observerOptions = { threshold: 0.1 };
-
-				// DOWNWARD TRIGGER
-				if (nextSection) {
-					const nextObserver = new IntersectionObserver((entries) => {
-						if (entries[0].isIntersecting && isSystemArmed && scrollDirection === 'down') {
-							const url = new URL(window.location.origin + base + nextSection.path);
-							if (isUniMode) url.searchParams.set('mode', 'uni');
-							fadeAndGo(url.toString());
-						}
-					}, observerOptions);
-					nextObserver.observe(document.getElementById('scroll-next-sensor'));
-				}
-
-                // UPWARD TRIGGER
-                if (prevSection) {
-                    const prevObserver = new IntersectionObserver((entries) => {
-                        // Check: Sensor visible AND scrolling UP AND near the top of the container
-                        if (entries[0].isIntersecting && isSystemArmed && scrollDirection === 'up' && window.scrollY < 30) {
-                            const url = new URL(window.location.origin + base + prevSection.path);
-                            if (isUniMode) url.searchParams.set('mode', 'uni');
-                            fadeAndGo(url.toString());
-                        }
-                    }, observerOptions);
-                    prevObserver.observe(document.getElementById('scroll-prev-sensor'));
-                }
 			}
 
 			initSystem();
