@@ -49,11 +49,12 @@ const tabs = [
 								class={`nav-tab group relative w-full flex items-center justify-center rounded-t-xl md:rounded-t-none md:rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
                                         ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-6 md:py-20' 
-                                        : 'bg-slate-800/80 text-slate-100 py-4 md:py-10 hover:bg-slate-700'}
+                                        /* HOVER EXPANSION: Added hover:md:py-12 for that vertical feedback */
+                                        : 'bg-slate-800/80 text-slate-100 py-4 md:py-10 hover:md:py-12 hover:bg-slate-700'}
 								`}
 							>
 								{isActive && <div class="absolute bottom-0 md:bottom-auto md:left-0 left-1/4 right-1/4 md:right-auto md:top-1/4 md:bottom-1/4 h-1 md:w-1 md:h-auto bg-brand-orange rounded-t-full md:rounded-r-full shadow-[0_-2px_10px_rgba(234,88,12,0.4)] md:shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
-								<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block md:rotate-180 ${isActive ? 'opacity-100' : 'opacity-70'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
+								<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block md:rotate-180 ${isActive ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
 									{tab.label}
 								</span>
 							</a>
@@ -103,6 +104,7 @@ const tabs = [
 				const nextSection = activeSequence[currentIndex + 1];
                 const prevSection = activeSequence[currentIndex - 1];
 
+                // Boundary Sensing for Fast Scroll
                 window.addEventListener('scroll', () => {
                     if (!isSystemArmed || isTransitioning) return;
                     const scrollPos = window.scrollY;
@@ -115,6 +117,7 @@ const tabs = [
                     }
                 }, { passive: true });
 
+                // Pull/Wheel-to-Previous Logic
                 let touchStartY = 0;
                 window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
                 window.addEventListener('touchmove', (e) => {

@@ -3,8 +3,12 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 export default function ProjectSlideshow({ images, title }) {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
+  
+  // Touch Sensor Refs
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
-  // Function to start or restart the auto-rotation timer
+  // 1. AUTOMATION LOGIC (The Timer)
   const startTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -17,15 +21,50 @@ export default function ProjectSlideshow({ images, title }) {
     return () => clearInterval(timerRef.current);
   }, [startTimer]);
 
+  // 2. NAVIGATION LOGIC
   const move = (dir, e) => {
-    if (e) e.preventDefault();
-    // Manual Override: Move the slide and restart the timer countdown
+    // Stop event from reaching the parent card (prevents accidental page navigation)
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation(); 
+    }
     setCurrent((prev) => (prev + dir + images.length) % images.length);
-    startTimer();
+    startTimer(); // Reset the 5-second countdown
+  };
+
+  // 3. TOUCH GESTURE HANDLERS
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50; // Minimum pixels to qualify as a "Swipe"
+
+    if (distance > minSwipeDistance) {
+      move(1); // Swipe Left -> Next
+    } else if (distance < -minSwipeDistance) {
+      move(-1); // Swipe Right -> Prev
+    }
+
+    // Reset touch sensors for next interaction
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-200 aspect-square w-full shadow-sm group/slideshow bg-zinc-900">
+    <div 
+      className="relative overflow-hidden rounded-2xl border border-slate-200 aspect-square w-full shadow-sm group/slideshow bg-zinc-900 touch-pan-y"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Images */}
       {images.map((img, idx) => (
         <img
@@ -38,21 +77,23 @@ export default function ProjectSlideshow({ images, title }) {
         />
       ))}
 
-      {/* Manual Navigation Arrows */}
-      <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover/slideshow:opacity-100 transition-opacity z-10">
+      {/* Manual Navigation Arrows - Responsive visibility */}
+      <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 opacity-100 md:opacity-0 group-hover/slideshow:opacity-100 transition-opacity z-20 pointer-events-none">
         <button 
           onClick={(e) => move(-1, e)} 
-          className="p-2 bg-white/90 rounded-full shadow-lg hover:bg-brand-orange hover:text-white transition-all transform hover:scale-110"
+          className="p-3 md:p-2 bg-white/90 text-slate-800 rounded-full shadow-lg pointer-events-auto hover:bg-brand-orange hover:text-white transition-all transform active:scale-95"
+          aria-label="Previous image"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/>
           </svg>
         </button>
         <button 
           onClick={(e) => move(1, e)} 
-          className="p-2 bg-white/90 rounded-full shadow-lg hover:bg-brand-orange hover:text-white transition-all transform hover:scale-110"
+          className="p-3 md:p-2 bg-white/90 text-slate-800 rounded-full shadow-lg pointer-events-auto hover:bg-brand-orange hover:text-white transition-all transform active:scale-95"
+          aria-label="Next image"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/>
           </svg>
         </button>

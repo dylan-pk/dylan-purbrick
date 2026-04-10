@@ -48,13 +48,14 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # THE JANITOR: Official GitHub CLI implementation
+  # THE JANITOR: Explicitly targeted at your repository
   prune-history:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Prune old runs
         run: |
-          gh run list --limit 100 --json databaseId -q '.[4:].databaseId' | xargs -I{} gh run delete {}
+          # We tell 'gh' exactly which repo to look at and which runs to delete
+          gh run list --repo ${{ github.repository }} --limit 100 --json databaseId -q '.[4:].databaseId' | xargs -I{} gh run delete --repo ${{ github.repository }} {}
         env:
           GH_TOKEN: ${{ github.token }}
