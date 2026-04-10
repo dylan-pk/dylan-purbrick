@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function ProjectSlideshow({ images, title }) {
   const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
 
-  // Auto-rotation logic: 5-second interval
-  useEffect(() => {
-    const timer = setInterval(() => {
+  // Function to start or restart the auto-rotation timer
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 5000);
-    return () => clearInterval(timer);
   }, [images.length]);
 
+  useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, [startTimer]);
+
   const move = (dir, e) => {
-    e.preventDefault(); // Prevent navigating to the project link
+    if (e) e.preventDefault();
+    // Manual Override: Move the slide and restart the timer countdown
     setCurrent((prev) => (prev + dir + images.length) % images.length);
+    startTimer();
   };
 
   return (
-    /* IMPLEMENTATION: 
-       - Removed 'lg:aspect-auto' and 'lg:h-full' to force square on all screens.
-       - Added 'w-full' to ensure it fills the lg:w-1/3 container in ProjectCard.
-    */
     <div className="relative overflow-hidden rounded-2xl border border-slate-200 aspect-square w-full shadow-sm group/slideshow bg-zinc-900">
-      
       {/* Images */}
       {images.map((img, idx) => (
         <img
           key={idx}
           src={img}
           alt={`${title} view ${idx + 1}`}
-          /* IMPLEMENTATION: 
-             - 'object-cover' fills the square without stretching.
-             - 'object-center' maintains your center-focus strategy.
-          */
           className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
             idx === current ? 'opacity-100' : 'opacity-0'
           }`}

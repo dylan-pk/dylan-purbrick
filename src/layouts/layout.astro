@@ -57,7 +57,7 @@ const tabs = [
 			</aside>
 
 			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col overflow-hidden">
-				<div id="scroll-prev-sensor" class="h-px w-full pointer-events-none"></div>
+				<div id="scroll-prev-sensor" class="h-[15vh] w-full pointer-events-none -mb-[15vh]"></div>
 
                 <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
@@ -68,7 +68,7 @@ const tabs = [
 					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">dylan.m.purbrick@gmail.com</a>
 				</footer>
 
-				<div id="scroll-next-sensor" class="h-px w-full pointer-events-none"></div>
+				<div id="scroll-next-sensor" class="h-[15vh] w-full pointer-events-none -mt-[15vh]"></div>
 			</main>
 		</div>
 
@@ -77,12 +77,8 @@ const tabs = [
 				const params = new URLSearchParams(window.location.search);
 				const isUniMode = params.get('mode') === 'uni';
 
-				// 1. ARMING DELAY (Hysteresis)
-				// System starts disarmed so the landing position doesn't trip the sensor
 				let isSystemArmed = false;
-				setTimeout(() => {
-					isSystemArmed = true;
-				}, 1500); 
+				setTimeout(() => { isSystemArmed = true; }, 1200);
 
 				if (isUniMode) {
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
@@ -94,7 +90,6 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-				// Tab Controls
 				document.querySelectorAll('.nav-tab').forEach(tab => {
 					tab.addEventListener('click', (e) => {
 						e.preventDefault();
@@ -104,19 +99,16 @@ const tabs = [
 					});
 				});
 
-				// Bidirectional Navigation Logic
 				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
 				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
-				
 				const nextSection = activeSequence[currentIndex + 1];
                 const prevSection = activeSequence[currentIndex - 1];
 
-				const observerOptions = { threshold: 0.1 };
+                // THRESHOLD: 0.2 means trigger when 20% of the 15vh sensor is visible
+				const observerOptions = { threshold: 0.2 };
 
-				// Next Sensor (Down)
 				if (nextSection) {
 					const nextObserver = new IntersectionObserver((entries) => {
-						// Only trigger if the system is armed (passed the 1.5s delay)
 						if (entries[0].isIntersecting && isSystemArmed) {
 							const url = new URL(window.location.origin + base + nextSection.path);
 							if (isUniMode) url.searchParams.set('mode', 'uni');
@@ -126,11 +118,10 @@ const tabs = [
 					nextObserver.observe(document.getElementById('scroll-next-sensor'));
 				}
 
-                // Previous Sensor (Up)
                 if (prevSection) {
                     const prevObserver = new IntersectionObserver((entries) => {
-                        // Added 'isSystemArmed' and tightened scroll tolerance to 20px
-                        if (entries[0].isIntersecting && isSystemArmed && window.scrollY < 20) {
+                        // Tightened scroll position check to ensure we are actually at the top
+                        if (entries[0].isIntersecting && isSystemArmed && window.scrollY < 40) {
                             const url = new URL(window.location.origin + base + prevSection.path);
                             if (isUniMode) url.searchParams.set('mode', 'uni');
                             fadeAndGo(url.toString());
