@@ -19,9 +19,8 @@ const tabs = [
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
 		<title>{title} | Dylan Purbrick</title>
 		<style>
-			/* The Pronounced Engineering Grid (128px for heavy-duty feel) */
 			.bg-engineering-grid {
-				background-color: #1a1a1a; 
+				background-color: #0f172a; /* Deeper slate for text pop */
 				background-image: 
 					linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px),
 					linear-gradient(90deg, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
@@ -41,12 +40,15 @@ const tabs = [
 						<div id={`${tab.id}-tab-wrapper`} class={tab.uniOnly ? 'hidden' : 'block'}>
 							<a 
 								href={`${base}${tab.path}`} 
-								class={`nav-tab group relative flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-t border-slate-400/20
-									${isActive ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' : 'bg-slate-300/40 text-slate-500/40 py-10 hover:py-12'}
+								class={`nav-tab group relative flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
+									${isActive 
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
+                                        /* READABILITY FIX: Increased opacity and darker text for inactive tabs */
+                                        : 'bg-slate-800/80 text-slate-100 py-10 hover:py-12 hover:bg-slate-700'}
 								`}
 							>
 								{isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
-								<span class="text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180" style="writing-mode: vertical-rl; text-orientation: mixed;">
+								<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${isActive ? 'opacity-100' : 'opacity-70'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
 									{tab.label}
 								</span>
 							</a>
@@ -56,10 +58,18 @@ const tabs = [
 			</aside>
 
 			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col overflow-hidden">
-				<div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
+				<div id="scroll-prev-sensor" class="h-px w-full pointer-events-none"></div>
+
+                <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
 				</div>
-                <div id="scroll-limit-switch" class="h-px w-full pointer-events-none"></div>
+
+				<footer class="mt-auto border-t border-slate-200 p-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
+					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">© 2026 Dylan Purbrick | Under Graduate Engineer</p>
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">dylan.m.purbrick@gmail.com</a>
+				</footer>
+
+				<div id="scroll-next-sensor" class="h-px w-full pointer-events-none"></div>
 			</main>
 		</div>
 
@@ -68,19 +78,17 @@ const tabs = [
 				const params = new URLSearchParams(window.location.search);
 				const isUniMode = params.get('mode') === 'uni';
 
-				// 1. Sync Uni Mode Tabs
 				if (isUniMode) {
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
 					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
 				}
 
-				// 2. Prep Transition Logic
 				const fadeAndGo = (url) => {
 					document.body.style.opacity = '0';
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-				// 3. Tab Interception (Keep manual control fast)
+				// Tab Controls
 				document.querySelectorAll('.nav-tab').forEach(tab => {
 					tab.addEventListener('click', (e) => {
 						e.preventDefault();
@@ -90,23 +98,39 @@ const tabs = [
 					});
 				});
 
-				// 4. Automated Assembly Line (Scroll Trigger)
+				// Bidirectional Navigation Logic
 				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
 				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
+				
 				const nextSection = activeSequence[currentIndex + 1];
+                const prevSection = activeSequence[currentIndex - 1];
 
+				const observerOptions = { threshold: 0.1 };
+
+				// Next Sensor (Down)
 				if (nextSection) {
-					const observer = new IntersectionObserver((entries) => {
+					const nextObserver = new IntersectionObserver((entries) => {
 						if (entries[0].isIntersecting) {
 							const url = new URL(window.location.origin + base + nextSection.path);
 							if (isUniMode) url.searchParams.set('mode', 'uni');
 							fadeAndGo(url.toString());
 						}
-					}, { threshold: 0.1 });
-
-					const sensor = document.getElementById('scroll-limit-switch');
-					if (sensor) observer.observe(sensor);
+					}, observerOptions);
+					nextObserver.observe(document.getElementById('scroll-next-sensor'));
 				}
+
+                // Previous Sensor (Up)
+                if (prevSection) {
+                    const prevObserver = new IntersectionObserver((entries) => {
+                        // We check if we are at the top AND moving up
+                        if (entries[0].isIntersecting && window.scrollY < 100) {
+                            const url = new URL(window.location.origin + base + prevSection.path);
+                            if (isUniMode) url.searchParams.set('mode', 'uni');
+                            fadeAndGo(url.toString());
+                        }
+                    }, observerOptions);
+                    prevObserver.observe(document.getElementById('scroll-prev-sensor'));
+                }
 			}
 
 			initSystem();
