@@ -19,6 +19,11 @@ const tabs = [
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
 		<title>{title} | Dylan Purbrick</title>
 		<style>
+			/* STOP MOBILE REFRESH: This prevents the browser pull-to-refresh conflict */
+			html, body {
+				overscroll-behavior-y: none;
+			}
+
 			.bg-engineering-grid {
 				background-color: #0f172a; 
 				background-image: 
@@ -33,24 +38,24 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-16 lg:w-20 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30">
+			<aside class="w-full md:w-16 lg:w-20 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30 overflow-x-auto md:overflow-visible no-scrollbar">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
 						<div 
 							id={`${tab.id}-tab-wrapper`} 
-							class={`w-full ${tab.uniOnly ? 'hidden' : 'block'}`}
+							class={`min-w-[100px] md:w-full ${tab.uniOnly ? 'hidden' : 'block'}`}
 						>
 							<a 
 								href={`${base}${tab.path}`} 
-								class={`nav-tab group relative w-full flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
+								class={`nav-tab group relative w-full flex items-center justify-center rounded-t-xl md:rounded-t-none md:rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
-                                        : 'bg-slate-800/80 text-slate-100 py-8 hover:py-16 hover:bg-slate-700'}
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-y-[1px] md:translate-y-0 md:translate-x-[1px] py-6 md:py-20' 
+                                        : 'bg-slate-800/80 text-slate-100 py-8 md:py-16 hover:bg-slate-700'}
 								`}
 							>
-								{isActive && <div class="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-orange rounded-r-full shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
-								<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block rotate-180 ${isActive ? 'opacity-100' : 'opacity-70'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
+								{isActive && <div class="absolute bottom-0 md:bottom-auto md:left-0 left-1/4 right-1/4 md:right-auto md:top-1/4 md:bottom-1/4 h-1 md:w-1 md:h-auto bg-brand-orange rounded-t-full md:rounded-r-full shadow-[0_-2px_10px_rgba(234,88,12,0.4)] md:shadow-[2px_0_10px_rgba(234,88,12,0.4)]"></div>}
+								<span class={`text-[10px] font-black uppercase tracking-[0.3em] inline-block md:rotate-180 ${isActive ? 'opacity-100' : 'opacity-70'}`} style="writing-mode: vertical-rl; text-orientation: mixed;">
 									{tab.label}
 								</span>
 							</a>
@@ -59,7 +64,7 @@ const tabs = [
 				})}
 			</aside>
 
-			<main class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-r-3xl md:rounded-tr-3xl relative z-20 border-l border-slate-200 flex flex-col overflow-hidden">
+			<main id="main-content" class="flex-1 bg-[#f1f5f9] shadow-[0_40px_100px_rgba(0,0,0,0.5)] min-h-[85vh] rounded-b-3xl md:rounded-r-3xl md:rounded-tr-3xl relative z-20 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col overflow-y-auto">
                 <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
 					<slot />
 				</div>
@@ -68,8 +73,6 @@ const tabs = [
 					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">© 2026 Dylan Purbrick | Under Graduate Engineer</p>
 					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">dylan.m.purbrick@gmail.com</a>
 				</footer>
-
-				<div id="scroll-next-sensor" class="h-24 w-full pointer-events-none"></div>
 			</main>
 		</div>
 
@@ -83,8 +86,11 @@ const tabs = [
 				setTimeout(() => { isSystemArmed = true; }, 1200);
 
 				if (isUniMode) {
-					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
-					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
+					document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
+						if (el.id.includes('uni') || el.id.includes('cover-letter')) {
+							el.classList.remove('hidden');
+						}
+					});
 				}
 
 				const fadeAndGo = (url) => {
@@ -99,28 +105,44 @@ const tabs = [
 				const nextSection = activeSequence[currentIndex + 1];
                 const prevSection = activeSequence[currentIndex - 1];
 
-                // Pull-to-previous Logic
-                window.addEventListener('wheel', (e) => {
-                    if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -20) {
+                // 1. IMPROVED BOUNDARY SENSING (Handles Fast Scrolling)
+                window.addEventListener('scroll', () => {
+                    if (!isSystemArmed || isTransitioning) return;
+
+                    const scrollPos = window.scrollY;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+                    // Next Page (Passes bottom boundary)
+                    if (nextSection && scrollPos >= maxScroll - 5) {
+                        const url = new URL(window.location.origin + base + nextSection.path);
+                        if (isUniMode) url.searchParams.set('mode', 'uni');
+                        fadeAndGo(url.toString());
+                    }
+                }, { passive: true });
+
+                // 2. PULL-TO-PREVIOUS (Handles Mouse & Touch intent)
+                let touchStartY = 0;
+                window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+
+                window.addEventListener('touchmove', (e) => {
+                    if (!isSystemArmed || isTransitioning || !prevSection || window.scrollY > 5) return;
+                    const touchY = e.touches[0].clientY;
+                    if (touchY > touchStartY + 100) { // 100px pull down at top of page
                         const url = new URL(window.location.origin + base + prevSection.path);
                         if (isUniMode) url.searchParams.set('mode', 'uni');
                         fadeAndGo(url.toString());
                     }
                 }, { passive: true });
 
-				// Downward Observer
-				if (nextSection) {
-					const nextObserver = new IntersectionObserver((entries) => {
-						if (entries[0].isIntersecting && isSystemArmed) {
-							const url = new URL(window.location.origin + base + nextSection.path);
-							if (isUniMode) url.searchParams.set('mode', 'uni');
-							fadeAndGo(url.toString());
-						}
-					}, { threshold: 0.1 });
-					nextObserver.observe(document.getElementById('scroll-next-sensor'));
-				}
+                window.addEventListener('wheel', (e) => {
+                    if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
+                        const url = new URL(window.location.origin + base + prevSection.path);
+                        if (isUniMode) url.searchParams.set('mode', 'uni');
+                        fadeAndGo(url.toString());
+                    }
+                }, { passive: true });
 
-				// Tab Controls
+				// 3. TAB CONTROLS
 				document.querySelectorAll('.nav-tab').forEach(tab => {
 					tab.addEventListener('click', (e) => {
 						e.preventDefault();
