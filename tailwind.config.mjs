@@ -12,7 +12,14 @@ export default {
 				'neue': ['Inter', 'sans-serif'],
 				'wayfinder': ['Playfair Display', 'serif'],
 			},
+			// explicit square crop ratio
+			aspectRatio: {
+				'square': '1/1',
+				'technical': '4/3', //optional technical shot crop
+			}
 		},
 	},
 	plugins: [],
+	// line clamp plugin project descriptions
+	require('@tailwindcss/line-clamp'),
 }

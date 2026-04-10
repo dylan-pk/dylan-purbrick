@@ -6,7 +6,10 @@ export default function ProjectCard({ title, category, images, github, demo, vid
     <div className="group flex flex-col lg:flex-row gap-12 items-stretch">
       {/* Visual Side: Auto-rotating Slideshow */}
       <div className="w-full lg:w-1/3 flex flex-col">
-        <ProjectSlideshow images={images} title={title} />
+      // cropping layer
+        <div className="aspect-square w-full overflow-hidden rounded-xl border border-white/10 bg-zinc-800 shadow-lg">
+          <ProjectSlideshow images={images} title={title} />
+        </div>
       </div>
 
       {/* Content Side */}
