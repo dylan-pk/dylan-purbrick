@@ -8,6 +8,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write # REQUIRED: Gives the Janitor permission to delete old runs
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -26,7 +27,6 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        # Added --legacy-peer-deps to handle the Astro 6 conflict
         run: npm install --legacy-peer-deps
 
       - name: Build Astro site
@@ -47,3 +47,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # THE JANITOR: Runs after the deployment is successful
+  prune-history:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old workflow runs
+        uses: Mattraiano/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 4 # Keeps your last 4 "snapshots"
