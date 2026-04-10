@@ -20,7 +20,7 @@ const tabs = [
 		<title>{title} | Dylan Purbrick</title>
 		<style>
 			.bg-engineering-grid {
-				background-color: #0f172a; /* Deeper slate for text pop */
+				background-color: #0f172a; 
 				background-image: 
 					linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px),
 					linear-gradient(90deg, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
@@ -43,7 +43,6 @@ const tabs = [
 								class={`nav-tab group relative flex items-center justify-center rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
                                         ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-20' 
-                                        /* READABILITY FIX: Increased opacity and darker text for inactive tabs */
                                         : 'bg-slate-800/80 text-slate-100 py-10 hover:py-12 hover:bg-slate-700'}
 								`}
 							>
@@ -78,6 +77,13 @@ const tabs = [
 				const params = new URLSearchParams(window.location.search);
 				const isUniMode = params.get('mode') === 'uni';
 
+				// 1. ARMING DELAY (Hysteresis)
+				// System starts disarmed so the landing position doesn't trip the sensor
+				let isSystemArmed = false;
+				setTimeout(() => {
+					isSystemArmed = true;
+				}, 1500); 
+
 				if (isUniMode) {
 					document.getElementById('uni-tab-wrapper')?.classList.remove('hidden');
 					document.getElementById('cover-letter-tab-wrapper')?.classList.remove('hidden');
@@ -110,7 +116,8 @@ const tabs = [
 				// Next Sensor (Down)
 				if (nextSection) {
 					const nextObserver = new IntersectionObserver((entries) => {
-						if (entries[0].isIntersecting) {
+						// Only trigger if the system is armed (passed the 1.5s delay)
+						if (entries[0].isIntersecting && isSystemArmed) {
 							const url = new URL(window.location.origin + base + nextSection.path);
 							if (isUniMode) url.searchParams.set('mode', 'uni');
 							fadeAndGo(url.toString());
@@ -122,8 +129,8 @@ const tabs = [
                 // Previous Sensor (Up)
                 if (prevSection) {
                     const prevObserver = new IntersectionObserver((entries) => {
-                        // We check if we are at the top AND moving up
-                        if (entries[0].isIntersecting && window.scrollY < 100) {
+                        // Added 'isSystemArmed' and tightened scroll tolerance to 20px
+                        if (entries[0].isIntersecting && isSystemArmed && window.scrollY < 20) {
                             const url = new URL(window.location.origin + base + prevSection.path);
                             if (isUniMode) url.searchParams.set('mode', 'uni');
                             fadeAndGo(url.toString());
