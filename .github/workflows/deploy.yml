@@ -8,7 +8,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  actions: write # REQUIRED: Gives the Janitor permission to delete old runs
+  actions: write # Required to prune history
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -48,15 +48,13 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # THE JANITOR: Runs after the deployment is successful
+  # THE JANITOR: Official GitHub CLI implementation
   prune-history:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old workflow runs
-        uses: Mattraiano/delete-workflow-runs@v2
-        with:
-          token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          retain_days: 0
-          keep_minimum_runs: 4 # Keeps your last 4 "snapshots"
+      - name: Prune old runs
+        run: |
+          gh run list --limit 100 --json databaseId -q '.[4:].databaseId' | xargs -I{} gh run delete {}
+        env:
+          GH_TOKEN: ${{ github.token }}

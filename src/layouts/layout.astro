@@ -19,11 +19,9 @@ const tabs = [
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
 		<title>{title} | Dylan Purbrick</title>
 		<style>
-			/* STOP MOBILE REFRESH: This prevents the browser pull-to-refresh conflict */
 			html, body {
 				overscroll-behavior-y: none;
 			}
-
 			.bg-engineering-grid {
 				background-color: #0f172a; 
 				background-image: 
@@ -38,7 +36,7 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-16 lg:w-20 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30 overflow-x-auto md:overflow-visible no-scrollbar">
+			<aside class="w-full md:w-24 lg:w-28 flex-shrink-0 flex flex-row md:flex-col items-start relative z-30 overflow-x-auto md:overflow-visible no-scrollbar">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
@@ -50,7 +48,7 @@ const tabs = [
 								href={`${base}${tab.path}`} 
 								class={`nav-tab group relative w-full flex items-center justify-center rounded-t-xl md:rounded-t-none md:rounded-l-xl transition-all duration-500 border-l border-y border-white/10 backdrop-blur-md
 									${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-y-[1px] md:translate-y-0 md:translate-x-[1px] py-6 md:py-20' 
+                                        ? 'bg-[#f1f5f9] text-brand-purple z-40 translate-x-[1px] py-6 md:py-20' 
                                         : 'bg-slate-800/80 text-slate-100 py-4 md:py-10 hover:bg-slate-700'}
 								`}
 							>
@@ -70,7 +68,7 @@ const tabs = [
 				</div>
 
 				<footer class="mt-auto border-t border-slate-200 p-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
-					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">© 2026 Dylan Purbrick | Under Graduate Engineer</p>
+					<p class="text-[9px] font-mono text-slate-400 uppercase tracking-widest">© 2026 Dylan Purbrick | Undergraduate Engineer</p>
 					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-[10px] font-black uppercase tracking-widest text-brand-purple hover:text-brand-orange transition-colors">dylan.m.purbrick@gmail.com</a>
 				</footer>
 			</main>
@@ -105,14 +103,11 @@ const tabs = [
 				const nextSection = activeSequence[currentIndex + 1];
                 const prevSection = activeSequence[currentIndex - 1];
 
-                // 1. IMPROVED BOUNDARY SENSING (Handles Fast Scrolling)
                 window.addEventListener('scroll', () => {
                     if (!isSystemArmed || isTransitioning) return;
-
                     const scrollPos = window.scrollY;
                     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
-                    // Next Page (Passes bottom boundary)
                     if (nextSection && scrollPos >= maxScroll - 5) {
                         const url = new URL(window.location.origin + base + nextSection.path);
                         if (isUniMode) url.searchParams.set('mode', 'uni');
@@ -120,14 +115,12 @@ const tabs = [
                     }
                 }, { passive: true });
 
-                // 2. PULL-TO-PREVIOUS (Handles Mouse & Touch intent)
                 let touchStartY = 0;
                 window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
-
                 window.addEventListener('touchmove', (e) => {
                     if (!isSystemArmed || isTransitioning || !prevSection || window.scrollY > 5) return;
                     const touchY = e.touches[0].clientY;
-                    if (touchY > touchStartY + 100) { // 100px pull down at top of page
+                    if (touchY > touchStartY + 100) {
                         const url = new URL(window.location.origin + base + prevSection.path);
                         if (isUniMode) url.searchParams.set('mode', 'uni');
                         fadeAndGo(url.toString());
@@ -142,7 +135,6 @@ const tabs = [
                     }
                 }, { passive: true });
 
-				// 3. TAB CONTROLS
 				document.querySelectorAll('.nav-tab').forEach(tab => {
 					tab.addEventListener('click', (e) => {
 						e.preventDefault();
