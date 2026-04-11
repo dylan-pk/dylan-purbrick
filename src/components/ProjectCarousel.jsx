@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function ProjectCarousel({ projects, base }) {
-  // MECHANICAL FIX: Increase buffer to 3 items on each side.
-  // This ensures the 3rd item (Datsun) is always pre-rendered in the loop.
   const clones = [
     ...projects.slice(-3), 
     ...projects, 
     ...projects.slice(0, 3)
   ];
   
-  // Adjusted starting index to account for the 3-item buffer
   const [currentIndex, setCurrentIndex] = useState(3); 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [useAnimation, setUseAnimation] = useState(true);
@@ -31,15 +28,10 @@ export default function ProjectCarousel({ projects, base }) {
 
   const onTransitionEnd = () => {
     setIsTransitioning(false);
-    
-    // RECALIBRATED RESET POINTS:
-    // If we hit the start buffer clones, jump to the end of the originals
     if (currentIndex <= 2) {
       setUseAnimation(false);
       setCurrentIndex(clones.length - 4);
-    } 
-    // If we hit the end buffer clones, jump back to the start of the originals
-    else if (currentIndex >= clones.length - 3) {
+    } else if (currentIndex >= clones.length - 3) {
       setUseAnimation(false);
       setCurrentIndex(3);
     }
@@ -50,27 +42,13 @@ export default function ProjectCarousel({ projects, base }) {
 
   return (
     <div className="relative group w-full overflow-hidden">
-      
-      {/* NAVIGATION CONTROLS: Positioned in the side gutters */}
-      <button 
-        onClick={() => move(-1)} 
-        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 bg-white/95 border border-slate-200 p-3 md:p-4 rounded-full shadow-xl hover:bg-brand-orange hover:text-white transition-all active:scale-90"
-      >
-        <svg className="w-5 h-5 md:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/>
-        </svg>
+      <button onClick={() => move(-1)} className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-30 bg-white/95 border border-slate-200 p-3 md:p-4 rounded-full shadow-xl hover:bg-brand-orange hover:text-white transition-all active:scale-90">
+        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button onClick={() => move(1)} className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 bg-white/95 border border-slate-200 p-3 md:p-4 rounded-full shadow-xl hover:bg-brand-orange hover:text-white transition-all active:scale-90">
+        <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
       </button>
 
-      <button 
-        onClick={() => move(1)} 
-        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-30 bg-white/95 border border-slate-200 p-3 md:p-4 rounded-full shadow-xl hover:bg-brand-orange hover:text-white transition-all active:scale-90"
-      >
-        <svg className="w-5 h-5 md:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/>
-        </svg>
-      </button>
-
-      {/* CAROUSEL TRACK */}
       <div className="px-12 md:px-20 py-10">
         <div 
           className={`flex will-change-transform ${useAnimation ? 'transition-transform duration-700 cubic-bezier(0.4, 0, 0.2, 1)' : 'transition-none'}`}
@@ -81,12 +59,7 @@ export default function ProjectCarousel({ projects, base }) {
             <div key={`${project.id}-${idx}`} className="min-w-full md:min-w-[50%] px-3">
               <a href={`${base}/projects#${project.id}`} className="block bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all group/card h-full">
                 <div className="h-64 overflow-hidden relative bg-slate-100">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-700" 
-                    loading={idx < 6 ? "eager" : "lazy"} // Eager load the initial and buffer tiles
-                  />
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-700" loading={idx < 6 ? "eager" : "lazy"} />
                   <div className="absolute inset-0 bg-industrial-black/20 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="bg-white px-6 py-2 rounded-full text-order-1 text-industrial-black">Analyze Build</span>
                   </div>
