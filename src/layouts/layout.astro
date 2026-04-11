@@ -40,7 +40,7 @@ const tabs = [
 					return (
 						<div 
                             id={`${tab.id}-tab-wrapper`} 
-                            /* THE KEY FIX: Promote the active tab to z-30 so it sits ABOVE the main chassis shadow */
+                            /* THE FIX: Active tab wrapper promoted to z-30 to sit ABOVE main page shadow */
                             class={`min-w-[110px] md:w-full relative ${isActive ? 'z-30' : 'z-auto'} ${tab.uniOnly ? 'hidden' : 'block'}`}
                         >
 							<a 
