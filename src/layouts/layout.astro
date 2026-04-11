@@ -18,8 +18,8 @@ const tabs = [
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
 		<title>{title} | Dylan Purbrick</title>
-		<style>
-			/* TAILWIND V4 REFERENCE: Required for @apply to function in Astro components */
+		
+		<style is:global>
 			@reference "../styles/global.css";
 
 			html, body { overscroll-behavior-y: none; }
@@ -32,7 +32,9 @@ const tabs = [
 				background-attachment: fixed;
 			}
             
-            /* GLOBAL TYPOGRAPHY SYSTEM */
+            /* MASTER TYPOGRAPHY SYSTEM 
+               Edit these 3 lines to update your entire site's font system 
+            */
             .text-order-1 { @apply text-[10px] font-black uppercase tracking-[0.3em] text-slate-500; }
             .text-order-2 { @apply text-[14px] leading-relaxed text-slate-700; }
             .text-order-3 { @apply text-[10px] font-mono text-slate-400 uppercase tracking-widest; }
@@ -100,6 +102,7 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
+                // GLOBAL NAVIGATION INTERCEPTOR: Preserves Uni Mode across the whole site
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
                     if (link && isUniMode && link.href.startsWith(window.location.origin)) {

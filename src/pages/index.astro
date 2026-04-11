@@ -23,7 +23,7 @@ const allProjects = [
             <h1 class="text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.8] mb-6 text-industrial-black">
                 Dylan <br/><span class="text-brand-orange">Purbrick</span>
             </h1>
-            <p class="text-[10px] font-mono text-brand-purple uppercase tracking-[0.4em] font-bold">
+            <p class="text-order-3 text-brand-purple font-bold tracking-[0.4em]">
                 Engineering Assistant // Mechatronic Student
             </p>
         </div>
@@ -40,16 +40,19 @@ const allProjects = [
 
     <section class="mb-32 grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div class="lg:col-span-8 space-y-8">
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em]">01 // Career Objective</h2>
+            <h2 class="text-order-1 text-brand-orange">01 // Career Objective</h2>
+            
             <p class="text-3xl font-medium leading-tight text-industrial-black">
                 Driven by a passion for hands-on experience and practical immersion.
             </p>
-            <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
+            
+            <p class="text-order-2 max-w-2xl">
                 My skills in problem-solving and cross-functional teamwork allow me to add immediate value to professional engineering environments.
             </p>
+
             <div class="pt-8">
                 <a href={resumePath} download class="inline-flex items-center gap-6 bg-industrial-black px-10 py-5 hover:bg-brand-orange transition-all rounded-sm shadow-2xl group">
-                    <span class="text-[12px] font-black uppercase tracking-widest text-white">Download Full Credentials</span>
+                    <span class="text-order-1 text-white tracking-widest">Download Full Credentials</span>
                     <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20">
                         <svg class="w-4 h-4 text-brand-orange group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
                     </div>
@@ -58,19 +61,30 @@ const allProjects = [
         </div>
 
         <div class="lg:col-span-4 bg-slate-100 p-8 rounded-2xl border border-slate-200 h-fit">
-            <h3 class="text-brand-purple font-black uppercase text-[10px] tracking-widest mb-6 border-b border-slate-300 pb-2">Status_Report</h3>
-            <ul class="space-y-4 font-mono text-[11px] uppercase tracking-wider text-slate-500">
-                <li class="flex justify-between"><span>Education:</span> <span class="text-industrial-black text-right">UTS Sydney</span></li>
-                <li class="flex justify-between"><span>Course|Major:</span> <span class="text-industrial-black text-right">Engineering|Mechatronics</span></li>
-                <li class="flex justify-between"><span>Current:</span> <span class="text-industrial-black font-bold text-right">Keith Engineering</span></li>
+            <h3 class="text-order-1 text-brand-purple mb-6 border-b border-slate-300 pb-2">Status_Report</h3>
+            <ul class="space-y-4">
+                <li class="flex justify-between items-center">
+                    <span class="text-order-3">Education:</span> 
+                    <span class="text-order-2 text-industrial-black font-bold">UTS Sydney</span>
+                </li>
+                <li class="flex justify-between items-center">
+                    <span class="text-order-3">Course|Major:</span> 
+                    <span class="text-order-2 text-industrial-black font-bold">Engineering|Mechatronics</span>
+                </li>
+                <li class="flex justify-between items-center">
+                    <span class="text-order-3">Current:</span> 
+                    <span class="text-order-2 text-industrial-black font-bold">Keith Engineering</span>
+                </li>
             </ul>
         </div>
     </section>
 
     <section class="mb-48">
         <div class="flex items-center justify-between mb-12">
-            <h2 class="text-brand-orange font-black uppercase text-xs tracking-[0.3em]">02 // Featured Works</h2>
-            <a href={`${base}/projects`} class="text-[10px] font-black uppercase text-brand-purple hover:text-brand-orange transition-colors tracking-widest">Technical Archive —></a>
+            <h2 class="text-order-1 text-brand-orange">02 // Featured Works</h2>
+            <a href={`${base}/projects`} class="text-order-1 text-brand-purple hover:text-brand-orange transition-colors">
+                Technical Archive —>
+            </a>
         </div>
         
         <div class="bg-white/50 p-6 md:p-12 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
