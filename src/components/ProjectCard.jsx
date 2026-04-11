@@ -13,18 +13,18 @@ const ProjectCard = ({ title, category, images, details, github, demo, video, po
           <ProjectSlideshow images={images} title={title} />
         </div>
         
-        <div className="flex flex-wrap gap-3 pt-4">
+        <div className="flex flex-col items-center gap-3 w-full">
           {github && (
-            <a href={github} target="_blank" className="bg-industrial-black text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">GitHub Repo</a>
+            <a href={github} target="_blank" className="w-full max-w-[240px] text-center bg-industrial-black text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">GitHub Repo</a>
           )}
           {video && (
-            <a href={video} target="_blank" className="bg-brand-purple text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">Video Demo</a>
+            <a href={video} target="_blank" className="w-full max-w-[240px] text-center bg-brand-purple text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">Video Demo</a>
           )}
           {demo && (
-            <a href={demo} target="_blank" className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Live Site</a>
+            <a href={demo} target="_blank" className="w-full max-w-[240px] text-center bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Live Site</a>
           )}
           {portfolio && (
-            <a href={portfolio} download className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Portfolio</a>
+            <a href={portfolio} download className="w-full max-w-[240px] text-center bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Portfolio</a>
           )}
         </div>
       </div>
