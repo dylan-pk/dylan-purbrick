@@ -5,8 +5,8 @@ const ProjectCard = ({ title, category, images, details, github, demo, video, po
   if (!details) return null;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-      
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      {/* Left Column: Visual Sib-ASsembly */}
       <div className="lg:col-span-5 space-y-8">
         <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
           {/* CRITICAL: Passing 'images' array to slideshow */}
@@ -17,7 +17,6 @@ const ProjectCard = ({ title, category, images, details, github, demo, video, po
           {github && (
             <a href={github} target="_blank" className="bg-industrial-black text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">GitHub Repo</a>
           )}
-          {/* Wallbug specific reintroduction */}
           {video && (
             <a href={video} target="_blank" className="bg-brand-purple text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">Video Demo</a>
           )}
@@ -25,11 +24,12 @@ const ProjectCard = ({ title, category, images, details, github, demo, video, po
             <a href={demo} target="_blank" className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Live Site</a>
           )}
           {portfolio && (
-            <a href={portfolio} download className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Documentation</a>
+            <a href={portfolio} download className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">Portfolio</a>
           )}
         </div>
       </div>
 
+      {/* RIGHT Column: Technical Documentation */}      
       <div className="lg:col-span-7 space-y-12">
         <header>
           <h3 className="text-4xl font-black uppercase tracking-tighter text-industrial-black leading-none">{title}</h3>

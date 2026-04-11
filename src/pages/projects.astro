@@ -134,6 +134,15 @@ const projects = [
         {projects.map((project) => (
             <div id={project.id} class="scroll-mt-40">
                 <ProjectCard client:load {...project} />
+
+                {/* MECHANICAL SECTION BREAK - Renders between items only */}
+                {index !== projects.length - 1 && (
+                    <div class="mt-32 flex items-center gap-8 opacity-20">
+                        <div class="h-[1px] flex-1 bg-industrial-black"></div>
+                        <div class="w-2 h-2 rotate-45 bg-industrial-black"></div>
+                        <div class="h-[1px] flex-1 bg-industrial-black"></div>
+                    </div>
+                )}
             </div>
         ))}
     </div>
