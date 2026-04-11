@@ -4,6 +4,7 @@
   --color-brand-orange: #FF4F00;
   --color-brand-purple: #571B7E;
   --color-industrial-black: #1A1A1A;
+  /* Specific mapping for standard tailwind colors if needed */
   --font-neue: "Inter", sans-serif;
   --font-wayfinder: "Fraunces", serif;
 }
@@ -13,11 +14,8 @@
     @apply bg-white text-industrial-black font-neue;
   }
 
-  @layer base {
+  /* Grid Spec: 80px major lines. */
   .bg-grid {
-    /* Grid Spec: 80px major lines. 
-       Lines are #ffffff at 5% opacity for that 'pronounced' look.
-    */
     background-size: 80px 80px;
     background-image:
       linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
@@ -25,13 +23,13 @@
     background-attachment: fixed;
   }
 
-  /* Optional: Add a subtle 'vignette' so the grid fades at the edges */
+  /* Vignette effect */
   body::after {
     content: "";
     position: fixed;
     inset: 0;
     background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.4) 100%);
     pointer-events: none;
-    }
+    z-index: -1;
   }
 }
