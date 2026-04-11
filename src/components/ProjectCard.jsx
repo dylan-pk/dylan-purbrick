@@ -32,8 +32,8 @@ const ProjectCard = ({ title, category, images, details, github, demo, video, po
 
       <div className="lg:col-span-7 space-y-12">
         <header>
-          <p className="text-order-3 text-brand-purple mb-4 font-bold">{category}</p>
           <h3 className="text-4xl font-black uppercase tracking-tighter text-industrial-black leading-none">{title}</h3>
+          <p className="text-order-3 text-brand-purple mb-4 font-bold">{category}</p>
         </header>
 
         <div className="space-y-10">
