@@ -19,6 +19,9 @@ const tabs = [
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
 		<title>{title} | Dylan Purbrick</title>
 		<style>
+			/* TAILWIND V4 REFERENCE: Required for @apply to function in Astro components */
+			@reference "../styles/global.css";
+
 			html, body { overscroll-behavior-y: none; }
 			.bg-engineering-grid {
 				background-color: #0f172a; 
@@ -97,7 +100,6 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-                // GLOBAL UNI MODE PERSISTENCE
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
                     if (link && isUniMode && link.href.startsWith(window.location.origin)) {
