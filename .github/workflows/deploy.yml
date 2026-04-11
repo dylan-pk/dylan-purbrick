@@ -49,14 +49,17 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # THE JANITOR: Robust JSON mapping and repository targeting
+  # 1. DELETE ALL NON-SUCCESSFUL RUNS (Failures, Cancelled, etc.) - ln.60
+  # 2. KEEP ONLY THE 4 MOST RECENT SUCCESSFUL RUNS - ln.63
   prune-history:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Prune old runs
+      - name: Purge failures and maintain success history
         run: |
-          # map(.databaseId) converts objects to a simple list of IDs
-          # [4:][] takes the 5th item onwards and prints them as raw lines
-          gh run list --repo ${{ github.repository }} --limit 100 --json databaseId -q 'map(.databaseId) | .[4:][]' | xargs -r -I{} gh run delete --repo ${{ github.repository }} {}
+          gh run list --repo ${{ github.repository }} --status failure --limit 100 --json databaseId -q '.[].databaseId' | xargs -r -I{} gh run delete --repo ${{ github.repository }} {}
+          gh run list --repo ${{ github.repository }} --status cancelled --limit 100 --json databaseId -q '.[].databaseId' | xargs -r -I{} gh run delete --repo ${{ github.repository }} {}
+          
+          gh run list --repo ${{ github.repository }} --status success --limit 100 --json databaseId -q 'map(.databaseId) | .[4:][]' | xargs -r -I{} gh run delete --repo ${{ github.repository }} {}
         env:
           GH_TOKEN: ${{ github.token }}
