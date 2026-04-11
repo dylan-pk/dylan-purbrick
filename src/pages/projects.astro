@@ -130,8 +130,8 @@ const projects = [
         <p class="text-order-3 text-brand-purple tracking-[0.4em] font-bold">Engineering Projects & Documentation</p>
     </header>
 
-    <div class="space-y-48 pb-48">
-        {projects.map((project) => (
+    <div class="space-y-32 pb-48">
+        {projects.map((project, index) => (
             <div id={project.id} class="scroll-mt-40">
                 <ProjectCard client:load {...project} />
 
