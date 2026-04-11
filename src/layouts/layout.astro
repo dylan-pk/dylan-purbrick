@@ -32,10 +32,8 @@ const tabs = [
 				background-attachment: fixed;
 			}
             
-            /* MASTER TYPOGRAPHY SYSTEM 
-               Edit these 3 lines to update your entire site's font system 
-            */
-            .text-order-1 { @apply text-[10px] font-black uppercase tracking-[0.3em] text-slate-500; }
+            /* MASTER TYPOGRAPHY SYSTEM */
+            .text-order-1 { @apply text-xs md:text-sm font-black uppercase tracking-[0.3em]; }
             .text-order-2 { @apply text-[14px] leading-relaxed text-slate-700; }
             .text-order-3 { @apply text-[10px] font-mono text-slate-400 uppercase tracking-widest; }
 		</style>
@@ -48,12 +46,12 @@ const tabs = [
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
-						<div id={`${tab.id}-tab-wrapper`} class={`min-w-[110px] md:w-full relative ${isActive ? 'z-30' : 'z-10'} ${tab.uniOnly ? 'hidden' : 'block'}`}>
+						<div id={`${tab.id}-tab-wrapper`} class={`min-w-[110px] md:w-full relative ${isActive ? 'z-40' : 'z-10'} ${tab.uniOnly ? 'hidden' : 'block'}`}>
 							<a 
 								href={`${base}${tab.path}`} 
 								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 backdrop-blur-md outline-none
 									${isActive 
-                                        ? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[1px] md:w-[calc(100%+2px)] shadow-[2px_0_0_#f1f5f9]' 
+                                        ? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9]' 
                                         : 'w-full bg-slate-800/80 text-slate-100 py-4 md:py-10 rounded-xl border border-white/10 hover:md:py-12 hover:bg-slate-700'}
 								`}
 							>
@@ -74,7 +72,7 @@ const tabs = [
 
 				<footer class="mt-auto border-t border-slate-200 p-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-4">
 					<p class="text-order-3">© 2026 Dylan Purbrick | Undergraduate Engineer</p>
-					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-order-1 hover:text-brand-orange transition-colors lowercase tracking-normal">dylan.m.purbrick@gmail.com</a>
+					<a href="mailto:dylan.m.purbrick@gmail.com" class="text-order-1 text-brand-purple hover:text-brand-orange transition-colors lowercase tracking-normal">dylan.m.purbrick@gmail.com</a>
 				</footer>
 			</main>
 		</div>
@@ -102,7 +100,6 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-                // GLOBAL NAVIGATION INTERCEPTOR: Preserves Uni Mode across the whole site
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
                     if (link && isUniMode && link.href.startsWith(window.location.origin)) {

@@ -6,81 +6,54 @@ const resumePath = `${base}/Dylan_Purbrick_Resume.pdf`;
 
 <Layout title="Resume" activeTab="resume">
   <div class="max-w-4xl mx-auto">
-    
     <header class="mb-20 flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-200 pb-12">
         <div>
             <h1 class="text-6xl font-black uppercase tracking-tighter mb-4 text-industrial-black">Resume</h1>
             <p class="text-order-3 text-brand-purple tracking-[0.4em]">Professional Credentials</p>
         </div>
-        
         <a href={resumePath} download class="group flex items-center gap-4 bg-industrial-black px-8 py-4 hover:bg-brand-orange transition-all rounded-sm shadow-xl">
             <span class="text-order-1 text-white">Download PDF</span>
-            <svg class="w-4 h-4 text-brand-orange group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
-            </svg>
         </a>
     </header>
 
     <div class="space-y-24">
-        
         <section>
             <h2 class="text-order-1 text-brand-orange mb-8">01 // Career Objective</h2>
             <div class="space-y-6 max-w-3xl">
-                <p class="text-2xl font-medium leading-snug text-industrial-black">
-                    Driven by a passion for hands-on experience and practical immersion, I aim to apply my innovative mindset to complex real-world engineering challenges.
-                </p>
-                <p class="text-order-2">
-                    While I appreciate the value of academic study, I believe that genuine professional growth is best achieved in a dynamic industry setting. My developed skills in technical communication and cross-functional teamwork allow me to add immediate value while continuing to develop technical expertise.
-                </p>
+                <p class="text-2xl font-medium leading-snug text-industrial-black">Driven by a passion for hands-on experience and practical immersion, I aim to apply my innovative mindset to complex real-world challenges.</p>
+                <p class="text-order-2">While I appreciate the value of academic study, I believe that genuine professional growth is best achieved in a dynamic industry setting.</p>
             </div>
         </section>
 
         <section>
             <h2 class="text-order-1 text-brand-orange mb-12">02 // Education</h2>
             <div class="space-y-12">
-                
                 <div class="flex flex-col md:flex-row md:justify-between items-start">
-                    <div class="max-w-2xl">
+                    <div>
                         <h3 class="text-xl font-black uppercase text-industrial-black">B. Engineering (Honours)</h3>
                         <p class="text-order-1 text-brand-purple tracking-widest mt-1">University of Technology Sydney</p>
-                        <div class="text-order-2 mt-4 space-y-2">
-                            <p>Majoring in Mechatronic Engineering.</p>
-                            <p class="italic text-slate-500">Distinction in: Materials and Manufacturing A, Sensors and Control, Programming 1.</p>
-                        </div>
+                        <p class="text-order-2 mt-4 italic">Majoring in Mechatronic Engineering. Distinction in: Materials and Manufacturing A, Sensors and Control, Programming 1.</p>
                     </div>
                     <p class="text-order-3 mt-4 md:mt-0">Jan 2022 — Jun 2026</p>
-                </div>
-
-                <div class="flex flex-col md:flex-row md:justify-between items-start pt-8 border-t border-slate-100">
-                    <div>
-                        <h3 class="text-xl font-black uppercase text-industrial-black">Diploma of Engineering</h3>
-                        <p class="text-order-1 text-slate-500 tracking-widest mt-1">UTS INSEARCH</p>
-                        <p class="text-order-2 mt-4">Graduated High Distinction Average.</p>
-                    </div>
-                    <p class="text-order-3 mt-4 md:mt-0">Jan 2021 — Jul 2022</p>
                 </div>
             </div>
         </section>
 
         <section>
             <h2 class="text-order-1 text-brand-orange mb-12">03 // Skills</h2>
-            <div class="bg-white/50 p-12 rounded-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-12 shadow-sm">
+            <div class="bg-white/50 p-16 rounded-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-16 shadow-sm">
                 <div>
                     <h3 class="text-order-1 text-brand-purple mb-6 underline decoration-brand-orange underline-offset-8">Technical & Practical</h3>
-                    <ul class="space-y-3">
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> CAD: SolidWorks, Fusion360, Altium, MATLab</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Programming: C++, Java, Python</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Technical Engineering Drawings</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> 3D Printing, Soldering & Hand Tools</li>
+                    <ul class="space-y-3 text-order-3">
+                        <li class="flex gap-3"><span class="text-brand-orange font-bold">+</span> CAD: SolidWorks, Fusion360, Altium, MATLab</li>
+                        <li class="flex gap-3"><span class="text-brand-orange font-bold">+</span> Programming: C++, Java, Python</li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-order-1 text-brand-purple mb-6 underline decoration-brand-orange underline-offset-8">Transferable</h3>
-                    <ul class="space-y-3">
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Leadership & Executive Supervision</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Project Management (Deadlines/Budgets)</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Team Collaboration & Unity</li>
-                        <li class="text-order-3 flex gap-3 text-slate-500"><span class="text-brand-orange font-bold">+</span> Adaptability in Dynamic Settings</li>
+                    <ul class="space-y-3 text-order-3">
+                        <li class="flex gap-3"><span class="text-brand-orange font-bold">+</span> Leadership & Executive Supervision</li>
+                        <li class="flex gap-3"><span class="text-brand-orange font-bold">+</span> Team Collaboration & Unity</li>
                     </ul>
                 </div>
             </div>
@@ -89,36 +62,20 @@ const resumePath = `${base}/Dylan_Purbrick_Resume.pdf`;
         <section>
             <h2 class="text-order-1 text-brand-orange mb-12">04 // Experience & Leadership</h2>
             <div class="space-y-16">
-                
                 <div class="relative pl-12 border-l-2 border-slate-200">
                     <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-brand-purple border-4 border-[#f1f5f9]"></div>
                     <header class="flex flex-col md:flex-row md:justify-between mb-6">
                         <div>
-                            <h3 class="text-xl font-black uppercase text-industrial-black">Engineering Assistant</h3>
-                            <p class="text-order-1 text-brand-purple tracking-widest mt-1">Keith Engineering | Erskine Park</p>
+                            <h3 class="text-xl font-black uppercase text-brand-purple">Engineering Assistant</h3>
+                            <p class="text-order-1 text-slate-500 tracking-widest mt-1">Keith Engineering | Erskine Park</p>
                         </div>
                         <p class="text-order-3 mt-2 md:mt-0">August 2025 — Present</p>
                     </header>
                     <ul class="space-y-3 text-order-2">
-                        <li class="flex gap-4"><span>•</span> Assisted in equipment reconditioning evaluation and quoting process with practical involvement in the fitting shop.</li>
-                        <li class="flex gap-4"><span>•</span> Performed CAD modelling, created Bills of Materials (BOMs), and conducted QA checks on manufacturing drawings.</li>
+                        <li class="flex gap-4"><span>•</span> Assisted in equipment reconditioning evaluation and quoting process.</li>
+                        <li class="flex gap-4"><span>•</span> Performed CAD modelling, created BOMs, and conducted QA checks.</li>
                     </ul>
                 </div>
-
-                <div class="relative pl-12 border-l-2 border-slate-200">
-                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-300 border-4 border-[#f1f5f9]"></div>
-                    <header class="flex flex-col md:flex-row md:justify-between mb-6">
-                        <div>
-                            <h3 class="text-xl font-black uppercase text-industrial-black">Team Executive</h3>
-                            <p class="text-order-1 text-slate-500 tracking-widest mt-1">UTS MechSoc | Ultimo</p>
-                        </div>
-                        <p class="text-order-3 mt-2 md:mt-0">Jan 2024 — Feb 2025</p>
-                    </header>
-                    <ul class="space-y-3 text-order-2">
-                        <li class="flex gap-4"><span>•</span> Planned professional development events and coordinated industrial tours for up to 30 members.</li>
-                    </ul>
-                </div>
-
             </div>
         </section>
     </div>
