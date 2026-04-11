@@ -1,92 +1,74 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
+import ProjectSlideshow from './ProjectSlideshow.jsx';
 
-export default function ProjectSlideshow({ images, title }) {
-  const [current, setCurrent] = useState(0);
-  const timerRef = useRef(null);
-  
-  const touchStartX = useRef(null);
-  const touchEndX = useRef(null);
-
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 5000);
-  }, [images.length]);
-
-  useEffect(() => {
-    startTimer();
-    return () => clearInterval(timerRef.current);
-  }, [startTimer]);
-
-  const move = (dir, e) => {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    setCurrent((prev) => (prev + dir + images.length) % images.length);
-    startTimer();
-  };
-
-  const handleTouchStart = (e) => { touchStartX.current = e.targetTouches[0].clientX; };
-  const handleTouchMove = (e) => { touchEndX.current = e.targetTouches[0].clientX; };
-  const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const distance = touchStartX.current - touchEndX.current;
-    if (distance > 50) move(1); 
-    else if (distance < -50) move(-1);
-    touchStartX.current = null; touchEndX.current = null;
-  };
-
+const ProjectCard = ({ title, category, images, details, github, demo, video, portfolio, base }) => {
   return (
-    <div 
-      className="relative overflow-hidden rounded-2xl aspect-square w-full shadow-sm group/slideshow bg-zinc-900 touch-pan-y"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* IMAGES */}
-      {images.map((img, idx) => (
-        <img
-          key={idx}
-          src={img}
-          alt={`${title} view ${idx + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            idx === current ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-      ))}
-
-      {/* INTERNAL NAVIGATION ARROWS */}
-      <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover/slideshow:opacity-100 transition-opacity z-20 pointer-events-none">
-        <button 
-          onClick={(e) => move(-1, e)} 
-          className="p-2 bg-white/90 text-slate-800 rounded-full shadow-lg pointer-events-auto hover:bg-brand-orange hover:text-white transition-all transform active:scale-95"
-          aria-label="Previous image"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-        <button 
-          onClick={(e) => move(1, e)} 
-          className="p-2 bg-white/90 text-slate-800 rounded-full shadow-lg pointer-events-auto hover:bg-brand-orange hover:text-white transition-all transform active:scale-95"
-          aria-label="Next image"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      
+      {/* VISUAL ASSEMBLY */}
+      <div className="lg:col-span-5 space-y-8">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+          <ProjectSlideshow images={images} title={title} />
+        </div>
+        
+        {/* ACTION PANEL: Reintroduced Video & Demo buttons */}
+        <div className="flex flex-wrap gap-3 pt-4">
+          {github && (
+            <a href={github} target="_blank" rel="noopener noreferrer" className="bg-industrial-black text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">
+              GitHub Repo
+            </a>
+          )}
+          {video && (
+            <a href={video} target="_blank" rel="noopener noreferrer" className="bg-brand-purple text-white px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-all shadow-lg">
+              Video Demo
+            </a>
+          )}
+          {demo && (
+            <a href={demo} target="_blank" rel="noopener noreferrer" className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">
+              Live Site
+            </a>
+          )}
+          {portfolio && (
+            <a href={portfolio} download className="bg-slate-200 text-slate-700 px-6 py-3 rounded-sm text-[10px] font-black uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all shadow-md">
+              Documentation
+            </a>
+          )}
+        </div>
       </div>
 
-      {/* SLIDE INDICATORS */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {images.map((_, idx) => (
-          <div 
-            key={idx} 
-            className={`h-1 rounded-full transition-all ${
-              idx === current ? 'w-6 bg-brand-orange' : 'w-2 bg-white/50'
-            }`} 
-          />
-        ))}
+      {/* TECHNICAL SPECIFICATIONS */}
+      <div className="lg:col-span-7 space-y-12">
+        <header>
+          <p className="text-order-3 text-brand-purple mb-4">{category}</p>
+          <h3 className="text-4xl font-black uppercase tracking-tighter text-industrial-black leading-none">{title}</h3>
+        </header>
+
+        <div className="space-y-10">
+          <section className="space-y-4">
+            <h4 className="text-order-1 text-brand-purple">01 // Purpose</h4>
+            <p className="text-order-2">{details.what}</p>
+          </section>
+
+          <section className="space-y-4">
+            <h4 className="text-order-1 text-brand-orange">02 // Outcomes</h4>
+            <p className="text-order-2">{details.results}</p>
+          </section>
+
+          <section className="space-y-4">
+            <h4 className="text-order-1 text-industrial-black">03 // Technical Execution</h4>
+            <ul className="space-y-2">
+              {details.how.map((point, i) => (
+                <li key={i} className="text-order-2 flex gap-4">
+                  <span className="text-brand-orange font-bold">•</span>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default ProjectCard;
