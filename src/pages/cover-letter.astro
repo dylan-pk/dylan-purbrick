@@ -6,19 +6,20 @@ const coverLetterPath = `${base}/docs/Dylan_Purbrick_Cover_Letter.pdf`;
 
 <Layout title="Cover Letter" activeTab="cover-letter">
   <div class="max-w-3xl mx-auto">
-    <header class="mb-20 border-b border-slate-200 pb-12">
-        <div>
-            <h1 class="text-6xl font-black uppercase tracking-tighter mb-4">Cover Letter</h1>
-            <p class="text-brand-purple font-mono text-[10px] uppercase tracking-[0.4em]">Graduate Application</p>
+ <header class="mb-16 border-b border-slate-200 pb-12 relative">
+        <div class="max-w-[70%]">
+            <h1 class="text-6xl font-black uppercase tracking-tighter mb-4 text-industrial-black">Cover Letter</h1>
+            <p class="text-order-3 text-brand-purple tracking-[0.4em] font-bold">Graduate Engineering Application</p>
         </div>
-        <a href={coverLetterPath} download class="group flex items-center gap-4 bg-industrial-black px-8 py-4 hover:bg-brand-orange transition-all rounded-sm shadow-xl">
-            <span class="text-order-1 text-white">Download PDF</span>
-            <svg class="w-4 h-4 text-brand-orange group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
+
+        {/* DOWNLOAD ACTION: Positioned Top-Right with New-Tab functionality */}
+        <a href={coverLetterPath} download target="_blank" rel="noopener noreferrer" class="absolute top-0 right-0 flex items-center gap-3 bg-industrial-black text-white px-5 py-3 rounded-sm text-order-3 hover:bg-brand-orange transition-all shadow-lg active:scale-95">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
+            <span class="hidden md:inline">Download PDF</span>
         </a>
     </header>
-    </div>
 
     <div class="max-w-5xl mx-auto">
         <div class="bg-white p-12 md:p-20 shadow-xl font-neue text-slate-800 leading-relaxed space-y-12">
