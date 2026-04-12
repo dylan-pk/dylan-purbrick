@@ -77,79 +77,99 @@ const tabs = [
 		</div>
 
 <script define:vars={{ tabs, base, activeTab }}>
-			function initSystem() {
-				const params = new URLSearchParams(window.location.search);
-				const isUniMode = params.get('mode') === 'uni';
-				let isSystemArmed = false;
-                let isTransitioning = false;
-				
-				// System Arming Delay: Prevents accidental triggers during page entry
-				setTimeout(() => { isSystemArmed = true; }, 1200);
+    function initSystem() {
+        const params = new URLSearchParams(window.location.search);
+        const isUniMode = params.get('mode') === 'uni';
+        let isSystemArmed = false;
+        let isTransitioning = false;
+        
+        // Mobile Touch Tracking Variables
+        let touchStartY = 0;
+        const swipeThreshold = 100; // Required swipe distance in px
 
-				// 1. UNI MODE VISIBILITY
-				if (isUniMode) {
-					document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
-						if (el.id.includes('uni') || el.id.includes('cover-letter')) {
-							el.classList.remove('hidden');
-						}
-					});
-				}
+        // System Arming Delay
+        setTimeout(() => { isSystemArmed = true; }, 1200);
 
-				// 2. FADE TRANSITION ENGINE
-				const fadeAndGo = (url) => {
-                    if (isTransitioning) return;
-                    isTransitioning = true;
-					document.body.style.opacity = '0';
-					setTimeout(() => window.location.href = url, 500);
-				};
+        // 1. UNI MODE VISIBILITY
+        if (isUniMode) {
+            document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
+                if (el.id.includes('uni') || el.id.includes('cover-letter')) {
+                    el.classList.remove('hidden');
+                }
+            });
+        }
 
-                // 3. GLOBAL NAVIGATION INTERCEPTOR (Uni Mode Persistence)
-                document.addEventListener('click', (e) => {
-                    const link = e.target.closest('a');
-                    // Check if it's an internal link
-                    if (link && isUniMode && link.href.startsWith(window.location.origin)) {
-                        const url = new URL(link.href);
-                        // If url doesn't have mode=uni, inject it and handle transition
-                        if (!url.searchParams.has('mode')) {
-                            e.preventDefault();
-                            url.searchParams.set('mode', 'uni');
-                            fadeAndGo(url.toString());
-                        }
-                    }
-                });
+        // 2. FADE TRANSITION ENGINE
+        const fadeAndGo = (url) => {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            document.body.style.opacity = '0';
+            setTimeout(() => window.location.href = url, 500);
+        };
 
-				// 4. SEQUENCE LOGIC (Scroll-to-Navigate)
-				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
-				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
-				const nextSection = activeSequence[currentIndex + 1];
-                const prevSection = activeSequence[currentIndex - 1];
+        // 3. GLOBAL NAVIGATION INTERCEPTOR
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && isUniMode && link.href.startsWith(window.location.origin)) {
+                const url = new URL(link.href);
+                if (!url.searchParams.has('mode')) {
+                    e.preventDefault();
+                    url.searchParams.set('mode', 'uni');
+                    fadeAndGo(url.toString());
+                }
+            }
+        });
 
-                // Next Page Trigger (Bottom Scroll)
-                window.addEventListener('scroll', () => {
-                    if (!isSystemArmed || isTransitioning) return;
-                    const scrollPos = window.scrollY;
-                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    
-                    if (nextSection && scrollPos >= maxScroll - 5) {
-                        const url = new URL(window.location.origin + base + nextSection.path);
-                        if (isUniMode) url.searchParams.set('mode', 'uni');
-                        fadeAndGo(url.toString());
-                    }
-                }, { passive: true });
+        // 4. SEQUENCE LOGIC (Scroll-to-Navigate)
+        const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
+        const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
+        const nextSection = activeSequence[currentIndex + 1];
+        const prevSection = activeSequence[currentIndex - 1];
 
-                // Previous Page Trigger (Overscroll Up)
-                window.addEventListener('wheel', (e) => {
-                    if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
-                        const url = new URL(window.location.origin + base + prevSection.path);
-                        if (isUniMode) url.searchParams.set('mode', 'uni');
-                        fadeAndGo(url.toString());
-                    }
-                }, { passive: true });
-			}
+        // --- DESKTOP: Wheel Event ---
+        window.addEventListener('wheel', (e) => {
+            if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
+                const url = new URL(window.location.origin + base + prevSection.path);
+                if (isUniMode) url.searchParams.set('mode', 'uni');
+                fadeAndGo(url.toString());
+            }
+        }, { passive: true });
 
-			// Initialization sequence
-			initSystem();
-			document.addEventListener('astro:page-load', initSystem);
-		</script>
+        // --- MOBILE: Touch Events for Overscroll-Up ---
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].pageY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+            if (!isSystemArmed || isTransitioning || !prevSection || window.scrollY > 5) return;
+            
+            const touchEndY = e.changedTouches[0].pageY;
+            const distance = touchEndY - touchStartY;
+
+            // If user swiped DOWN at the top of the page
+            if (distance > swipeThreshold) {
+                const url = new URL(window.location.origin + base + prevSection.path);
+                if (isUniMode) url.searchParams.set('mode', 'uni');
+                fadeAndGo(url.toString());
+            }
+        }, { passive: true });
+
+        // --- SHARED: Next Page Trigger (Bottom Scroll) ---
+        window.addEventListener('scroll', () => {
+            if (!isSystemArmed || isTransitioning || !nextSection) return;
+            const scrollPos = window.scrollY;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if (scrollPos >= maxScroll - 5) {
+                const url = new URL(window.location.origin + base + nextSection.path);
+                if (isUniMode) url.searchParams.set('mode', 'uni');
+                fadeAndGo(url.toString());
+            }
+        }, { passive: true });
+    }
+
+    initSystem();
+    document.addEventListener('astro:page-load', initSystem);
+</script>
 	</body>
 </html>
