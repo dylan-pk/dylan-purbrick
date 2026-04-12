@@ -4,6 +4,11 @@ export default function ProjectSlideshow({ images, title }) {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
   
+  // TOUCH SENSOR REFS
+  const touchStart = useRef(null);
+  const touchEnd = useRef(null);
+  const minSwipeDistance = 50; // Minimum distance in px to trigger a slide change
+
   if (!images || images.length === 0) return <div className="aspect-square bg-slate-200 animate-pulse rounded-xl" />;
 
   const startTimer = useCallback(() => {
@@ -24,8 +29,37 @@ export default function ProjectSlideshow({ images, title }) {
     startTimer();
   };
 
+  // TOUCH HANDLERS: Detecting the swipe vector
+  const onTouchStart = (e) => {
+    touchEnd.current = null; // Reset end point
+    touchStart.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e) => {
+    touchEnd.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart.current || !touchEnd.current) return;
+    
+    const distance = touchStart.current - touchEnd.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      move(1); // Swipe left -> Next image
+    } else if (isRightSwipe) {
+      move(-1); // Swipe right -> Previous image
+    }
+  };
+
   return (
-    <div className="relative overflow-hidden rounded-2xl aspect-square w-full shadow-sm group/slideshow bg-zinc-900 touch-pan-y">
+    <div 
+      className="relative overflow-hidden rounded-2xl aspect-square w-full shadow-sm group/slideshow bg-zinc-900 touch-pan-y"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       {images.map((img, idx) => (
         <img
           key={idx}
@@ -37,6 +71,7 @@ export default function ProjectSlideshow({ images, title }) {
         />
       ))}
 
+      {/* DESKTOP NAVIGATION OVERLAY */}
       <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover/slideshow:opacity-100 transition-opacity z-20 pointer-events-none">
         <button 
           onClick={(e) => move(-1, e)} 
@@ -52,6 +87,7 @@ export default function ProjectSlideshow({ images, title }) {
         </button>
       </div>
 
+      {/* STEP INDICATORS */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {images.map((_, idx) => (
           <div key={idx} className={`h-1 rounded-full transition-all ${idx === current ? 'w-6 bg-brand-orange' : 'w-2 bg-white/50'}`} />
