@@ -110,8 +110,20 @@ const tabs = [
 				// 3. GLOBAL NAVIGATION INTERCEPTOR
 				document.addEventListener('click', (e) => {
 					const link = e.target.closest('a');
-					if (link && isUniMode && link.href.startsWith(window.location.origin)) {
+					if (!link) return;
+
+					// SENSOR: Check if the link is a PDF, has a download attribute, or opens in a new tab
+					const isPdf = link.pathname.toLowerCase().endsWith('.pdf');
+					const isDownload = link.hasAttribute('download');
+					const isNewTab = link.target === '_blank';
+
+					if (isUniMode && link.href.startsWith(window.location.origin)) {
+						// BYPASS: If it's a document or a new-tab action, don't intercept it
+						if (isPdf || isDownload || isNewTab) return;
+
 						const url = new URL(link.href);
+						
+						// If url doesn't have mode=uni, inject it and handle transition
 						if (!url.searchParams.has('mode')) {
 							e.preventDefault();
 							url.searchParams.set('mode', 'uni');
