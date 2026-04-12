@@ -76,8 +76,80 @@ const tabs = [
 			</main>
 		</div>
 
-		<script define:vars={{ tabs, base, activeTab }}>
-            /* Navigation and Uni Mode logic remains same */
+<script define:vars={{ tabs, base, activeTab }}>
+			function initSystem() {
+				const params = new URLSearchParams(window.location.search);
+				const isUniMode = params.get('mode') === 'uni';
+				let isSystemArmed = false;
+                let isTransitioning = false;
+				
+				// System Arming Delay: Prevents accidental triggers during page entry
+				setTimeout(() => { isSystemArmed = true; }, 1200);
+
+				// 1. UNI MODE VISIBILITY
+				if (isUniMode) {
+					document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
+						if (el.id.includes('uni') || el.id.includes('cover-letter')) {
+							el.classList.remove('hidden');
+						}
+					});
+				}
+
+				// 2. FADE TRANSITION ENGINE
+				const fadeAndGo = (url) => {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+					document.body.style.opacity = '0';
+					setTimeout(() => window.location.href = url, 500);
+				};
+
+                // 3. GLOBAL NAVIGATION INTERCEPTOR (Uni Mode Persistence)
+                document.addEventListener('click', (e) => {
+                    const link = e.target.closest('a');
+                    // Check if it's an internal link
+                    if (link && isUniMode && link.href.startsWith(window.location.origin)) {
+                        const url = new URL(link.href);
+                        // If url doesn't have mode=uni, inject it and handle transition
+                        if (!url.searchParams.has('mode')) {
+                            e.preventDefault();
+                            url.searchParams.set('mode', 'uni');
+                            fadeAndGo(url.toString());
+                        }
+                    }
+                });
+
+				// 4. SEQUENCE LOGIC (Scroll-to-Navigate)
+				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
+				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
+				const nextSection = activeSequence[currentIndex + 1];
+                const prevSection = activeSequence[currentIndex - 1];
+
+                // Next Page Trigger (Bottom Scroll)
+                window.addEventListener('scroll', () => {
+                    if (!isSystemArmed || isTransitioning) return;
+                    const scrollPos = window.scrollY;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    
+                    if (nextSection && scrollPos >= maxScroll - 5) {
+                        const url = new URL(window.location.origin + base + nextSection.path);
+                        if (isUniMode) url.searchParams.set('mode', 'uni');
+                        fadeAndGo(url.toString());
+                    }
+                }, { passive: true });
+
+                // Previous Page Trigger (Overscroll Up)
+                window.addEventListener('wheel', (e) => {
+                    if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
+                        const url = new URL(window.location.origin + base + prevSection.path);
+                        if (isUniMode) url.searchParams.set('mode', 'uni');
+                        fadeAndGo(url.toString());
+                    }
+                }, { passive: true });
+			}
+
+			// Initialization sequence
+			initSystem();
+			document.addEventListener('astro:page-load', initSystem);
 		</script>
 	</body>
 </html>
