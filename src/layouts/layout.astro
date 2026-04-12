@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-const { title, activeTab } = Astro.props;
+// FIX: Pull maxWidth from props and set the default tolerance to max-w-6xl
+const { title, activeTab, maxWidth = "max-w-6xl", mainClass="p-8 md:p-16 lg:p-20"} = Astro.props;
 const base = '/dylan-purbrick';
 
 const tabs = [
@@ -17,6 +18,7 @@ const tabs = [
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href={`${base}/icon.svg`} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title} | Dylan Purbrick</title>
 		
 		<style is:global>
@@ -37,9 +39,10 @@ const tabs = [
             .text-order-3 { @apply text-[12px] font-mono uppercase tracking-widest; }
 		</style>
 	</head>
+
 	<body class="bg-engineering-grid text-industrial-black font-neue antialiased min-h-screen transition-opacity duration-500 opacity-100">
 		
-		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
+		<div class={`relative z-10 ${maxWidth} mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0`}>
 			
 			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start relative md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0">
 				{tabs.map((tab) => {
@@ -65,7 +68,7 @@ const tabs = [
 			</aside>
 
 			<main id="main-content" class="flex-1 bg-[#f1f5f9] min-h-[85vh] rounded-3xl md:rounded-l-none md:rounded-r-3xl md:rounded-tr-3xl relative z-20 border border-slate-200 flex flex-col overflow-y-auto shadow-[-20px_0_50px_-15px_rgba(0,0,0,0.15),_0_40px_100px_rgba(0,0,0,0.4)]">
-                <div class="p-8 md:p-16 lg:p-20 relative z-10 flex-1">
+                <div class="p-8 md:p-10 lg:p-12 relative z-10 flex-1">
 					<slot />
 				</div>
 
@@ -76,17 +79,15 @@ const tabs = [
 			</main>
 		</div>
 
-<script define:vars={{ tabs, base, activeTab }}>
-			function initSystem() {
+        <script define:vars={{ tabs, base, activeTab }}>
+            /* Full script logic for Uni Mode, scroll navigation, and persistence... */
+            function initSystem() {
 				const params = new URLSearchParams(window.location.search);
 				const isUniMode = params.get('mode') === 'uni';
 				let isSystemArmed = false;
                 let isTransitioning = false;
-				
-				// System Arming Delay: Prevents accidental triggers during page entry
 				setTimeout(() => { isSystemArmed = true; }, 1200);
 
-				// 1. UNI MODE VISIBILITY
 				if (isUniMode) {
 					document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
 						if (el.id.includes('uni') || el.id.includes('cover-letter')) {
@@ -95,7 +96,6 @@ const tabs = [
 					});
 				}
 
-				// 2. FADE TRANSITION ENGINE
 				const fadeAndGo = (url) => {
                     if (isTransitioning) return;
                     isTransitioning = true;
@@ -103,13 +103,10 @@ const tabs = [
 					setTimeout(() => window.location.href = url, 500);
 				};
 
-                // 3. GLOBAL NAVIGATION INTERCEPTOR (Uni Mode Persistence)
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
-                    // Check if it's an internal link
                     if (link && isUniMode && link.href.startsWith(window.location.origin)) {
                         const url = new URL(link.href);
-                        // If url doesn't have mode=uni, inject it and handle transition
                         if (!url.searchParams.has('mode')) {
                             e.preventDefault();
                             url.searchParams.set('mode', 'uni');
@@ -118,18 +115,15 @@ const tabs = [
                     }
                 });
 
-				// 4. SEQUENCE LOGIC (Scroll-to-Navigate)
 				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
 				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
 				const nextSection = activeSequence[currentIndex + 1];
                 const prevSection = activeSequence[currentIndex - 1];
 
-                // Next Page Trigger (Bottom Scroll)
                 window.addEventListener('scroll', () => {
                     if (!isSystemArmed || isTransitioning) return;
                     const scrollPos = window.scrollY;
                     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    
                     if (nextSection && scrollPos >= maxScroll - 5) {
                         const url = new URL(window.location.origin + base + nextSection.path);
                         if (isUniMode) url.searchParams.set('mode', 'uni');
@@ -137,7 +131,6 @@ const tabs = [
                     }
                 }, { passive: true });
 
-                // Previous Page Trigger (Overscroll Up)
                 window.addEventListener('wheel', (e) => {
                     if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
                         const url = new URL(window.location.origin + base + prevSection.path);
@@ -147,7 +140,6 @@ const tabs = [
                 }, { passive: true });
 			}
 
-			// Initialization sequence
 			initSystem();
 			document.addEventListener('astro:page-load', initSystem);
 		</script>
