@@ -76,100 +76,100 @@ const tabs = [
 			</main>
 		</div>
 
-<script define:vars={{ tabs, base, activeTab }}>
-    function initSystem() {
-        const params = new URLSearchParams(window.location.search);
-        const isUniMode = params.get('mode') === 'uni';
-        let isSystemArmed = false;
-        let isTransitioning = false;
-        
-        // Mobile Touch Tracking Variables
-        let touchStartY = 0;
-        const swipeThreshold = 100; // Required swipe distance in px
+		<script define:vars={{ tabs, base, activeTab }}>
+			function initSystem() {
+				const params = new URLSearchParams(window.location.search);
+				const isUniMode = params.get('mode') === 'uni';
+				let isSystemArmed = false;
+				let isTransitioning = false;
+				
+				// Mobile Touch Tracking Variables
+				let touchStartY = 0;
+				const swipeThreshold = 100; // Required swipe distance in px
 
-        // System Arming Delay
-        setTimeout(() => { isSystemArmed = true; }, 1200);
+				// System Arming Delay
+				setTimeout(() => { isSystemArmed = true; }, 1200);
 
-        // 1. UNI MODE VISIBILITY
-        if (isUniMode) {
-            document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
-                if (el.id.includes('uni') || el.id.includes('cover-letter')) {
-                    el.classList.remove('hidden');
-                }
-            });
-        }
+				// 1. UNI MODE VISIBILITY
+				if (isUniMode) {
+					document.querySelectorAll('[id$="-tab-wrapper"]').forEach(el => {
+						if (el.id.includes('uni') || el.id.includes('cover-letter')) {
+							el.classList.remove('hidden');
+						}
+					});
+				}
 
-        // 2. FADE TRANSITION ENGINE
-        const fadeAndGo = (url) => {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            document.body.style.opacity = '0';
-            setTimeout(() => window.location.href = url, 500);
-        };
+				// 2. FADE TRANSITION ENGINE
+				const fadeAndGo = (url) => {
+					if (isTransitioning) return;
+					isTransitioning = true;
+					document.body.style.opacity = '0';
+					setTimeout(() => window.location.href = url, 500);
+				};
 
-        // 3. GLOBAL NAVIGATION INTERCEPTOR
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link && isUniMode && link.href.startsWith(window.location.origin)) {
-                const url = new URL(link.href);
-                if (!url.searchParams.has('mode')) {
-                    e.preventDefault();
-                    url.searchParams.set('mode', 'uni');
-                    fadeAndGo(url.toString());
-                }
-            }
-        });
+				// 3. GLOBAL NAVIGATION INTERCEPTOR
+				document.addEventListener('click', (e) => {
+					const link = e.target.closest('a');
+					if (link && isUniMode && link.href.startsWith(window.location.origin)) {
+						const url = new URL(link.href);
+						if (!url.searchParams.has('mode')) {
+							e.preventDefault();
+							url.searchParams.set('mode', 'uni');
+							fadeAndGo(url.toString());
+						}
+					}
+				});
 
-        // 4. SEQUENCE LOGIC (Scroll-to-Navigate)
-        const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
-        const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
-        const nextSection = activeSequence[currentIndex + 1];
-        const prevSection = activeSequence[currentIndex - 1];
+				// 4. SEQUENCE LOGIC (Scroll-to-Navigate)
+				const activeSequence = tabs.filter(t => !t.uniOnly || isUniMode);
+				const currentIndex = activeSequence.findIndex(t => t.id === activeTab);
+				const nextSection = activeSequence[currentIndex + 1];
+				const prevSection = activeSequence[currentIndex - 1];
 
-        // --- DESKTOP: Wheel Event ---
-        window.addEventListener('wheel', (e) => {
-            if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
-                const url = new URL(window.location.origin + base + prevSection.path);
-                if (isUniMode) url.searchParams.set('mode', 'uni');
-                fadeAndGo(url.toString());
-            }
-        }, { passive: true });
+				// --- DESKTOP: Wheel Event ---
+				window.addEventListener('wheel', (e) => {
+					if (isSystemArmed && !isTransitioning && prevSection && window.scrollY <= 0 && e.deltaY < -25) {
+						const url = new URL(window.location.origin + base + prevSection.path);
+						if (isUniMode) url.searchParams.set('mode', 'uni');
+						fadeAndGo(url.toString());
+					}
+				}, { passive: true });
 
-        // --- MOBILE: Touch Events for Overscroll-Up ---
-        window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].pageY;
-        }, { passive: true });
+				// --- MOBILE: Touch Events for Overscroll-Up ---
+				window.addEventListener('touchstart', (e) => {
+					touchStartY = e.touches[0].pageY;
+				}, { passive: true });
 
-        window.addEventListener('touchend', (e) => {
-            if (!isSystemArmed || isTransitioning || !prevSection || window.scrollY > 5) return;
-            
-            const touchEndY = e.changedTouches[0].pageY;
-            const distance = touchEndY - touchStartY;
+				window.addEventListener('touchend', (e) => {
+					if (!isSystemArmed || isTransitioning || !prevSection || window.scrollY > 5) return;
+					
+					const touchEndY = e.changedTouches[0].pageY;
+					const distance = touchEndY - touchStartY;
 
-            // If user swiped DOWN at the top of the page
-            if (distance > swipeThreshold) {
-                const url = new URL(window.location.origin + base + prevSection.path);
-                if (isUniMode) url.searchParams.set('mode', 'uni');
-                fadeAndGo(url.toString());
-            }
-        }, { passive: true });
+					// If user swiped DOWN at the top of the page
+					if (distance > swipeThreshold) {
+						const url = new URL(window.location.origin + base + prevSection.path);
+						if (isUniMode) url.searchParams.set('mode', 'uni');
+						fadeAndGo(url.toString());
+					}
+				}, { passive: true });
 
-        // --- SHARED: Next Page Trigger (Bottom Scroll) ---
-        window.addEventListener('scroll', () => {
-            if (!isSystemArmed || isTransitioning || !nextSection) return;
-            const scrollPos = window.scrollY;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            
-            if (scrollPos >= maxScroll - 5) {
-                const url = new URL(window.location.origin + base + nextSection.path);
-                if (isUniMode) url.searchParams.set('mode', 'uni');
-                fadeAndGo(url.toString());
-            }
-        }, { passive: true });
-    }
+				// --- SHARED: Next Page Trigger (Bottom Scroll) ---
+				window.addEventListener('scroll', () => {
+					if (!isSystemArmed || isTransitioning || !nextSection) return;
+					const scrollPos = window.scrollY;
+					const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+					
+					if (scrollPos >= maxScroll - 5) {
+						const url = new URL(window.location.origin + base + nextSection.path);
+						if (isUniMode) url.searchParams.set('mode', 'uni');
+						fadeAndGo(url.toString());
+					}
+				}, { passive: true });
+			}
 
-    initSystem();
-    document.addEventListener('astro:page-load', initSystem);
-</script>
+			initSystem();
+			document.addEventListener('astro:page-load', initSystem);
+		</script>
 	</body>
 </html>
