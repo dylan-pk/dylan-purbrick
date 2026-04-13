@@ -45,21 +45,19 @@ const tabs = [
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
+						/* STACKING CALIBRATION:
+						- Active tabs are set to z-30 to sit above the folder page.
+						- Inactive tabs are set to z-10 to sit behind the folder page.
+						*/
 						<div 
 							id={`${tab.id}-tab-wrapper`} 
-							/* 3. TAB WRAPPERS: 
-							Active (z-30) > Main Page (z-20)
-							Inactive (z-10) < Main Page (z-20)
-							*/
 							class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'} ${isActive ? 'z-30' : 'z-10'}`}
 						>
 							<a 
 								href={`${base}${tab.path}`} 
 								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 backdrop-blur-md outline-none
 									${isActive 
-										/* ACTIVE: Sits at z-30 to merge flush with the z-20 page */
 										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9]' 
-										/* INACTIVE: Sits at z-10 to physically fall behind the z-20 page */
 										: 'w-full bg-slate-800/90 text-slate-400 py-4 md:py-10 rounded-xl border border-white/5 hover:md:py-12 hover:bg-slate-700 translate-x-[-12px] opacity-80 brightness-75 scale-95 origin-right'}
 								`}
 							>
