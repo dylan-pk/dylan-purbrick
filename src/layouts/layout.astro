@@ -41,26 +41,27 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-24 self-start z-auto md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0 mt-0">
+			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-24 self-start md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0 mt-0">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
-						/* STACKING CALIBRATION:
-						   - Active wrappers are z-30 (Higher than the z-20 Main Page)
-						   - Inactive wrappers are z-10 (Lower than the z-20 Main Page)
+						/* 2. THE TAB WRAPPERS:
+						- Active Tab: z-50 (Highest priority, beats the main page shadow)
+						- Inactive Tabs: z-10 (Physically lower than the main page)
 						*/
 						<div 
 							id={`${tab.id}-tab-wrapper`} 
-							class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'} ${isActive ? 'z-30' : 'z-10'}`}
+							class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'} ${isActive ? 'z-50' : 'z-10'}`}
 						>
 							<a 
 								href={`${base}${tab.path}`} 
-								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 backdrop-blur-md outline-none
+								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 outline-none
 									${isActive 
-										/* ACTIVE: Merged flush with the page surface */
+										/* ACTIVE: Solid background, no blur (to prevent shadow leakage), 
+										overlaps the folder edge by 2px. */
 										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9]' 
-										/* INACTIVE: Physically tucked behind the folder cover */
-										: 'w-full bg-slate-800/80 text-slate-100 py-4 md:py-10 rounded-xl border border-white/10 hover:md:py-12 hover:bg-slate-700 opacity-90'}
+										/* INACTIVE: Darker, recessed behind the page. */
+										: 'w-full bg-slate-800/90 text-slate-400 py-4 md:py-10 rounded-xl border border-white/5 hover:md:py-12 hover:bg-slate-700 opacity-90 brightness-90'}
 								`}
 							>
 								{isActive && <div class="absolute bottom-0 md:bottom-auto md:left-0 left-1/4 right-1/4 md:right-auto md:top-1/4 md:bottom-1/4 h-1 md:w-1 md:h-auto bg-brand-orange rounded-t-full md:rounded-r-full shadow-[0_-2px_10px_rgba(234,88,12,0.4)]"></div>}
