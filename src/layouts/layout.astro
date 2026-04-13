@@ -41,26 +41,26 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-24 self-start md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0">
+			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-24 self-start z-40 md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0 mt-0">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
-						/* 3. TAB WRAPPER: 
-						- Active (z-30) is higher than Main (z-20).
-						- Inactive (z-10) is lower than Main (z-20).
-						*/
 						<div 
 							id={`${tab.id}-tab-wrapper`} 
-							class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'} ${isActive ? 'z-30' : 'z-10'}`}
+							class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'}`}
 						>
 							<a 
 								href={`${base}${tab.path}`} 
 								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 backdrop-blur-md outline-none
 									${isActive 
-										/* ACTIVE: Seamlessly merged with page, sitting on top of the shadow */
-										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9]' 
-										/* INACTIVE: Physically behind the main folder page */
-										: 'w-full bg-slate-800/80 text-slate-100 py-4 md:py-10 rounded-xl border border-white/10 hover:md:py-12 hover:bg-slate-700 opacity-90 grayscale-[0.2]'}
+										/* ACTIVE: Merged flush with the page, sitting on top of the shadow */
+										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9] z-50' 
+										/* INACTIVE: Visual Recession Logic 
+										- 'translate-x-[-12px]': Tucks the tab "into" the shadow of the folder.
+										- 'opacity-80' & 'brightness-75': Simulates being behind the current page.
+										- 'scale-95': Adds a subtle perspective depth.
+										*/
+										: 'w-full bg-slate-800/90 text-slate-400 py-4 md:py-10 rounded-xl border border-white/5 hover:md:py-12 hover:bg-slate-700 translate-x-[-12px] opacity-80 brightness-75 scale-95 origin-right z-10'}
 								`}
 							>
 								{isActive && <div class="absolute bottom-0 md:bottom-auto md:left-0 left-1/4 right-1/4 md:right-auto md:top-1/4 md:bottom-1/4 h-1 md:w-1 md:h-auto bg-brand-orange rounded-t-full md:rounded-r-full shadow-[0_-2px_10px_rgba(234,88,12,0.4)]"></div>}
