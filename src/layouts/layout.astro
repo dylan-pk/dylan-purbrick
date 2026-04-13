@@ -41,17 +41,19 @@ const tabs = [
 		
 		<div class="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row min-h-screen pt-24 pb-48 px-4 md:px-0">
 			
-			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-32 self-start md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0">
+			<aside class="w-full md:w-24 lg:w-26 flex-shrink-0 flex flex-row md:flex-col items-start sticky top-32 self-start z-30 md:-mr-4 overflow-x-auto md:overflow-visible no-scrollbar mb-8 md:mb-0">
 				{tabs.map((tab) => {
 					const isActive = activeTab === tab.id;
 					return (
-						<div id={`${tab.id}-tab-wrapper`} class={`min-w-[110px] md:w-full relative ${isActive ? 'z-30' : 'z-10'} ${tab.uniOnly ? 'hidden' : 'block'}`}>
+						<div id={`${tab.id}-tab-wrapper`} class={`min-w-[110px] md:w-full relative ${tab.uniOnly ? 'hidden' : 'block'}`}>
 							<a 
 								href={`${base}${tab.path}`} 
 								class={`nav-tab group relative flex items-center justify-center transition-all duration-500 backdrop-blur-md outline-none
 									${isActive 
-										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9]' 
-										: 'w-full bg-slate-800/80 text-slate-100 py-4 md:py-10 rounded-xl border border-white/10 hover:md:py-12 hover:bg-slate-700'}
+										/* ACTIVE TAB: Shifting +2px right to overlap the folder border */
+										? 'bg-[#f1f5f9] text-brand-purple py-6 md:py-20 rounded-xl md:rounded-l-xl md:rounded-r-none border-y border-l border-slate-200 border-r-0 translate-x-[2px] md:w-[calc(100%+4px)] shadow-[4px_0_0_#f1f5f9] z-40' 
+										/* INACTIVE TAB: Shifting -8px left to "tuck" it under the folder shadow */
+										: 'w-full bg-slate-800/80 text-slate-100 py-4 md:py-10 rounded-xl border border-white/10 hover:md:py-12 hover:bg-slate-700 translate-x-[-8px] opacity-90 grayscale-[0.3] z-10'}
 								`}
 							>
 								{isActive && <div class="absolute bottom-0 md:bottom-auto md:left-0 left-1/4 right-1/4 md:right-auto md:top-1/4 md:bottom-1/4 h-1 md:w-1 md:h-auto bg-brand-orange rounded-t-full md:rounded-r-full shadow-[0_-2px_10px_rgba(234,88,12,0.4)]"></div>}
